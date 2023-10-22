@@ -28,6 +28,7 @@ var cookieParser 		= require('cookie-parser');
 var logger 				= require('morgan');
 
 var indexRouter 		= require('./routes/index');
+var indexLogin 			= require('./routes/login');
 var usersRouter 		= require('./routes/users');
 
 var app = express();
@@ -130,6 +131,11 @@ app.get('/admin-lte/node_modules/bootstrap/js/bootstrap.bundle.min.css.map', fun
 app.use('/admin-lte/plugins/fontawesome-free/webfonts', express.static(path.join(__dirname, 'node_modules', 'admin-lte', 'plugins', 'fontawesome-free', 'webfonts')));
 app.get('/admin-lte/plugins/fontawesome-free/css/all.css', function(req, res) {
 	res.sendFile(__dirname + '/node_modules/admin-lte/plugins/fontawesome-free/css/all.css');
+});
+
+//-iCheck-Bootstrap Free 10/22/2023
+app.get('/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css', function(req, res) {
+	res.sendFile(__dirname + '/node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css');
 });
 
 //PopperJS 1.16.1 10/22/2023
@@ -254,7 +260,7 @@ app.use(function(req, res, next) {
 
 
 app.use('/', indexRouter);
-
+app.use('/login', indexLogin);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

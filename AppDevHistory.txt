@@ -17,4 +17,5 @@ Tested / QA by:				Jammi Dee
                 - added AdminLTE 3.2
                 - added dotenv library
                 - successfully run the sample page.
+                - added login page
                 

@@ -1,0 +1,53 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title AdminLTE 3 | Blank Page
+		include layout/cgHeader.pug
+	body(class="hold-transition login-page")
+		div.login-box
+			div.login-logo
+				a(href="../../index2.html")
+					b Lalulla
+			div.card
+				div.card-body.login-card-body
+					p.login-box-msg Sign in to start your session
+					form(action="../../index3.html", method="post")
+						div.input-group.mb-3
+							input(type="email", class="form-control", placeholder="Email")
+							div.input-group-append
+								div.input-group-text
+									span.fas.fa-envelope
+						div.input-group.mb-3
+							input(type="password", class="form-control", placeholder="Password")
+							div.input-group-append
+								div.input-group-text
+									span.fas.fa-lock
+						div.row
+							div.col-8
+								div.icheck-primary
+									input(type="checkbox", id="remember")
+									label(for="remember") Remember Me
+							div.col-4
+								button(type="submit", class="btn btn-primary btn-block") Sign In
+						div.social-auth-links.text-center.mb-3
+							p - OR -
+							a.btn.btn-block.btn-primary(href="#")
+								i.fab.fa-facebook.mr-2
+								| Sign in using Facebook
+							a.btn.btn-block.btn-danger(href="#")
+								i.fab.fa-google-plus.mr-2
+								| Sign in using Google+
+						p.mb-1
+							a(href="forgot-password.html") I forgot my password
+						p.mb-0
+							a(href="register.html", class="text-center") Register a new membership
+
+			//include layout/cgFooter.pug
+			include layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+
+		});
