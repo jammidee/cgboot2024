@@ -12,3 +12,5 @@ Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
 10/22/2022		- started this framework at exactly 12:00PM
+                - added fs-extra library
+                
