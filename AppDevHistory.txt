@@ -1,0 +1,14 @@
+CloudGate Framework
+============================================================================
+Copyright (C) Lalulla OPC - All Rights Reserved
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential. This file is part of Lalulla Framework.
+Written by Joel M. Damaso <jammidee@gmail.com>, September 12, 2017 - 2024
+============================================================================
+ 
+Software Architect: 		Jammi Dee
+Framework Design: 			Jammi Dee
+Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
+Tested / QA by:				Jammi Dee
+
+10/22/2022		- started this framework at exactly 12:00PM
