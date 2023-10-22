@@ -15,4 +15,6 @@ Tested / QA by:				Jammi Dee
                 - added fs-extra library
                 - added README.md
                 - added AdminLTE 3.2
-                - 
+                - added dotenv library
+                - successfully run the sample page.
+                

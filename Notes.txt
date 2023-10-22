@@ -13,6 +13,7 @@ Creation:
    cd cgboot2024
    npm install
    npm install fs-extra --save
+   npm install express-session --save
 
 2. Create a build.js file
 
@@ -75,9 +76,6 @@ Creation:
 	//     copyFiles();
 	// });
 
-
-
-
 3. Create a batch file la.bat
    node build.js
    SET DEBUG=cgboot2024:* & npm start
@@ -90,8 +88,8 @@ LIBRARIES
 npm install fs-extra --save
 **AdminLte 10/22/2023
 npm install admin-lte@^3.2 --save
-
-
+**Environment 10/22/2023
+npm install dotenv --save
 
 EXTENSIONS
 
