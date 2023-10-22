@@ -88,6 +88,8 @@ LIBRARIES
 
 **FS-EXTRA 10/22/2023
 npm install fs-extra --save
+**AdminLte 10/22/2023
+npm install admin-lte@^3.2 --save
 
 
 
@@ -106,6 +108,7 @@ AUDIT
 npm audit
 **If there is a fix run:
 npm audit fix 
+
 
 
 GIT - G1thUUb@!!M3

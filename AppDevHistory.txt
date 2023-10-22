@@ -13,4 +13,6 @@ Tested / QA by:				Jammi Dee
 
 10/22/2022		- started this framework at exactly 12:00PM
                 - added fs-extra library
-                
+                - added README.md
+                - added AdminLTE 3.2
+                - 
