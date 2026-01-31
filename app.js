@@ -2,22 +2,22 @@
  * Copyright (C) 2012-2024 Lalulla OPC. All rights reserved.
  * Copyright (c) 2017 - Joel M. Damaso - mailto:jammi_dee@yahoo.com Manila/Philippines
  * This file is part of Lalulla OPC System.
- * 
+ *
  * Lalulla Framework is distributed under the terms of the GNU General Public License 
  * as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Lalulla System is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Cloud Gate System.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Framework Designed by: Jammi Dee (jammi_dee@yahoo.com)
  * 10/22/2023
- * 
+ *
 */
 
 var createError 		= require('http-errors');
@@ -158,27 +158,27 @@ app.use(function(req, res, next) {
       
   require('dotenv').config();
 
-  	req.session.cgAppId					    = process.env.APP_ID || 'LAM';
-	req.session.cgAppName					= process.env.APP_NAME || 'LAMOBILE';
-	req.session.cgAppVersion				= process.env.APP_VERSION || '0.0.0';
-	req.session.cgAppDesc					= process.env.APP_DESC || 'This an official template of Lalulla Framework using NodeJS';
-	req.session.cgAppPrefix					= process.env.APP_PREFIX || 'LAT';
+  	req.session.cgAppId					    = process.env.APP_ID 			|| 'LAM';
+	req.session.cgAppName					= process.env.APP_NAME 			|| 'LAMOBILE';
+	req.session.cgAppVersion				= process.env.APP_VERSION 		|| '0.0.0';
+	req.session.cgAppDesc					= process.env.APP_DESC 			|| 'This an official template of Lalulla Framework using NodeJS';
+	req.session.cgAppPrefix					= process.env.APP_PREFIX 		|| 'LAT';
 	
 	// Protect the app from F12 or view source in the browser
 	// The script is location in the cgJsGlobal.pug
 	// Added by Jammi Dee 07/13/2021
-	req.session.cgAppProtect				= process.env.APP_PROTECT || 'ON';
+	req.session.cgAppProtect				= process.env.APP_PROTECT 		|| 'ON';
 	
 	// Framework and App version are the same 
 	// during framework development.
-	req.session.cgFrameCodeName			= process.env.APP_FRAMECODENAME || 'Alstroemeria'; 			// http://www.typesofflowers.co.uk/flower-list
-	req.session.cgFrameVersion			= process.env.APP_FRAMEVERSION || '0.0.0'; 							// versioning http://semver.org/
-	req.session.cgFrameworkVersion		= process.env.APP_FRAMEVERSION || '0.0.0'; 
+	req.session.cgFrameCodeName			= process.env.APP_FRAMECODENAME 	|| 'Alstroemeria'; 			// http://www.typesofflowers.co.uk/flower-list
+	req.session.cgFrameVersion			= process.env.APP_FRAMEVERSION 		|| '0.0.0'; 							// versioning http://semver.org/
+	req.session.cgFrameworkVersion		= process.env.APP_FRAMEVERSION 		|| '0.0.0'; 
 
 	//Added by Jammi Dee - 07/10/2021
 	//Get the initial signupentity. Well be used for default entity as well
-	req.session.signupEntity			= process.env.APP_SIGNUPENTITY || 'LALULLA';
-	req.session.entityid				= process.env.APP_SIGNUPENTITY || 'LALULLA';
+	req.session.signupEntity			= process.env.APP_SIGNUPENTITY 		|| 'LALULLA';
+	req.session.entityid				= process.env.APP_SIGNUPENTITY 		|| 'LALULLA';
 
 	//Non session ID yet
 	req.session.cgSessId				= '';
@@ -194,10 +194,10 @@ app.use(function(req, res, next) {
 	req.session.cgSiteMode				= 'YES';
 
 	//Added by Jammi Dee 12/11/2021
-	req.session.appprotect				= process.env.APP_PROTECT || 'OFF';
-	req.session.enforcecaptcha			= process.env.APP_ENFORCECAPTCHA || 'OFF';
-	req.session.enforcehttps			= process.env.APP_ENFORCEHTTPS || 'OFF';
-	req.session.enforceotp				= process.env.APP_ENFORCEOTP || 'OFF';
+	req.session.appprotect				= process.env.APP_PROTECT 			|| 'OFF';
+	req.session.enforcecaptcha			= process.env.APP_ENFORCECAPTCHA 	|| 'OFF';
+	req.session.enforcehttps			= process.env.APP_ENFORCEHTTPS 		|| 'OFF';
+	req.session.enforceotp				= process.env.APP_ENFORCEOTP 		|| 'OFF';
 	
 	//Framework switches
 	req.session.cgSwApp					= 'YES';						//Application Menu
@@ -209,14 +209,14 @@ app.use(function(req, res, next) {
 	req.session.cgSwLog					= 'YES';						//Added by Jammi Dee logging switch
 	
 	//Added by Jammi Dee 03/20/2018
-	req.session.cgSwApp 				= process.env.APP_SWITCH_APP ||'ON';
-	req.session.cgSwMsg 				= process.env.APP_SWITCH_MSG ||'ON';
-	req.session.cgSwNoti 				= process.env.APP_SWITCH_NOTI ||'ON';
-	req.session.cgSwTask 				= process.env.APP_SWITCH_TASK ||'ON';
-	req.session.cgSwRight 				= process.env.APP_SWITCH_RIGHT ||'ON';
-	req.session.cgSwNoDev 				= process.env.APP_SWITCH_NODEV ||'ON';
+	req.session.cgSwApp 				= process.env.APP_SWITCH_APP 		||'ON';
+	req.session.cgSwMsg 				= process.env.APP_SWITCH_MSG 		||'ON';
+	req.session.cgSwNoti 				= process.env.APP_SWITCH_NOTI 		||'ON';
+	req.session.cgSwTask 				= process.env.APP_SWITCH_TASK 		||'ON';
+	req.session.cgSwRight 				= process.env.APP_SWITCH_RIGHT 		||'ON';
+	req.session.cgSwNoDev 				= process.env.APP_SWITCH_NODEV 		||'ON';
 	//Added by Jammi Dee 04/14/2018
-	req.session.cgSwLog 	= process.env.APP_SWITCH_LOG ||'ON';
+	req.session.cgSwLog 	= process.env.APP_SWITCH_LOG 					||'ON';
 	
 	
 	res.locals.logged					= 'NO';
@@ -264,19 +264,18 @@ app.use('/login', indexLogin);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+// Error handling middleware
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).render('error', {
+	  message: err.message,
+	  error: err,
+	  sess: req.session // Pass session data to the error template
+	});
+  });
 
 module.exports = app;

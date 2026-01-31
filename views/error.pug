@@ -1,6 +1,52 @@
-extends layout
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title AdminLTE 3 | Blank Page
+		include layout/cgHeader.pug
+	body(class="hold-transition sidebar-mini")
+		.wrapper
+			include layout/cgNavigation.pug
+			include layout/cgSideBar.pug
+			include layout/cgRightBar.pug
 
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+			//Content Wrapper. Contains page content
+			div.content-wrapper
+				//Content Header (Page header)
+				div.content-header
+					div.container-fluid
+						//div.row.mb-2
+							div.col-sm-6
+								h1.m-0 Dashboard
+							div.col-sm-6
+								ol.breadcrumb.float-sm-right
+									li.breadcrumb-item
+										a( href="#" ) Home
+									li.breadcrumb-item.active Dashboard V1
+				div.content
+					div.container-fluid
+						//- h1= message
+						//- h2= error.status
+						//- pre #{error.stack}
+
+					p
+						b WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED!
+							i &nbsp;
+							
+
+			include layout/cgFooter.pug
+			include layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+
+		});
+
+
+//- extends layout
+
+//- block content
+//-   h1= message
+//-   h2= error.status
+//-   pre #{error.stack}
