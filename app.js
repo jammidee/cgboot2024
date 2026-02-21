@@ -29,7 +29,9 @@ var logger 				= require('morgan');
 
 var indexRouter 		= require('./routes/index');
 var indexLogin 			= require('./routes/login');
-var usersRouter 		= require('./routes/users');
+// var usersRouter 		= require('./routes/users');
+
+// const userRoutes 		= require('./routes/user.routes')
 
 var app = express();
 
@@ -155,7 +157,7 @@ app.get('/admin-lte/plugins/popper/popper.min.js', function(req, res) {
  * @todo Add all possible global variables here.
  */
 app.use(function(req, res, next) {
-      
+
   require('dotenv').config();
 
   	req.session.cgAppId					    = process.env.APP_ID 			|| 'LAM';
@@ -163,13 +165,13 @@ app.use(function(req, res, next) {
 	req.session.cgAppVersion				= process.env.APP_VERSION 		|| '0.0.0';
 	req.session.cgAppDesc					= process.env.APP_DESC 			|| 'This an official template of Lalulla Framework using NodeJS';
 	req.session.cgAppPrefix					= process.env.APP_PREFIX 		|| 'LAT';
-	
+
 	// Protect the app from F12 or view source in the browser
 	// The script is location in the cgJsGlobal.pug
 	// Added by Jammi Dee 07/13/2021
 	req.session.cgAppProtect				= process.env.APP_PROTECT 		|| 'ON';
-	
-	// Framework and App version are the same 
+
+	// Framework and App version are the same
 	// during framework development.
 	req.session.cgFrameCodeName			= process.env.APP_FRAMECODENAME 	|| 'Alstroemeria'; 			// http://www.typesofflowers.co.uk/flower-list
 	req.session.cgFrameVersion			= process.env.APP_FRAMEVERSION 		|| '0.0.0'; 							// versioning http://semver.org/
@@ -184,11 +186,11 @@ app.use(function(req, res, next) {
 	req.session.cgSessId				= '';
 	req.session.cgMotd					= '';
 
-	//Collapse side page 10/24/2017 
+	//Collapse side page 10/24/2017
 	//Values: sidebar-collapse, layout-top-nav, layout-boxed, fixed
 	//Use blank for normal page mode
 	req.session.cgBodyClass				= '';
-	
+
 	//Site Mode - Provides a website like interface before the user login to the system
 	//Added by Jammi Dee 27/2017
 	req.session.cgSiteMode				= 'YES';
@@ -198,7 +200,7 @@ app.use(function(req, res, next) {
 	req.session.enforcecaptcha			= process.env.APP_ENFORCECAPTCHA 	|| 'OFF';
 	req.session.enforcehttps			= process.env.APP_ENFORCEHTTPS 		|| 'OFF';
 	req.session.enforceotp				= process.env.APP_ENFORCEOTP 		|| 'OFF';
-	
+
 	//Framework switches
 	req.session.cgSwApp					= 'YES';						//Application Menu
 	req.session.cgSwMsg					= 'YES';						//Message module
@@ -207,7 +209,7 @@ app.use(function(req, res, next) {
 	req.session.cgSwRight				= 'YES';						//Right side column
 	req.session.cgSwNoDev				= 'YES';						//All Development page and features
 	req.session.cgSwLog					= 'YES';						//Added by Jammi Dee logging switch
-	
+
 	//Added by Jammi Dee 03/20/2018
 	req.session.cgSwApp 				= process.env.APP_SWITCH_APP 		||'ON';
 	req.session.cgSwMsg 				= process.env.APP_SWITCH_MSG 		||'ON';
@@ -217,11 +219,11 @@ app.use(function(req, res, next) {
 	req.session.cgSwNoDev 				= process.env.APP_SWITCH_NODEV 		||'ON';
 	//Added by Jammi Dee 04/14/2018
 	req.session.cgSwLog 	= process.env.APP_SWITCH_LOG 					||'ON';
-	
-	
+
+
 	res.locals.logged					= 'NO';
-  
-  
+
+
 	//Config declarations that can be access in pages using
 	//the format #{config.cfgName}
 	app.locals.config = {
@@ -229,17 +231,17 @@ app.use(function(req, res, next) {
 					cfgPhone: '0917-580-9483',
 					cfgEmail: 'jammi_dee@yahoo.com'
 				}
-    
+
 	if(!res.locals.cgAboutCnt){
-		
+
 		res.locals.cgAboutCnt = 1;
-		
+
 	} else {
-		
+
 		res.locals.cgAboutCnt = 2;
-		
+
 	}
-    
+
 	//=====================================================
 	// Configuration for Synchronization - JMD 10/31/2021
 	//=====================================================
@@ -253,15 +255,30 @@ app.use(function(req, res, next) {
 	// req.session.sourcefolder				= nconf.get('sourcefolder');
 	// req.session.targetfolder				= nconf.get('targetfolder');
 	// req.session.sourcerecreate				= nconf.get('sourcerecreate');
-	
+
 	next();
 });
 
-
-
 app.use('/', indexRouter);
 app.use('/login', indexLogin);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
+
+app.use('/users', require('./src/modules/user/user.routes'))
+// app.use('/users', userRoutes)
+
+const fs = require('fs')
+const path = require('path')
+
+// module.exports = (app) => {
+//   const modulesPath = path.join(__dirname, '../modules')
+
+//   fs.readdirSync(modulesPath).forEach((folder) => {
+//     const routePath = path.join(modulesPath, folder, `${folder}.routes.js`)
+//     if (fs.existsSync(routePath)) {
+//       app.use(`/${folder}`, require(routePath))
+//     }
+//   })
+// }
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

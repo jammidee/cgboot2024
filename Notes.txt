@@ -90,6 +90,8 @@ npm install fs-extra --save
 npm install admin-lte@^3.2 --save
 **Environment 10/22/2023
 npm install dotenv --save
+**ORM
+npm install sequelize --save
 
 EXTENSIONS
 
