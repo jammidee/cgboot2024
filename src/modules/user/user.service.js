@@ -1,14 +1,16 @@
+const User = require('./user.model')
+
 class UserService {
   async getUsers() {
-    return [{ id: 1, name: 'Jammi 😄' }]
+    return User.findAll() // returns all users from MySQL
   }
 
   async getById(id) {
-    return { id, name: 'Sample User' }
+    return User.findByPk(id)
   }
 
   async create(data) {
-    return { id: Date.now(), ...data }
+    return User.create(data)
   }
 }
 

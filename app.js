@@ -32,6 +32,7 @@ var indexLogin 			= require('./routes/login');
 // var usersRouter 		= require('./routes/users');
 
 // const userRoutes 		= require('./routes/user.routes')
+const sequelize 		= require('./src/config/db')
 
 var app = express();
 
@@ -267,7 +268,7 @@ app.use('/users', require('./src/modules/user/user.routes'))
 // app.use('/users', userRoutes)
 
 const fs = require('fs')
-const path = require('path')
+// const path = require('path')
 
 // module.exports = (app) => {
 //   const modulesPath = path.join(__dirname, '../modules')

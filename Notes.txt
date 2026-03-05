@@ -92,6 +92,10 @@ npm install admin-lte@^3.2 --save
 npm install dotenv --save
 **ORM
 npm install sequelize --save
+03/06/2026
+npm install mysql2 --save
+npm install pg --save
+
 
 EXTENSIONS
 
