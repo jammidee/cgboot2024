@@ -96,6 +96,10 @@ npm install sequelize --save
 npm install mysql2 --save
 npm install pg --save
 
+03/07/2026
+npm install bcrypt --save
+npm install pug --save
+
 
 EXTENSIONS
 

@@ -4,27 +4,13 @@ html
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
 		title AdminLTE 3 | Blank Page
-		include layout/cgHeader.pug
-	body(class="hold-transition sidebar-mini")
+		include ../layout/cgHeader.pug
+	body(class="hold-transition layout-top-nav")
 		.wrapper
-			include layout/cgNavigation.pug
-			include layout/cgSideBar.pug
-			include layout/cgRightBar.pug
+			include ../layout/cgNavigation-no-session.pug
 
 			//Content Wrapper. Contains page content
 			div.content-wrapper
-				//Content Header (Page header)
-				div.content-header
-					div.container-fluid
-						div.row.mb-2
-							div.col-sm-6
-								h1.m-0 Dashboard
-							div.col-sm-6
-								ol.breadcrumb.float-sm-right
-									li.breadcrumb-item
-										a( href="#" ) Home
-									li.breadcrumb-item.active Dashboard V1
-
 				div.content
 					div.container-fluid
 
@@ -43,8 +29,8 @@ html
 							i &nbsp;
 
 
-			include layout/cgFooter.pug
-			include layout/cgJs.pug
+			include ../layout/cgFooter-no-session.pug
+			include ../layout/cgJs.pug
 
 	script.
 		$(document).ready(function(){
