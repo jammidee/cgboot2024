@@ -35,7 +35,7 @@ html
 						nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4.rounded.shadow-sm
 							div.container
 								a.navbar-brand.d-flex.align-items-center(href="#")
-									img(src="https://cdn-icons-png.flaticon.com/512/2721/2721295.png" style="height:30px;margin-right:10px;")
+									img(src="/resources/images/logos/logo160.png" style="height:30px;margin-right:10px;")
 									span Lalulla System
 								div.collapse.navbar-collapse.justify-content-end
 									ul.navbar-nav
@@ -131,15 +131,37 @@ html
 								p.tagline OUR FOUNDATION
 								h2.main-heading Our Core Values
 								div.row.mt-4
-									div.col-md-4
-										h4 Innovation
-										p We continuously adopt modern architectures and best practices.
-									div.col-md-4
-										h4 Integrity
-										p We build secure, transparent, and reliable systems.
-									div.col-md-4
-										h4 Excellence
-										p We deliver high-quality, maintainable enterprise solutions.
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Custom Software Development
+											div.card-body(style="text-align:left;")
+												p
+													| We design and build scalable enterprise applications 
+													| tailored to complex business environments, ensuring 
+													| long-term stability, security, and maintainability.
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 System Integration
+											div.card-body(style="text-align:left;")
+												p
+													| We integrate platforms, APIs, and distributed systems 
+													| into unified digital ecosystems that streamline 
+													| operations and improve data-driven decision making.
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Data Engineering
+											div.card-body(style="text-align:left;")
+												p
+													| We architect high-performance data pipelines and 
+													| real-time processing environments designed to handle 
+													| enterprise-scale analytics and reporting workloads.
+
+
 
 						// Services
 						div#services.row.justify-content-center.mb-5
@@ -150,20 +172,43 @@ html
 										div.card.shadow-sm.h-100.service-card
 											div.card-header.text-white.bg-primary
 												h5.mb-0 Custom Software Development
-											div.card-body
-												p Enterprise web and mobile application development.
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We design and develop scalable enterprise applications tailored 
+													| to your business processes and operational requirements.
+												ul
+													li Multi-tenant SaaS platforms
+													li Enterprise web & mobile applications
+													li Secure authentication & authorization systems
+													li Long-term maintainable architectures
+
 									div.col-md-4.mb-3
 										div.card.shadow-sm.h-100.service-card
 											div.card-header.text-white.bg-primary
 												h5.mb-0 System Integration
-											div.card-body
-												p API integrations, microservices, and distributed systems.
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We integrate complex systems into unified digital ecosystems 
+													| ensuring seamless data flow and operational efficiency.
+												ul
+													li RESTful & secure API ecosystems
+													li Microservices architecture
+													li Workflow & BPM automation
+													li Legacy system modernization
+
 									div.col-md-4.mb-3
 										div.card.shadow-sm.h-100.service-card
 											div.card-header.text-white.bg-primary
 												h5.mb-0 Data Engineering
-											div.card-body
-												p Real-time streaming, reporting, and analytics solutions.
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We build robust data pipelines and analytics platforms 
+													| capable of handling high-volume enterprise workloads.
+												ul
+													li Real-time streaming (Kafka-based architectures)
+													li Reporting & BI dashboards
+													li Data warehousing solutions
+													li Event-driven distributed systems
 
 						// Footer
 						div#contact

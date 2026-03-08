@@ -265,7 +265,8 @@ app.use('/', 				indexRouter);
 app.use('/login', 			require('./src/modules/login/login.routes'));
 app.use('/users', 			require('./src/modules/user/user.routes'))
 // Mount login module
-app.use('/welcome', require('./src/modules/welcome/welcome.routes'))
+app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'))
+app.use('/site', 			require('./routes/site/site.routes'))
 
 const fs = require('fs')
 // const path = require('path')
