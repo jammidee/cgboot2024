@@ -20,7 +20,7 @@
  */
 
 const { DataTypes } = require('sequelize')
-const sequelize = require('../../config/db')
+const sequelize = require('../config/db')
 
 /**
  * Sequelize model mapped directly to existing MySQL `users` table.

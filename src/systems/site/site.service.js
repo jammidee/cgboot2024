@@ -14,14 +14,14 @@
  */
 
 const bcrypt = require('bcrypt')
-const User = require('../user/user.model')
+const User = require('../../models/user.model')
 
 /**
- * WelcomeService
+ * SiteService
  * Handles authentication logic only.
  * No HTTP logic here.
  */
-class WelcomeService {
+class SiteService {
 
   /**
    * Validate username & password
@@ -46,4 +46,4 @@ class WelcomeService {
   }
 }
 
-module.exports = WelcomeService
+module.exports = SiteService

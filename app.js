@@ -260,13 +260,16 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.use('/', 				indexRouter);
+//Homepage
+app.use('/', 				require('./src/systems/site/site.routes'));
 
-app.use('/login', 			require('./src/modules/login/login.routes'));
-app.use('/users', 			require('./src/modules/user/user.routes'))
+//System Modules 
+app.use('/auth', 			require('./src/systems/auth/auth.routes'));
+app.use('/site', 			require('./src/systems/site/site.routes'));
+
+app.use('/users', 			require('./src/modules/user/user.routes'));
 // Mount login module
-app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'))
-app.use('/site', 			require('./routes/site/site.routes'))
+app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'));
 
 const fs = require('fs')
 // const path = require('path')

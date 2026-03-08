@@ -4,19 +4,19 @@
  * ------------------------------------------------------------------------
  */
 
-const express = require('express')
-const router = express.Router()
+const express           = require('express')
+const router            = express.Router()
 
-const LoginController = require('./login.controller')
-const LoginService = require('./login.service')
+const AuthController    = require('./auth.controller')
+const AuthService       = require('./auth.service')
 
-const controller = new LoginController(new LoginService())
+const controller = new AuthController(new AuthService())
 
 /**
  * GET /login
  * Displays login page
  */
-router.get('/', controller.showLoginPage)
+router.get('/login', controller.showLoginPage)
 
 /**
  * POST /login

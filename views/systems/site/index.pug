@@ -1,0 +1,242 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title Lalulla System | Enterprise Software Solutions
+		include ../../layout/cgHeader.pug
+
+	body(class="hold-transition layout-top-nav")
+		.wrapper
+
+			div.content-wrapper
+				div.content
+					div.container-fluid#container-wrapper
+
+						// Embedded CSS
+						style.
+							html { scroll-behavior: smooth; }
+							.service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 12px; }
+							.service-card:hover { transform: scale(1.05); box-shadow: 0 12px 24px rgba(0,0,0,0.2); z-index: 10; }
+							.about-section { background: #fff; color: #444; font-family: 'Open Sans','Roboto',Arial,sans-serif; }
+							.about-section .tagline { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; color: #999; margin-bottom: 10px; }
+							.about-section .main-heading { font-size: 42px; font-weight: 300; margin-bottom: 20px; color: #222; }
+							.about-section .lead-text { font-size: 17px; line-height: 1.7; color: #555; }
+							.video-section { position: relative; width: 100%; height: 700px; overflow: hidden; color: #fff; }
+							.video-section .nectar-video-wrap { position: absolute; width: 100%; height: 100%; }
+							.video-section video { width: 100%; height: 100%; object-fit: cover; }
+							.video-section .video-color-overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.55); z-index: 1; }
+							.video-section .video-content { position: relative; z-index: 2; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; }
+							.counter { font-size: 2.5rem; font-weight: 700; }
+							.tech-icon { height: 50px; margin: 10px; filter: grayscale(0.2); transition: transform 0.3s ease; }
+							.tech-icon:hover { transform: scale(1.2); }
+
+						// Navigation
+						nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4.rounded.shadow-sm
+							div.container
+								a.navbar-brand.d-flex.align-items-center(href="#")
+									img(src="/resources/images/logos/logo160.png" style="height:30px;margin-right:10px;")
+									span Lalulla System
+								div.collapse.navbar-collapse.justify-content-end
+									ul.navbar-nav
+										li.nav-item
+											a.nav-link(href="#who") Who We Are
+										li.nav-item
+											a.nav-link(href="#expertise") Our Expertise
+										li.nav-item
+											a.nav-link(href="#core-values") Core Values
+										li.nav-item
+											a.nav-link(href="#services") Services
+										li.nav-item
+											a.nav-link(href="/auth/login") Client Login
+
+						// Hero Section with Updated Video
+						section.video-section
+							div.video-color-overlay
+							div.nectar-video-wrap
+								video(autoplay loop muted playsinline)
+									//- source(type="video/mp4" src="https://cdn.coverr.co/videos/coverr-programming-at-night-5176/1080p.mp4")
+									source(type="video/mp4" src="https://www.w3schools.com/html/mov_bbb.mp4")
+							div.video-content
+								h1 Engineering Enterprise-Grade Systems
+								span Delivering scalable, secure and mission-critical software solutions
+								br
+								br
+								a.btn.btn-primary.btn-lg(href="#services") Discover Our Capabilities
+
+						// Who We Are
+						section#who.about-section.py-5
+							div.container
+								div.row.align-items-center
+									div.col-lg-6
+										p.tagline BUILDING DIGITAL INFRASTRUCTURE
+										h2.main-heading Who We Are
+										p.lead-text
+											| Lalulla System is a technology-driven software development company 
+											| specializing in enterprise systems, financial platforms, workflow automation, 
+											| API integrations, and high-volume data processing environments.
+											| Our solutions are designed for scalability, maintainability, and long-term operational stability.
+									div.col-lg-6.text-center
+										img.img-fluid.rounded.shadow-sm(
+											src="https://images.unsplash.com/photo-1551434678-e076c223a692"
+											style="max-height:350px;object-fit:cover;width:100%;"
+										)
+
+						// Our Expertise
+						section#expertise.about-section.py-5(style="background:#f8f9fa;")
+							div.container
+								div.row.align-items-center
+									div.col-lg-6.text-center
+										img.img-fluid.rounded.shadow-sm(
+											src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+											style="max-height:350px;object-fit:cover;width:100%;"
+										)
+									div.col-lg-6
+										p.tagline ENTERPRISE SPECIALIZATION
+										h2.main-heading Our Expertise
+										p.lead-text
+											| We architect and develop:
+											br
+											| • Large-scale multi-tenant systems
+											br
+											| • Workflow and BPM-driven platforms
+											br
+											| • Data streaming and event-driven architectures
+											br
+											| • Secure API ecosystems
+											br
+											| • Government and financial enterprise applications
+											br
+											| Our team leverages modern stacks including Node.js, Java, MySQL,
+											| Kafka, cloud-native technologies, and containerized deployments.
+
+								// Animated Demographics / Counters
+								div.row.text-center.mt-4
+									div.col-md-3.mb-3
+										div.counter(data-target="150") 0
+										p Projects Delivered
+									div.col-md-3.mb-3
+										div.counter(data-target="95") 0
+										p Satisfied Clients
+									div.col-md-3.mb-3
+										div.counter(data-target="50") 0
+										p Ongoing Projects
+									div.col-md-3.mb-3
+										div.counter(data-target="10") 0
+										p Years of Experience
+
+						// Core Values
+						div#core-values.row.justify-content-center.mb-5.bg-white.p-4.rounded.shadow-sm
+							div.col-lg-10.text-center
+								p.tagline OUR FOUNDATION
+								h2.main-heading Our Core Values
+								div.row.mt-4
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Custom Software Development
+											div.card-body(style="text-align:left;")
+												p
+													| We design and build scalable enterprise applications 
+													| tailored to complex business environments, ensuring 
+													| long-term stability, security, and maintainability.
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 System Integration
+											div.card-body(style="text-align:left;")
+												p
+													| We integrate platforms, APIs, and distributed systems 
+													| into unified digital ecosystems that streamline 
+													| operations and improve data-driven decision making.
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Data Engineering
+											div.card-body(style="text-align:left;")
+												p
+													| We architect high-performance data pipelines and 
+													| real-time processing environments designed to handle 
+													| enterprise-scale analytics and reporting workloads.
+
+
+
+						// Services
+						div#services.row.justify-content-center.mb-5
+							div.col-lg-10.text-center
+								h2.main-heading Our Services
+								div.row.mt-4
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Custom Software Development
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We design and develop scalable enterprise applications tailored 
+													| to your business processes and operational requirements.
+												ul
+													li Multi-tenant SaaS platforms
+													li Enterprise web & mobile applications
+													li Secure authentication & authorization systems
+													li Long-term maintainable architectures
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 System Integration
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We integrate complex systems into unified digital ecosystems 
+													| ensuring seamless data flow and operational efficiency.
+												ul
+													li RESTful & secure API ecosystems
+													li Microservices architecture
+													li Workflow & BPM automation
+													li Legacy system modernization
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Data Engineering
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We build robust data pipelines and analytics platforms 
+													| capable of handling high-volume enterprise workloads.
+												ul
+													li Real-time streaming (Kafka-based architectures)
+													li Reporting & BI dashboards
+													li Data warehousing solutions
+													li Event-driven distributed systems
+
+						// Footer
+						div#contact
+							footer.p-4.text-white(style="background-color:#000;")
+								div.row.text-center
+									div.col-md-4
+										h5 Lalulla System
+										p Engineering secure and scalable enterprise systems.
+									div.col-md-4
+										h5 Contact
+										ul.list-unstyled
+											li Email: info@lalulla.com
+											li Philippines
+									div.col-md-4
+										h5 Connect
+										a.btn.btn-sm.m-1(style="background-color:#3b5998;") Facebook
+										a.btn.btn-sm.m-1(style="background-color:#0e76a8;") LinkedIn
+
+			include ../../layout/cgFooter-no-session.pug
+			include ../../layout/cgJs.pug
+			script.
+				// Counter Animation
+				$('.counter').each(function() {
+					var $this = $(this), countTo = $this.attr('data-target');
+					$({ countNum: $this.text() }).animate({ countNum: countTo }, {
+						duration: 2000,
+						easing:'swing',
+						step: function() { $this.text(Math.floor(this.countNum)); },
+						complete: function() { $this.text(this.countNum); }
+					});
+				});

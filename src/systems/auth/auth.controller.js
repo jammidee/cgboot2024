@@ -3,15 +3,15 @@
  * Copyright (C) 2025 Lalulla OPC. All rights reserved.
  *
  * ------------------------------------------------------------------------
- * PRODUCT NAME : CloudGate PHP Framework
+ * PRODUCT NAME : Lalulla NodeJS Framework
  * CREATED DATE : March 07, 2026 11:50 PM
  * ------------------------------------------------------------------------
  */
 
-class LoginController {
+class AuthController {
 
-  constructor(loginService) {
-    this.loginService = loginService
+  constructor(AuthService) {
+    this.authService = AuthService;
   }
 
   /**
@@ -20,7 +20,7 @@ class LoginController {
    */
   showLoginPage = async (req, res) => {
 
-    res.render('login/index', {
+    res.render('systems/auth/index', {
       error: null
     })
   }
@@ -69,4 +69,4 @@ class LoginController {
   }
 }
 
-module.exports = LoginController
+module.exports = AuthController

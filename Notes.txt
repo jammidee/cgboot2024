@@ -127,7 +127,7 @@ Create .gitignore on the app root folder
 node_modules/
 
 git init           # Initialize a Git repository
-git add .            # Add all files in your project to the staging area
+git add .          # Add all files in your project to the staging area
 git config --global user.email "jammi_dee@yahoo.com"
 git config --global user.name "Jammi Dee"
 git commit -m "Initial commit Lalulla Framework Legacy"  # Commit your changes

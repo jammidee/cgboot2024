@@ -22,10 +22,21 @@ class SiteController {
    */
   showSitePage = async (req, res) => {
 
-    res.render('site/index', {
+    res.render('systems/site/index', {
       error: null
     })
   }
+  
+  /**
+   * Display the Fullflyer Page
+   */
+  showFullFlyerPage = async (req, res) => {
+
+    res.render('systems/site/fullflyer', {
+      error: null
+    })
+  }
+  
 
 }
 

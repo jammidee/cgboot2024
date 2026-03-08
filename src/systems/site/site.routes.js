@@ -24,6 +24,7 @@ const controller = new SiteController(new SiteService())
  * GET /site
  * Displays site page
  */
-router.get('/', controller.showSitePage)
+router.get('/',                 controller.showSitePage);
+router.get('/fullflyer',        controller.showFullFlyerPage)
 
 module.exports = router
