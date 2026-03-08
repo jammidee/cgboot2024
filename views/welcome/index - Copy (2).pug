@@ -16,20 +16,70 @@ html
 						// Embedded CSS
 						style.
 							html { scroll-behavior: smooth; }
-							.service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 12px; }
-							.service-card:hover { transform: scale(1.05); box-shadow: 0 12px 24px rgba(0,0,0,0.2); z-index: 10; }
-							.about-section { background: #fff; color: #444; font-family: 'Open Sans','Roboto',Arial,sans-serif; }
-							.about-section .tagline { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; color: #999; margin-bottom: 10px; }
-							.about-section .main-heading { font-size: 42px; font-weight: 300; margin-bottom: 20px; color: #222; }
-							.about-section .lead-text { font-size: 17px; line-height: 1.7; color: #555; }
-							.video-section { position: relative; width: 100%; height: 700px; overflow: hidden; color: #fff; }
-							.video-section .nectar-video-wrap { position: absolute; width: 100%; height: 100%; }
-							.video-section video { width: 100%; height: 100%; object-fit: cover; }
-							.video-section .video-color-overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.55); z-index: 1; }
-							.video-section .video-content { position: relative; z-index: 2; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; }
-							.counter { font-size: 2.5rem; font-weight: 700; }
-							.tech-icon { height: 50px; margin: 10px; filter: grayscale(0.2); transition: transform 0.3s ease; }
-							.tech-icon:hover { transform: scale(1.2); }
+							.service-card {
+								transition: transform 0.3s ease, box-shadow 0.3s ease;
+								border-radius: 12px;
+							}
+							.service-card:hover {
+								transform: scale(1.05);
+								box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+								z-index: 10;
+							}
+							.about-section {
+								background: #fff;
+								color: #444;
+								font-family: 'Open Sans','Roboto',Arial,sans-serif;
+							}
+							.about-section .tagline {
+								text-transform: uppercase;
+								letter-spacing: 3px;
+								font-size: 12px;
+								color: #999;
+								margin-bottom: 10px;
+							}
+							.about-section .main-heading {
+								font-size: 42px;
+								font-weight: 300;
+								margin-bottom: 20px;
+								color: #222;
+							}
+							.about-section .lead-text {
+								font-size: 17px;
+								line-height: 1.7;
+								color: #555;
+							}
+							.video-section {
+								position: relative;
+								width: 100%;
+								height: 700px;
+								overflow: hidden;
+								color: #fff;
+							}
+							.video-section .nectar-video-wrap {
+								position: absolute;
+								width: 100%;
+								height: 100%;
+							}
+							.video-section video {
+								width: 100%;
+								height: 100%;
+								object-fit: cover;
+							}
+							.video-section .video-color-overlay {
+								position: absolute;
+								width: 100%;
+								height: 100%;
+								background: rgba(0,0,0,0.55);
+								z-index: 1;
+							}
+							.video-section .video-content {
+								position: relative;
+								z-index: 2;
+								top: 50%;
+								left: 50%;
+								transform: translate(-50%, -50%);
+								text-align: center;
+							}
 
 						// Navigation
 						nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4.rounded.shadow-sm
@@ -50,13 +100,13 @@ html
 										li.nav-item
 											a.nav-link(href="/auth/login") Client Login
 
-						// Hero Section with Updated Video
+						// Hero Section
 						section.video-section
 							div.video-color-overlay
 							div.nectar-video-wrap
 								video(autoplay loop muted playsinline)
-									//- source(type="video/mp4" src="https://cdn.coverr.co/videos/coverr-programming-at-night-5176/1080p.mp4")
-									source(type="video/mp4" src="https://www.w3schools.com/html/mov_bbb.mp4")
+									source(type="video/mp4" src="https://cdn.coverr.co/videos/coverr-programming-at-night-5176/1080p.mp4")
+
 							div.video-content
 								h1 Engineering Enterprise-Grade Systems
 								span Delivering scalable, secure and mission-critical software solutions
@@ -76,21 +126,24 @@ html
 											| specializing in enterprise systems, financial platforms, workflow automation, 
 											| API integrations, and high-volume data processing environments.
 											| Our solutions are designed for scalability, maintainability, and long-term operational stability.
+
 									div.col-lg-6.text-center
 										img.img-fluid.rounded.shadow-sm(
 											src="https://images.unsplash.com/photo-1551434678-e076c223a692"
 											style="max-height:350px;object-fit:cover;width:100%;"
 										)
 
-						// Our Expertise
+						// Our Expertise (Pattern Replacement for Mission/Vision Section)
 						section#expertise.about-section.py-5(style="background:#f8f9fa;")
 							div.container
 								div.row.align-items-center
+
 									div.col-lg-6.text-center
 										img.img-fluid.rounded.shadow-sm(
 											src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
 											style="max-height:350px;object-fit:cover;width:100%;"
 										)
+
 									div.col-lg-6
 										p.tagline ENTERPRISE SPECIALIZATION
 										h2.main-heading Our Expertise
@@ -109,21 +162,6 @@ html
 											br
 											| Our team leverages modern stacks including Node.js, Java, MySQL,
 											| Kafka, cloud-native technologies, and containerized deployments.
-
-								// Animated Demographics / Counters
-								div.row.text-center.mt-4
-									div.col-md-3.mb-3
-										div.counter(data-target="150") 0
-										p Projects Delivered
-									div.col-md-3.mb-3
-										div.counter(data-target="95") 0
-										p Satisfied Clients
-									div.col-md-3.mb-3
-										div.counter(data-target="50") 0
-										p Ongoing Projects
-									div.col-md-3.mb-3
-										div.counter(data-target="10") 0
-										p Years of Experience
 
 						// Core Values
 						div#core-values.row.justify-content-center.mb-5.bg-white.p-4.rounded.shadow-sm
@@ -152,12 +190,14 @@ html
 												h5.mb-0 Custom Software Development
 											div.card-body
 												p Enterprise web and mobile application development.
+
 									div.col-md-4.mb-3
 										div.card.shadow-sm.h-100.service-card
 											div.card-header.text-white.bg-primary
 												h5.mb-0 System Integration
 											div.card-body
 												p API integrations, microservices, and distributed systems.
+
 									div.col-md-4.mb-3
 										div.card.shadow-sm.h-100.service-card
 											div.card-header.text-white.bg-primary
@@ -184,14 +224,3 @@ html
 
 			include ../layout/cgFooter-no-session.pug
 			include ../layout/cgJs.pug
-			script.
-				// Counter Animation
-				$('.counter').each(function() {
-					var $this = $(this), countTo = $this.attr('data-target');
-					$({ countNum: $this.text() }).animate({ countNum: countTo }, {
-						duration: 2000,
-						easing:'swing',
-						step: function() { $this.text(Math.floor(this.countNum)); },
-						complete: function() { $this.text(this.countNum); }
-					});
-				});

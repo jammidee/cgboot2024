@@ -260,13 +260,10 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.use('/', indexRouter);
-app.use('/login', indexLogin);
-// app.use('/users', usersRouter);
+app.use('/', 				indexRouter);
 
-app.use('/users', require('./src/modules/user/user.routes'))
-// app.use('/users', userRoutes)
-
+app.use('/login', 			require('./src/modules/login/login.routes'));
+app.use('/users', 			require('./src/modules/user/user.routes'))
 // Mount login module
 app.use('/welcome', require('./src/modules/welcome/welcome.routes'))
 

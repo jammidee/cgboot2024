@@ -1,25 +1,73 @@
-//- ------------------------------------------------------------------------
-//- CloudGate Login View
-//- ------------------------------------------------------------------------
-
 doctype html
 html
-  head
-    title CloudGate Login
-    meta(charset="UTF-8")
-  body
-    h2 CloudGate Login
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title Lalulla System | Login
+		include ../layout/cgHeader.pug
 
-    if error
-      p(style="color:red") #{error}
+	body(class="hold-transition layout-top-nav")
+		.wrapper
 
-    form(method="POST", action="/login")
-      div
-        label(for="username") Username:
-        input(type="text", name="username", required)
+			// Content Wrapper
+			div.content-wrapper
+				div.content
+					div.container-fluid
 
-      div
-        label(for="password") Password:
-        input(type="password", name="password", required)
+						// Add vertical spacing
+						//- div.row.justify-content-center.mt-5
+						div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+							div.col-md-4.col-sm-6.col-12
 
-      button(type="submit") Login
+								div.card.card-primary
+									div.card-header.text-center
+										h3.card-title Lalulla System
+
+									div.card-body
+										p.login-box-msg.text-center.mb-4
+											| Sign in to start your session
+
+										form(action="/login" method="post")
+
+											div.input-group.mb-3
+												input.form-control(
+													type="text"
+													name="username"
+													placeholder="Username"
+													required
+												)
+												div.input-group-append
+													div.input-group-text
+														span.fas.fa-user
+
+											div.input-group.mb-3
+												input.form-control(
+													type="password"
+													name="password"
+													placeholder="Password"
+													required
+												)
+												div.input-group-append
+													div.input-group-text
+														span.fas.fa-lock
+
+											div.row
+												div.col-8
+													div.icheck-primary
+														input#remember(type="checkbox")
+														label(for="remember") Remember Me
+
+												div.col-4
+													button.btn.btn-primary.btn-block(type="submit")
+														| Login
+
+									div.card-footer.text-center
+										a(href="#") Forgot password?
+
+			include ../layout/cgFooter-no-session.pug
+			include ../layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+			console.log("Login ready");
+		});

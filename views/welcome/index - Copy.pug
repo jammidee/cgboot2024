@@ -1,0 +1,38 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title Lalulla System
+		include ../layout/cgHeader.pug
+	body(class="hold-transition layout-top-nav")
+		.wrapper
+			include ../layout/cgNavigation-no-session.pug
+
+			//Content Wrapper. Contains page content
+			div.content-wrapper
+				div.content
+					div.container-fluid
+
+						if (is_desktop)
+							p This is a desktop!
+
+						if (is_phone)
+							p This is a phone!
+
+						if (is_tablet)
+							p This is a table!
+
+
+					p
+						b WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED!
+							i &nbsp;
+
+
+			include ../layout/cgFooter-no-session.pug
+			include ../layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+
+		});
