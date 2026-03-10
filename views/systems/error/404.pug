@@ -1,0 +1,45 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title Lalulla System | Page Not Found
+		include ../../layout/cgHeader.pug
+
+	body(class="hold-transition layout-top-nav")
+		.wrapper
+
+			// Content Wrapper
+			div.content-wrapper
+				div.content
+					div.container-fluid
+
+						// Vertically centered
+						div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+							div.col-md-4.col-sm-6.col-12
+
+								div.card.card-danger
+									div.card-header.text-center
+										h3.card-title Lalulla System
+
+									div.card-body.text-center
+										h1.display-4.text-danger 404
+										p.mb-3
+											| The page you are looking for could not be found.
+										p.text-muted
+											| It may have been moved, deleted, or you entered an incorrect URL.
+
+										a.btn.btn-primary.btn-block.mt-3(href="/")
+											i.fas.fa-home.mr-2
+											| Back to Home
+
+									div.card-footer.text-center
+										small.text-muted Lalulla Enterprise Software Solutions
+
+			include ../../layout/cgFooter-no-session.pug
+			include ../../layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+			console.log("Error page ready");
+		});

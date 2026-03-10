@@ -100,6 +100,11 @@ npm install pg --save
 npm install bcrypt --save
 npm install pug --save
 
+03/10/2026
+npm install axios --save
+npm install axios-retry --save
+npm install https --save
+
 
 EXTENSIONS
 

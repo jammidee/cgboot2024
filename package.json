@@ -1,6 +1,6 @@
 {
   "name": "cgboot2024",
-  "version": "0.0.183",
+  "version": "0.0.184",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -9,6 +9,8 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "admin-lte": "3.2",
+    "axios": "^1.13.6",
+    "axios-retry": "^4.5.0",
     "bcrypt": "^6.0.0",
     "bootstrap": "4.6",
     "cookie-parser": "~1.4.4",
@@ -18,6 +20,7 @@
     "express-session": "^1.19.0",
     "fs-extra": "^11.1.1",
     "http-errors": "~1.6.3",
+    "https": "^1.0.0",
     "morgan": "~1.9.1",
     "mysql2": "^3.19.0",
     "pg": "^8.20.0",

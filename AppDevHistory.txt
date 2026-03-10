@@ -11,9 +11,10 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+03/10/2026      - Added axios, axios-retry and https library
+                -
 02/22/2026      - added sequelized
                 - re-design the structure to be module centric
-                - 
 
 02/01/2026      - migated to the latest expressjs and express-sessions
 

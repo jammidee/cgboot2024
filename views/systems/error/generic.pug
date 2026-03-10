@@ -1,0 +1,62 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title Lalulla System | Error #{status}
+		include ../../layout/cgHeader.pug
+
+	body(class="hold-transition layout-top-nav")
+		.wrapper
+
+			div.content-wrapper
+				div.content
+					div.container-fluid
+
+						div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+							div.col-md-4.col-sm-6.col-12
+
+								// Card color changes depending on status
+								- var cardClass = status >= 500 ? 'card-danger' : 'card-warning'
+
+								div.card(class=cardClass)
+									div.card-header.text-center
+										h3.card-title Lalulla System
+
+									div.card-body.text-center
+										h1.display-4(class=status >= 500 ? 'text-danger' : 'text-warning') #{status}
+
+										p.mb-3 #{message}
+
+										p.text-muted
+											if status == 404
+												| The page you are looking for does not exist.
+											else if status == 403
+												| You do not have permission to access this resource.
+											else if status >= 500
+												| Something went wrong on our end.
+												br
+												| Our team has been notified and is working to resolve the issue.
+											else
+												| An unexpected error occurred.
+
+										a.btn.btn-primary.btn-block.mt-3(href="/")
+											i.fas.fa-home.mr-2
+											| Return to Home
+
+										// Show stack trace only in development
+										if error && error.stack
+											hr
+											pre.text-left.mt-3(style="font-size:12px;max-height:200px;overflow:auto;")
+												= error.stack
+
+									div.card-footer.text-center
+										small.text-muted Lalulla Enterprise Software Solutions
+
+			include ../../layout/cgFooter-no-session.pug
+			include ../../layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+			console.log("Generic error page ready");
+		});

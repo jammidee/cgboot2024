@@ -1,0 +1,47 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title Lalulla System | Internal Server Error
+		include ../../layout/cgHeader.pug
+
+	body(class="hold-transition layout-top-nav")
+		.wrapper
+
+			// Content Wrapper
+			div.content-wrapper
+				div.content
+					div.container-fluid
+
+						// Vertically centered
+						div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+							div.col-md-4.col-sm-6.col-12
+
+								div.card.card-danger
+									div.card-header.text-center
+										h3.card-title Lalulla System
+
+									div.card-body.text-center
+										h1.display-4.text-danger 500
+										p.mb-3
+											| Internal Server Error
+										p.text-muted
+											| Something went wrong on our end.
+											br
+											| Our team has been notified and is working to resolve the issue.
+
+										a.btn.btn-primary.btn-block.mt-3(href="/")
+											i.fas.fa-home.mr-2
+											| Return to Dashboard
+
+									div.card-footer.text-center
+										small.text-muted Lalulla Enterprise Software Solutions
+
+			include ../../layout/cgFooter-no-session.pug
+			include ../../layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+			console.log("500 error page ready");
+		});

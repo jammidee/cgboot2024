@@ -285,19 +285,26 @@ const fs = require('fs')
 //   })
 // }
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
+// app.use((req, res, next) => {
+//   res.status(404).render('systems/error/404');
 // });
 
-// Error handling middleware
+// 404 handler
+app.use((req, res, next) => {
+  const err = new Error('Page Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// Generic error handler
 app.use((err, req, res, next) => {
-	console.error(err.stack);
-	res.status(500).render('error', {
-	  message: err.message,
-	  error: err,
-	  sess: req.session // Pass session data to the error template
-	});
+  res.status(err.status || 500);
+
+  res.render('systems/error/generic', {
+    status: err.status || 500,
+    message: err.message || 'Internal Server Error',
+    error: process.env.NODE_ENV === 'development' ? err : null
   });
+});
 
 module.exports = app;
