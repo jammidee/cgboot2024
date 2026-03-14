@@ -264,7 +264,7 @@ app.use(function(req, res, next) {
 app.use('/', 				require('./src/systems/site/site.routes'));
 
 //System Modules 
-app.use('/auth', 			require('./src/systems/auth/auth.routes'));
+app.use('/auth', 			require('./src/routes/systems/auth.routes'));
 app.use('/site', 			require('./src/systems/site/site.routes'));
 
 app.use('/users', 			require('./src/modules/user/user.routes'));
