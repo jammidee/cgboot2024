@@ -1,5 +1,5 @@
 
-const userService = require('../services/user.service')
+const userService = require('../../../services/api/v1/user/user.service')
 
 exports.getUsers = async (req, res) => {
   const users = await userService.getUsers() // errors auto handled

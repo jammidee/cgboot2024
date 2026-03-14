@@ -8,6 +8,9 @@
  * ------------------------------------------------------------------------
  */
 
+const crypto          = require('crypto');
+const config          = require('../../config/app.config')
+
 class AuthController {
 
   constructor(AuthService) {
@@ -19,10 +22,11 @@ class AuthController {
    * Uses Pug template from /views/login/index.pug
    */
   showLoginPage = async (req, res) => {
-
+    
     res.render('systems/auth/index', {
       error: null
-    })
+    });
+  
   }
 
   /**
@@ -35,6 +39,44 @@ class AuthController {
     const { username, password } = req.body
 
     try {
+
+      // -------------------------------------------------
+      // 1️⃣ Check SUPERADMINS from config first
+      // -------------------------------------------------
+
+      const hashedInput = crypto.createHash('md5').update(password).digest('hex');
+
+      // 03/14/2026 Get the matching data in the config.
+      const superadmin = config.superadmins.find(admin =>admin.email === username && admin.password === hashedInput);
+
+      if (superadmin) {
+
+        req.session.user = {
+          id: 'SUPERADMIN', username: superadmin.email, role: 'SUPERADMIN'
+        }
+
+        // ✅ Set Lalulla-style session data
+        req.session.user_id     = 0;
+        req.session.user_name   = 'Superadmin';
+        req.session.user_email  = superadmin.email;
+        req.session.user_role   = 'Superadmin';
+        req.session.user_entity = config.appentity;
+        req.session.user_appid  = config.appid;
+        req.session.logged_in   = true;
+
+        // Optional: update your main app session flag
+        if (req.session.app) {
+          req.session.app.logged = 'YES';
+        }
+
+        return res.redirect('/dashboard')
+
+      }
+
+      // -------------------------------------------------
+      // 2️⃣ Otherwise check database
+      // -------------------------------------------------
+
 
       const user = await this.loginService.authenticate(username, password)
 
@@ -52,6 +94,7 @@ class AuthController {
 
     } catch (err) {
 
+      console.log(`There is an error --------> ${err}.`);
       res.redirect('/auth/login')
       
       // Re-render login page with error message

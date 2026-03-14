@@ -22,7 +22,7 @@
 
 var createError 		= require('http-errors');
 var express 			= require('express');
-var session				= require('express-session');	
+var session				= require('express-session');
 var path 				= require('path');
 var cookieParser 		= require('cookie-parser');
 var logger 				= require('morgan');
@@ -32,7 +32,12 @@ var indexLogin 			= require('./routes/login');
 // var usersRouter 		= require('./routes/users');
 
 // const userRoutes 		= require('./routes/user.routes')
+
+//=================================
+// Configuration Files - 03/14/2026
+//=================================
 const sequelize 		= require('./src/config/db')
+const appConfig 		= require('./src/config/app.config');
 
 var app = express();
 
@@ -47,7 +52,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //=============================================================
-// Demo mode scripts. This will protect the app from executing 
+// Demo mode scripts. This will protect the app from executing
 // when the date had expired.
 // Added by Jammi Dee 02/10/2019
 //=============================================================
@@ -73,23 +78,53 @@ if( cdate > xdate){
 //Declare initial values of sessions
 //resave is important to be true for rolling age
 app.use(session({
-	cookieName: 				  	'session',
-	secret: 					  	'Lux in Domino',
-	duration: 					  	30 * 60 * 1000,
-	activeDuration: 				5 * 60 * 1000,
-	resave: 					    true,
-	saveUninitialized: 				true,
-	rolling: 					    true,
-	cookie: { maxAge: 				30 * 60 * 1000 },
-	ephemeral: 					  	true,
-	varAppName:					  	'Lalulla Template',
-	varAppCopyright:				'Lalulla Copyright 2024',
-	varAppPrefix:				  	'LAM',
-	varAppContext:					'laMobile2018',
-	varAppId:					    'LAMOBILE',
-	varAppCategory:					'B2C',
-	logged: 						'NO'
-}));
+  name: 'session',
+  secret: 'Lux in Domino',
+  resave: false,
+  saveUninitialized: false,
+  rolling: true,
+  cookie: {
+    maxAge: 30 * 60 * 1000
+  }
+  
+}))
+
+app.use((req, res, next) => {
+
+  if (!req.session.app) {
+    req.session.app = {
+      name: 		appConfig.appname,
+      copyright: 	appConfig.appcopyright,
+      prefix: 		appConfig.appprefix,
+      id: 			appConfig.appid,
+      category: 	'B2C', // you can move this to config too
+      context: 		'laMobile2018',
+      logged: 		'NO'
+    }
+  }
+
+  next();
+})
+
+
+// app.use(session({
+// 	cookieName: 				  	'session',
+// 	secret: 					  	'Lux in Domino',
+// 	duration: 					  	30 * 60 * 1000,
+// 	activeDuration: 				5 * 60 * 1000,
+// 	resave: 					    true,
+// 	saveUninitialized: 				true,
+// 	rolling: 					    true,
+// 	cookie: { maxAge: 				30 * 60 * 1000 },
+// 	ephemeral: 					  	true,
+// 	varAppName:					  	'Lalulla Template',
+// 	varAppCopyright:				'Lalulla Copyright 2024',
+// 	varAppPrefix:				  	'LAM',
+// 	varAppContext:					'laMobile2018',
+// 	varAppId:					    'LAMOBILE',
+// 	varAppCategory:					'B2C',
+// 	logged: 						'NO'
+// }));
 
 //=======================
 // Path of the jQuery JS
@@ -219,29 +254,9 @@ app.use(function(req, res, next) {
 	req.session.cgSwRight 				= process.env.APP_SWITCH_RIGHT 		||'ON';
 	req.session.cgSwNoDev 				= process.env.APP_SWITCH_NODEV 		||'ON';
 	//Added by Jammi Dee 04/14/2018
-	req.session.cgSwLog 	= process.env.APP_SWITCH_LOG 					||'ON';
+	req.session.cgSwLog 				= process.env.APP_SWITCH_LOG 		||'ON';
 
-
-	res.locals.logged					= 'NO';
-
-
-	//Config declarations that can be access in pages using
-	//the format #{config.cfgName}
-	app.locals.config = {
-					cfgName: 'Jammi Dee',
-					cfgPhone: '0917-580-9483',
-					cfgEmail: 'jammi_dee@yahoo.com'
-				}
-
-	if(!res.locals.cgAboutCnt){
-
-		res.locals.cgAboutCnt = 1;
-
-	} else {
-
-		res.locals.cgAboutCnt = 2;
-
-	}
+	req.session.logged 					= 'NO';
 
 	//=====================================================
 	// Configuration for Synchronization - JMD 10/31/2021
@@ -260,10 +275,22 @@ app.use(function(req, res, next) {
 	next();
 });
 
+//Make It Available to All Pug Views Automatically
+app.use((req, res, next) => {
+
+  res.locals.app 		= appConfig;
+  res.locals.session 	= req.session;
+  res.locals.logged		= 'NO';
+
+  next();
+
+});
+
+
 //Homepage
 app.use('/', 				require('./src/systems/site/site.routes'));
 
-//System Modules 
+//System Modules
 app.use('/auth', 			require('./src/routes/systems/auth.routes'));
 app.use('/site', 			require('./src/systems/site/site.routes'));
 
@@ -272,18 +299,22 @@ app.use('/users', 			require('./src/modules/user/user.routes'));
 app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'));
 
 const fs = require('fs')
-// const path = require('path')
 
-// module.exports = (app) => {
-//   const modulesPath = path.join(__dirname, '../modules')
+//====================================
+// Auto register modules - 03/14/2026
+//====================================
+module.exports = (app) => {
 
-//   fs.readdirSync(modulesPath).forEach((folder) => {
-//     const routePath = path.join(modulesPath, folder, `${folder}.routes.js`)
-//     if (fs.existsSync(routePath)) {
-//       app.use(`/${folder}`, require(routePath))
-//     }
-//   })
-// }
+  const modulesPath = path.join(__dirname, '../modules')
+
+  fs.readdirSync(modulesPath).forEach((folder) => {
+    const routePath = path.join(modulesPath, folder, `${folder}.routes.js`)
+    if (fs.existsSync(routePath)) {
+      app.use(`/${folder}`, require(routePath))
+    }
+  })
+
+}
 
 // app.use((req, res, next) => {
 //   res.status(404).render('systems/error/404');
