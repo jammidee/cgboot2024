@@ -17,6 +17,10 @@ Tested / QA by:				Jammi Dee
                 - Fixed the app.js session variables
                 - Added scanning of modules in the module folder
                 - re-organized API folder.
+                - Added dashboard module on the capp (client application)
+                - Added middleware to check if the user has login or not.
+                - Added client application folder
+                - Added dashboard for the client app
                 -
 
 03/10/2026      - Added axios, axios-retry and https library

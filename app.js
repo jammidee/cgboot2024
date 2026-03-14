@@ -287,7 +287,9 @@ app.use((req, res, next) => {
 });
 
 
-//Homepage
+//==========
+// Homepage
+//==========
 app.use('/', 				require('./src/systems/site/site.routes'));
 
 //System Modules
@@ -297,6 +299,11 @@ app.use('/site', 			require('./src/systems/site/site.routes'));
 app.use('/users', 			require('./src/modules/user/user.routes'));
 // Mount login module
 app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'));
+
+//=====================================
+// Client Application (capp) end points
+//=====================================
+app.use('/dashboard', 		require('./src/routes/capp/dashboard.routes'));
 
 const fs = require('fs')
 
