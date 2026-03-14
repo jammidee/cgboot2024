@@ -14,29 +14,20 @@
  * ------------------------------------------------------------------------
  */
 
-// const { isLogged } = require('../../../helpers/auth');
+class AuthMiddleware {
 
-class DashboardController {
+  static ensureAuthenticated(req, res, next) {
 
-  index = async (req, res) => {
+    if (req.session.logged_in || (req.session.auth && req.session.auth.logged_in)) {
 
-    // if (!isLogged(req)) {
-    //   // Not logged in, redirect to login with last URL as redirect
-    //   const redirectUrl = encodeURIComponent(req.originalUrl);
-    //   return res.redirect('/auth/login?redirect=' + redirectUrl);
-    // }
+      return next();
 
-    res.render('capp/dashboard/index', {
-      title: 'Dashboard',
-      user: {
-        name: req.session.user_name || 'User',
-        email: req.session.user_email || ''
-      },
-      now: new Date()
-    });
+    }
+
+    return res.redirect('/auth/login');
 
   }
 
 }
 
-module.exports = DashboardController;
+module.exports = AuthMiddleware;

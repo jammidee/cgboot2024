@@ -29,6 +29,8 @@ html
 
 										form(action="/auth/login" method="post")
 
+											input(type="hidden" name="redirect_url" value=redirect_url)
+											
 											div.input-group.mb-3
 												input.form-control(
 													type="text"

@@ -11,6 +11,8 @@
 const crypto          = require('crypto');
 const config          = require('../../config/app.config');
 const logAction       = require('../../utils/logAction');
+const { isLogged }    = require('../../helpers/auth');
+
 
 class AuthController {
 
@@ -23,11 +25,24 @@ class AuthController {
    * Uses Pug template from /views/login/index.pug
    */
   showLoginPage = async (req, res) => {
-    
+
+    // Just redirect to secured page because we are
+    // still authenticated.
+    if (isLogged(req)) {
+
+      return res.redirect('/dashboard');
+
+    }
+
+    // Get redirect URL from query parameter
+    // (e.g., /auth/login?redirect=/dashboard)
+    const redirectUrl = req.query.redirect || '';
+
     res.render('systems/auth/index', {
-      error: null
+        error: null,
+        redirect_url: redirectUrl  // pass to the view
     });
-  
+
   }
 
   /**
@@ -37,7 +52,7 @@ class AuthController {
    */
   login = async (req, res) => {
 
-    const { username, password } = req.body
+    const { username, password, redirect_url } = req.body
 
     try {
 
@@ -70,7 +85,12 @@ class AuthController {
           req.session.app.logged = 'YES';
         }
 
-        return res.redirect('/dashboard')
+        // Redirect back if redirect_url exists
+        if (redirect_url) {
+            return res.redirect(redirect_url);
+        }
+
+        return res.redirect('/dashboard');
 
       }
 
@@ -97,12 +117,12 @@ class AuthController {
 
       console.log(`There is an error --------> ${err}.`);
       res.redirect('/auth/login')
-      
+
       // Re-render login page with error message
       // res.render('systems/auth/login', {
       //   error: err.message
       // })
-      
+
     }
   }
 

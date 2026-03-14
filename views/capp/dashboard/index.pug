@@ -5,6 +5,52 @@ html
 		meta(name="viewport", content="width=device-width, initial-scale=1")
 		title AdminLTE 3 | Blank Page
 		include ../../layout/cgHeader.pug
+
+		// Inline CSS for dashboard icons
+		style.
+			.dashboard-icons {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 100px;
+				margin-top: 40px;
+				justify-content: center;
+			}
+
+			.dashboard-btn {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100px;
+				text-decoration: none;
+				color: #333;
+				transition: transform 0.2s, box-shadow 0.2s;
+			}
+
+			.dashboard-btn img {
+				width: 120px;
+				height: 120px;
+				border-radius: 20%;
+				margin-bottom: 8px;
+				transition: transform 0.2s, box-shadow 0.2s;
+				border: 1px solid #ccc; /* subtle grey border */
+				padding: 10px;          /* space inside the border */
+				background-color: #f4f3f3; /* optional, to make border stand out */
+			}
+
+			.dashboard-btn:hover img {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+			}
+
+			.dashboard-btn p {
+				margin: 0;
+				font-size: 14px;
+				font-weight: 500;
+				text-align: center;
+				color: #303030; /* standard dark text color */
+			}
+
+
 	body(class="hold-transition sidebar-mini")
 		.wrapper
 			include ../../layout/cgNavigation.pug
@@ -41,6 +87,56 @@ html
 					p
 						b WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED!
 							i &nbsp;
+
+						div.dashboard-icons
+
+							a.dashboard-btn(href="/dashboard")
+								img(src="/resources/assets/dashboard.png", alt="Dashboard")
+								p Dashboard
+
+							a.dashboard-btn(href="/calendarc-img")
+								img(src="/resources/assets/calendarc-img.png", alt="Calendar")
+								p Calendar
+
+							a.dashboard-btn(href="/attendance")
+								img(src="/resources/assets/attendance.png", alt="Attendance")
+								p Attendance
+
+							a.dashboard-btn(href="/flows")
+								img(src="/resources/assets/flows.png", alt="Flows")
+								p Flows
+
+							a.dashboard-btn(href="/employees")
+								img(src="/resources/assets/employees.png", alt="Employees")
+								p Employees
+
+							a.dashboard-btn(href="/hr-documents")
+								img(src="/resources/assets/hr-documents.png", alt="HR Docs")
+								p HR Documents
+
+							a.dashboard-btn(href="/performance")
+								img(src="/resources/assets/performance.png", alt="Performance")
+								p Performance
+
+							a.dashboard-btn(href="/recruitment")
+								img(src="/resources/assets/recruitment.png", alt="Recruitment")
+								p Recruitment
+
+							a.dashboard-btn(href="/compensation")
+								img(src="/resources/assets/compensation.png", alt="Compensation")
+								p Compensation
+
+							a.dashboard-btn(href="/org_structure_icon")
+								img(src="/resources/assets/org_structure_icon.svg", alt="Org Structure")
+								p Org Structure
+
+							a.dashboard-btn(href="/pending-action")
+								img(src="/resources/assets/pending-action.png", alt="Pending Actions")
+								p Pending Actions
+
+							a.dashboard-btn(href="/pending-action")
+								img(src="/resources/assets/TalentManagementDashboard_Icon.svg", alt="Talent Management")
+								p Talent Management
 
 
 			include ../../layout/cgFooter.pug

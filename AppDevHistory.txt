@@ -14,6 +14,11 @@ Tested / QA by:				Jammi Dee
 
 03/15/2026      - Added log_action to logs transactions/activities in the system
                 - successfully executed login/logout
+                - successfully allowed redirection to the original page on logout
+                - Added isLogged() function
+                - Added an iPhone like menu
+                - Added a right bar menu
+                - Adjusted CSS
                 -
 
 03/14/2026      - re-arrange working folder for the codes

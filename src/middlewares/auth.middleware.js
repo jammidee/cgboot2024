@@ -14,17 +14,50 @@
  * ------------------------------------------------------------------------
  */
 
+const { logAction } = require('../utils/logAction'); // assume helper exists
+
 class AuthMiddleware {
 
+  // Ensure the user is authenticated, else log & redirect to login
   static ensureAuthenticated(req, res, next) {
 
+    //===============================
+    // Check if user is logged in
+    //===============================
     if (req.session.logged_in || (req.session.auth && req.session.auth.logged_in)) {
-
       return next();
-
     }
 
-    return res.redirect('/auth/login');
+    //===============================
+    // Unauthorized access attempt
+    //===============================
+    try {
+      // Capture caller info (controller/method) if available
+      const callerInfo = req.route ? `${req.route.path}` : 'Unknown Route';
+
+      // Capture the current URI for redirect after login
+      const redirectUrl = encodeURIComponent(req.originalUrl || '/');
+
+      // Log the unauthorized attempt
+      logAction(
+        'unauthorized_access',
+        `Unauthorized access attempt to ${callerInfo} at URI: ${req.originalUrl}`,
+        'WARNING',
+        true
+      );
+
+      //=======================================
+      // Redirect to login page with return URL
+      //=======================================
+      return res.redirect(`/auth/login?redirect=${redirectUrl}`);
+
+    } catch (err) {
+
+      console.error('Error logging unauthorized access:', err);
+      // fallback redirect
+      return res.redirect('/auth/login');
+
+    }
 
   }
 
