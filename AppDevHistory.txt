@@ -11,6 +11,9 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+
+03/15/2026      -
+
 03/14/2026      - re-arrange working folder for the codes
                 - complete auth re-arrange
                 - Added configuration files in the system
@@ -21,7 +24,8 @@ Tested / QA by:				Jammi Dee
                 - Added middleware to check if the user has login or not.
                 - Added client application folder
                 - Added dashboard for the client app
-                -
+                - installed sweetalert2 library\
+
 
 03/10/2026      - Added axios, axios-retry and https library
                 -

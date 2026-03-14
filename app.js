@@ -303,7 +303,7 @@ app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'));
 //=====================================
 // Client Application (capp) end points
 //=====================================
-app.use('/dashboard', 		require('./src/routes/capp/dashboard.routes'));
+app.use('/dashboard', 		require('./src/routes/capp/dashboard/dashboard.routes'));
 
 const fs = require('fs')
 

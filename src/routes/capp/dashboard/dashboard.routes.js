@@ -14,21 +14,18 @@
  * ------------------------------------------------------------------------
  */
 
-const express = require('express');
-const router  = express.Router();
+const express               = require('express');
+const router                = express.Router();
 
-const DashboardController = require('../../controllers/capp/dashboard.controller');
-const AuthMiddleware      = require('../../middleware/auth.middleware');
+const DashboardController   = require('../../../controllers/capp/dashboard/dashboard.controller');
+const AuthMiddleware        = require('../../../middlewares/auth.middleware');
 
-const controller = new DashboardController();
+const controller            = new DashboardController();
 
 /**
  * GET /dashboard
  */
-router.get(
-  '/',
-  AuthMiddleware.ensureAuthenticated,
-  controller.index
-);
+router.get('/', AuthMiddleware.ensureAuthenticated, controller.index );
+
 
 module.exports = router;

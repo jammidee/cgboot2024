@@ -105,6 +105,8 @@ npm install axios --save
 npm install axios-retry --save
 npm install https --save
 
+03/15/2026
+npm install sweetalert2 --save
 
 EXTENSIONS
 
