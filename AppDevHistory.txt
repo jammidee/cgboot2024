@@ -12,7 +12,9 @@ Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
 
-03/15/2026      -
+03/15/2026      - Added log_action to logs transactions/activities in the system
+                - successfully executed login/logout
+                -
 
 03/14/2026      - re-arrange working folder for the codes
                 - complete auth re-arrange

@@ -182,6 +182,8 @@ app.get('/admin-lte/plugins/popper/popper.min.js', function(req, res) {
 	res.sendFile(__dirname + '/node_modules/admin-lte/plugins/popper/umd/popper.min.js');
 });
 
+//SweetAlert2 03/15/2026
+app.use('/plugins/sweetalert2', express.static(require('path').join(__dirname, 'node_modules', 'sweetalert2', 'dist')));
 
 //Added by Jammi Dee 10/22/2023
 // Declare application global variables here

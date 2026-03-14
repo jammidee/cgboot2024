@@ -9,7 +9,8 @@
  */
 
 const crypto          = require('crypto');
-const config          = require('../../config/app.config')
+const config          = require('../../config/app.config');
+const logAction       = require('../../utils/logAction');
 
 class AuthController {
 
@@ -108,11 +109,35 @@ class AuthController {
   /**
    * Logout
    */
-  logout = async (req, res) => {
-    req.session.destroy(() => {
-      res.redirect('/login')
-    })
+  // logout = async (req, res) => {
+  //   req.session.destroy(() => {
+  //     res.redirect('/auth/login')
+  //   })
+  // }
+
+logout = async (req, res) => {
+
+  try {
+    await logAction( req,'logout', 'User logged out', 'INFO', false );
+  } catch (err) {
+    console.error(err);
   }
+
+  req.session.destroy((err) => {
+
+    if (err) {
+      console.error('Session destroy error:', err);
+    }
+
+    res.clearCookie('connect.sid');
+    res.redirect('/?t=' + Date.now());
+
+  });
+
+};
+
+
+
 }
 
 module.exports = AuthController
