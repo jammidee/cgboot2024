@@ -10,30 +10,24 @@
  * AUTHOR       : Jammi Dee (Joel M. Damaso)
  * LOCATION     : Manila, Philippines
  * EMAIL        : jammi_dee@yahoo.com
- * CREATED DATE : March 14, 2026 07:02 PM
+ * CREATED DATE : March 15, 2026 01:24 AM
  * ------------------------------------------------------------------------
  */
 
-// const { isLogged } = require('../../../helpers/auth');
-const { can }         = require('../../../helpers/access.helper');
+const { isLogged }      = require('../../helpers/auth');
+const { can }           = require('../../helpers/access.helper');
 
 class DashboardController {
 
   index = async (req, res) => {
 
-    // if (!isLogged(req)) {
-    //   // Not logged in, redirect to login with last URL as redirect
-    //   const redirectUrl = encodeURIComponent(req.originalUrl);
-    //   return res.redirect('/auth/login?redirect=' + redirectUrl);
-    // }
-
-    if (!can('dashboard_manage', req.user)) {
-
-      return res.status(403).send('Access Denied')
-
+    if (!isLogged(req)) {
+      // Not logged in, redirect to login with last URL as redirect
+      const redirectUrl = encodeURIComponent(req.originalUrl);
+      return res.redirect('/auth/login?redirect=' + redirectUrl);
     }
 
-    res.render('capp/dashboard/index', { title: 'Dashboard', user: req.session.user_name || 'User', email: req.session.user_email || '',
+    res.render('systems/error/access_denied', { title: 'Access Denied', user: req.session.user_name || 'User', email: req.session.user_email || '',
       can, now: new Date(),
     });
 

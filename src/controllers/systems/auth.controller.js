@@ -85,6 +85,17 @@ class AuthController {
           req.session.app.logged = 'YES';
         }
 
+        //Normalize to req.user
+        if (req.session?.logged_in) {
+          req.user = {
+              id:       req.session.user_id,
+              name:     req.session.user_name,
+              email:    req.session.user_email,
+              role:     req.session.user_role,      // <-- this is important
+              entity:   req.session.user_entity,
+              appid:    req.session.user_appid
+          }
+        }
         // Redirect back if redirect_url exists
         if (redirect_url) {
             return res.redirect(redirect_url);

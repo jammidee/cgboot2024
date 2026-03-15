@@ -34,12 +34,13 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 							a.nav-link(href="#")
 								i.far.fa-circle.nav-icon
 								p Inactive Page
-				li.nav-item
-					a.nav-link(href="#")
-						i.nav-icon.fas.fa-th
-						p
-							| Simple Link
-							span.right.badge.badge-danger New
+				if can('dashboard_manage', user)
+					li.nav-item
+						a.nav-link(href="#")
+							i.nav-icon.fas.fa-th
+							p
+								| Simple Link
+								span.right.badge.badge-danger New
 
 				li.nav-item
 					a.nav-link.logout-btn(href="#" data-href="/auth/logout")

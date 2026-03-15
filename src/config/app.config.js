@@ -10,6 +10,7 @@
 
 const crypto          = require('crypto');
 const lalullaConfig   = require('./app.lalulla');
+const accessConfig    = require('./app.access');
 
 // ---------------------------------------------
 // Helper
@@ -39,5 +40,6 @@ const localConfig = {
 // ---------------------------------------------
 module.exports = {
   ...lalullaConfig,
-  ...localConfig
+  ...localConfig,
+  ...accessConfig
 }

@@ -3,7 +3,7 @@ html
 	head
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
-		title Lalulla System | Login
+		title #{app.appname} | Login
 		include ../../layout/cgHeader.pug
 
 	body(class="hold-transition layout-top-nav")
@@ -30,7 +30,7 @@ html
 										form(action="/auth/login" method="post")
 
 											input(type="hidden" name="redirect_url" value=redirect_url)
-											
+
 											div.input-group.mb-3
 												input.form-control(
 													type="text"

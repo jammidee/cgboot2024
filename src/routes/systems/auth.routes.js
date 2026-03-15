@@ -4,11 +4,11 @@
  * ------------------------------------------------------------------------
  */
 
-const express           = require('express')
-const router            = express.Router()
+const express           = require('express');
+const router            = express.Router();
 
-const AuthController    = require('../../controllers/systems/auth.controller')
-const AuthService       = require('../../services/systems/auth.service')
+const AuthController    = require('../../controllers/systems/auth.controller');
+const AuthService       = require('../../services/systems/auth.service');
 
 const controller = new AuthController(new AuthService())
 

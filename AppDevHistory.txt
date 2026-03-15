@@ -12,6 +12,10 @@ Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
 
+03/16/2026      - Added access denied page
+                - Modified the authorize in the helper
+                -
+
 03/15/2026      - Added log_action to logs transactions/activities in the system
                 - successfully executed login/logout
                 - successfully allowed redirection to the original page on logout
@@ -20,6 +24,8 @@ Tested / QA by:				Jammi Dee
                 - Added a right bar menu
                 - Adjusted CSS
                 - Clean up the route folder and added a note to guide users how to place routes.
+
+                - Added role / right configuration in the config. hard-coded.
 
 03/14/2026      - re-arrange working folder for the codes
                 - complete auth re-arrange

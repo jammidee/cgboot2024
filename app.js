@@ -27,8 +27,8 @@ var path 				= require('path');
 var cookieParser 		= require('cookie-parser');
 var logger 				= require('morgan');
 
-var indexRouter 		= require('./routes/index');
-var indexLogin 			= require('./routes/login');
+// var indexRouter 		= require('./routes/index');
+// var indexLogin 			= require('./routes/login');
 // var usersRouter 		= require('./routes/users');
 
 // const userRoutes 		= require('./routes/user.routes')
@@ -89,6 +89,7 @@ app.use(session({
   
 }))
 
+//Access this to pug using #{app.appname}
 app.use((req, res, next) => {
 
   if (!req.session.app) {
@@ -296,6 +297,8 @@ app.use('/', 				require('./src/systems/site/site.routes'));
 
 //System Modules
 app.use('/auth', 			require('./src/routes/systems/auth.routes'));
+app.use('/access-denied', 	require('./src/routes/systems/access_denied.routes'));
+
 app.use('/site', 			require('./src/systems/site/site.routes'));
 
 app.use('/users', 			require('./src/modules/user/user.routes'));

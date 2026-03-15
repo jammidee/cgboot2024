@@ -10,25 +10,25 @@
  * AUTHOR       : Jammi Dee (Joel M. Damaso)
  * LOCATION     : Manila, Philippines
  * EMAIL        : jammi_dee@yahoo.com
- * CREATED DATE : March 14, 2026 07:02 PM
+ * CREATED DATE : March 15, 2026 01:24 AM
  * ------------------------------------------------------------------------
  */
 
 const express               = require('express');
 const router                = express.Router();
 
-const DashboardController   = require('../../../controllers/capp/dashboard/dashboard.controller');
-const AuthMiddleware        = require('../../../middlewares/auth.middleware');
+const AccessController      = require('../../controllers/systems/access_denied.controller');
+const AuthMiddleware        = require('../../middlewares/auth.middleware');
 
 //Control Acess
-const { authorize }         = require('../../../helpers/access.helper');
+const { authorize }         = require('../../helpers/access.helper');
 
-const controller            = new DashboardController();
+const controller            = new AccessController();
 
 /**
  * GET /dashboard
  */
-router.get('/', AuthMiddleware.ensureAuthenticated, authorize('dashboard_manage'), controller.index );
+router.get('/', AuthMiddleware.ensureAuthenticated, controller.index );
 
 
 module.exports = router;
