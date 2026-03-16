@@ -14,7 +14,7 @@
  * ------------------------------------------------------------------------
  */
 
-const { isLogged }      = require('../../helpers/auth');
+const { isLogged }      = require('../../helpers/auth.helper');
 const { can }           = require('../../helpers/access.helper');
 
 class DashboardController {

@@ -49,13 +49,13 @@ class AuthMiddleware {
       //=======================================
       // Redirect to login page with return URL
       //=======================================
-      return res.redirect(`/auth/login?redirect=${redirectUrl}`);
+      return res.redirect(`/auth/login?redirect=${redirectUrl}&t=` + + Date.now());
 
     } catch (err) {
 
       console.error('Error logging unauthorized access:', err);
       // fallback redirect
-      return res.redirect('/auth/login');
+      return res.redirect('/auth/login?t=' + Date.now() );
 
     }
 

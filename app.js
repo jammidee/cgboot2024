@@ -289,6 +289,32 @@ app.use((req, res, next) => {
 
 });
 
+// Globalize req.user
+const { can } = require('./src/helpers/access.helper');
+app.use((req, res, next) => {
+
+  if (req.session?.logged_in) {
+
+    req.user = {
+      id:     req.session.user_id,
+      name:   req.session.user_name,
+      email:  req.session.user_email,
+      role:   req.session.user_role,
+      entity: req.session.user_entity,
+      appid:  req.session.user_appid
+    }
+
+    // expose to pug automatically
+    res.locals.user = req.user;
+	// Expose can in the pages
+	res.locals.can = can;
+
+  }
+
+  next()
+
+})
+
 
 //==========
 // Homepage

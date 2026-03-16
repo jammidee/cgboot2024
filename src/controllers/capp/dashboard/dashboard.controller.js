@@ -14,7 +14,7 @@
  * ------------------------------------------------------------------------
  */
 
-// const { isLogged } = require('../../../helpers/auth');
+// const { isLogged } = require('../../../helpers/auth.helper');
 const { can }         = require('../../../helpers/access.helper');
 
 class DashboardController {
@@ -27,15 +27,16 @@ class DashboardController {
     //   return res.redirect('/auth/login?redirect=' + redirectUrl);
     // }
 
-    if (!can('dashboard_manage', req.user)) {
-
-      return res.status(403).send('Access Denied')
-
+    if (!can('dashboard_access', req.user)) {
+        return res.status(403).send('Access Denied')
     }
 
-    res.render('capp/dashboard/index', { title: 'Dashboard', user: req.session.user_name || 'User', email: req.session.user_email || '',
-      can, now: new Date(),
-    });
+    //------------------------------------------------------------------------------
+    // 'can' is passed as a function to check user access. 'can' is declared in the
+    // app.js
+    // The pug is found in the application folder 'view'.
+    //------------------------------------------------------------------------------
+    res.render('capp/dashboard/index', { title: 'Dashboard', can, now: new Date() });
 
   }
 

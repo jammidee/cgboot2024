@@ -18,17 +18,23 @@ const express               = require('express');
 const router                = express.Router();
 
 const DashboardController   = require('../../../controllers/capp/dashboard/dashboard.controller');
+const controller            = new DashboardController();
+
+//------------------------------------------------------------------
+// This make sure that user is authenticated when access this page.
+// If not authenticated, redirect to login page.
+//------------------------------------------------------------------
 const AuthMiddleware        = require('../../../middlewares/auth.middleware');
 
-//Control Acess
+//------------------------------------------------------------------
+// Control Access, this makes sure that access this page
+// requires 'dashboard_access'
+//------------------------------------------------------------------
 const { authorize }         = require('../../../helpers/access.helper');
-
-const controller            = new DashboardController();
 
 /**
  * GET /dashboard
  */
-router.get('/', AuthMiddleware.ensureAuthenticated, authorize('dashboard_manage'), controller.index );
-
+router.get('/', AuthMiddleware.ensureAuthenticated, authorize('dashboard_access'), controller.index );
 
 module.exports = router;

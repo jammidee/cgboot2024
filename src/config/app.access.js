@@ -23,14 +23,15 @@ accessConfig['cg-roles'] = {
 // -------------------------------------------------------------
 accessConfig['menu-access'] = {
 
-  // Laboratory Right controls
-  'laboratory_manage'    : ['admin-group','support-group','business-group','user-group'],
-  'laboratory_create'    : ['admin-group','support-group'],
-  'laboratory_read'      : ['admin-group','support-group','business-group','user-group'],
-  'laboratory_update'    : ['admin-group','support-group'],
-  'laboratory_delete'    : ['admin-group','support-group'],
-  'laboratory_report'    : ['admin-group','support-group'],
-  
+  // Dashboard Right controls
+  'dashboard_access'      : ['admin-group','support-group','business-group','user-group'],
+  'dashboard_manage'      : ['admin-group','support-group','business-group','user-group'],
+  'dashboard_create'      : ['admin-group','support-group'],
+  'dashboard_read'        : ['admin-group','support-group','business-group','user-group'],
+  'dashboard_update'      : ['admin-group','support-group'],
+  'dashboard_delete'      : ['admin-group','support-group'],
+  'dashboard_report'      : ['admin-group','support-group'],
+
   // Top Menu controls
   'topmenu_manage'       : ['admin-group','support-group','business-group','user-group'],
   'topmenu_create'       : ['admin-group','support-group'],

@@ -101,7 +101,13 @@ function canAccessMenu(menuId, userRole) {
  * ------------------------------------------------------------------------
  */
 function can(menuId, user) {
-  return canAccessMenu(menuId, user?.role)
+
+  console.log(menuId);
+  console.log(user);
+  console.log(user?.role);
+  console.log(canAccessMenu(menuId, user?.role));
+  return canAccessMenu(menuId, user?.role);
+
 }
 
 /**

@@ -17,6 +17,13 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 		// Sidebar Menu
 		nav.mt-2
 			ul.nav.nav-pills.nav-sidebar.flex-column(data-widget="treeview", role="menu")
+
+				if can('dashboard_manage', user)
+					li.nav-item
+						a.nav-link(href="#", onclick="window.location='/dashboard'; return false;")
+							i.nav-icon.fas.fa-th
+							p Dashboard
+
 				// Add icons to the links using the .nav-icon class
 				// with font-awesome or any other icon font library
 				li.nav-item.menu-close
@@ -34,6 +41,8 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 							a.nav-link(href="#")
 								i.far.fa-circle.nav-icon
 								p Inactive Page
+								
+				//- Check if allowed to manage page. It cpntrols the sidebar
 				if can('dashboard_manage', user)
 					li.nav-item
 						a.nav-link(href="#")

@@ -11,7 +11,7 @@
 const crypto          = require('crypto');
 const config          = require('../../config/app.config');
 const logAction       = require('../../utils/logAction');
-const { isLogged }    = require('../../helpers/auth');
+const { isLogged }    = require('../../helpers/auth.helper');
 
 
 class AuthController {
@@ -85,17 +85,38 @@ class AuthController {
           req.session.app.logged = 'YES';
         }
 
-        //Normalize to req.user
-        if (req.session?.logged_in) {
-          req.user = {
-              id:       req.session.user_id,
-              name:     req.session.user_name,
-              email:    req.session.user_email,
-              role:     req.session.user_role,      // <-- this is important
-              entity:   req.session.user_entity,
-              appid:    req.session.user_appid
-          }
-        }
+        // In the app.js, user information is normalized
+        // and loaded to be access by pug like below. The function 'can'
+        // is also published.
+
+        //--------------------------------------------------------
+        // // Globalize req.user
+        // const { can } = require('./src/helpers/access.helper');
+        // app.use((req, res, next) => {
+
+        //   if (req.session?.logged_in) {
+
+        //     req.user = {
+        //       id:     req.session.user_id,
+        //       name:   req.session.user_name,
+        //       email:  req.session.user_email,
+        //       role:   req.session.user_role,
+        //       entity: req.session.user_entity,
+        //       appid:  req.session.user_appid
+        //     }
+
+        //     // expose to pug automatically
+        //     res.locals.user = req.user;
+        //   // Expose can in the pages
+        //   res.locals.can = can;
+
+        //   }
+
+        //   next()
+
+        // })
+        //--------------------------------------------------
+
         // Redirect back if redirect_url exists
         if (redirect_url) {
             return res.redirect(redirect_url);
