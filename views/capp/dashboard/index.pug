@@ -3,7 +3,7 @@ html
 	head
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
-		title AdminLTE 3 | Blank Page
+		title #{app.appname} | #{title}
 		include ../../layout/cgHeader.pug
 
 		// Inline CSS for dashboard icons
@@ -69,7 +69,7 @@ html
 								ol.breadcrumb.float-sm-right
 									li.breadcrumb-item
 										a( href="#" ) Home
-									li.breadcrumb-item.active Dashboard V1
+									li.breadcrumb-item.active Dashboard
 
 				div.content
 					div.container-fluid
@@ -90,51 +90,52 @@ html
 
 						div.dashboard-icons
 
-							a.dashboard-btn(href="/dashboard")
-								img(src="/resources/assets/dashboard.png", alt="Dashboard")
-								p Dashboard
+							if can('dashboard_manage', user)
+								a.dashboard-btn(data-url="/dashboard")
+									img(src="/resources/assets/dashboard.png", alt="Dashboard")
+									p Dashboard
 
-							a.dashboard-btn(href="/calendarc-img")
+							a.dashboard-btn(data-urll="/calendarc")
 								img(src="/resources/assets/calendarc-img.png", alt="Calendar")
 								p Calendar
 
-							a.dashboard-btn(href="/attendance")
+							a.dashboard-btn(data-urll="/attendance")
 								img(src="/resources/assets/attendance.png", alt="Attendance")
 								p Attendance
 
-							a.dashboard-btn(href="/flows")
+							a.dashboard-btn(data-urll="/flows")
 								img(src="/resources/assets/flows.png", alt="Flows")
 								p Flows
 
-							a.dashboard-btn(href="/employees")
+							a.dashboard-btn(data-urll="/employees")
 								img(src="/resources/assets/employees.png", alt="Employees")
 								p Employees
 
-							a.dashboard-btn(href="/hr-documents")
+							a.dashboard-btn(data-urll="/hr-documents")
 								img(src="/resources/assets/hr-documents.png", alt="HR Docs")
 								p HR Documents
 
-							a.dashboard-btn(href="/performance")
+							a.dashboard-btn(data-urll="/performance")
 								img(src="/resources/assets/performance.png", alt="Performance")
 								p Performance
 
-							a.dashboard-btn(href="/recruitment")
+							a.dashboard-btn(data-urll="/recruitment")
 								img(src="/resources/assets/recruitment.png", alt="Recruitment")
 								p Recruitment
 
-							a.dashboard-btn(href="/compensation")
+							a.dashboard-btn(data-urll="/compensation")
 								img(src="/resources/assets/compensation.png", alt="Compensation")
 								p Compensation
 
-							a.dashboard-btn(href="/org_structure_icon")
+							a.dashboard-btn(data-urll="/org_structure_icon")
 								img(src="/resources/assets/org_structure_icon.svg", alt="Org Structure")
 								p Org Structure
 
-							a.dashboard-btn(href="/pending-action")
+							a.dashboard-btn(data-urll="/pending-action")
 								img(src="/resources/assets/pending-action.png", alt="Pending Actions")
 								p Pending Actions
 
-							a.dashboard-btn(href="/pending-action")
+							a.dashboard-btn(data-urll="/pending-action")
 								img(src="/resources/assets/TalentManagementDashboard_Icon.svg", alt="Talent Management")
 								p Talent Management
 
@@ -144,5 +145,15 @@ html
 
 	script.
 		$(document).ready(function(){
+
+			document.addEventListener('click', function(e) {
+			const link = e.target.closest('[data-url]');
+				if (link) {
+					window.location.href = link.dataset.url;
+				} else {
+					alert('Not yet implemented!');
+					
+				}
+			});
 
 		});
