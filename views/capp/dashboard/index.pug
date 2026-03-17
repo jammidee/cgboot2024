@@ -8,6 +8,11 @@ html
 
 		// Inline CSS for dashboard icons
 		style.
+		
+			.content-wrapper {
+				background-color: #ffffff;
+			}
+			
 			.dashboard-icons {
 				display: flex;
 				flex-wrap: wrap;
@@ -32,9 +37,9 @@ html
 				border-radius: 20%;
 				margin-bottom: 8px;
 				transition: transform 0.2s, box-shadow 0.2s;
-				border: 1px solid #ccc; /* subtle grey border */
+				border: 1px solid #e1e1e1; /* subtle grey border */
 				padding: 10px;          /* space inside the border */
-				background-color: #f4f3f3; /* optional, to make border stand out */
+				background-color: #f9f9f9; /* optional, to make border stand out */
 			}
 
 			.dashboard-btn:hover img {
@@ -64,7 +69,7 @@ html
 					div.container-fluid
 						div.row.mb-2
 							div.col-sm-6
-								h1.m-0 Dashboard
+								h4.m-0 Dashboard
 							div.col-sm-6
 								ol.breadcrumb.float-sm-right
 									li.breadcrumb-item
@@ -85,7 +90,7 @@ html
 
 
 					p
-						b WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED! #{app.appname}
+						span  &nbsp; &nbsp; &nbsp;WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED! #{app.appname}
 							i &nbsp;
 
 						div.dashboard-icons
@@ -151,8 +156,7 @@ html
 				if (link) {
 					window.location.href = link.dataset.url;
 				} else {
-					alert('Not yet implemented!');
-					
+					//alert('Not yet implemented!');
 				}
 			});
 

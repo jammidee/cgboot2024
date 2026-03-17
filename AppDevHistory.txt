@@ -14,6 +14,7 @@ Tested / QA by:				Jammi Dee
 03/17/2026      - successfully executed the access control
                 - successfully applied access control to the dashboard page
                 - accessing route, inside page, and sidebar have access control
+                - move the site folder to module folder to organized
                 -
 
 03/16/2026      - Added access denied page
