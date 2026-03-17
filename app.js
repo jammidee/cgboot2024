@@ -330,6 +330,12 @@ app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'));
 //=====================================
 app.use('/dashboard', 		require('./src/routes/capp/dashboard/dashboard.routes'));
 
+//=====================================
+// Modules Declaration
+//=====================================
+app.use('/template', 		require('./src/modules/tmpl/tmpl.routes'));
+
+
 const fs = require('fs')
 
 //====================================

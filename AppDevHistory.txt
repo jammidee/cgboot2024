@@ -11,6 +11,9 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+03/18/2026      - added the template module
+                -
+
 03/17/2026      - successfully executed the access control
                 - successfully applied access control to the dashboard page
                 - accessing route, inside page, and sidebar have access control

@@ -1,0 +1,50 @@
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ * 
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 18, 2026 12:29 AM
+ * ------------------------------------------------------------------------
+ */
+
+const bcrypt = require('bcrypt')
+const User = require('../../models/user.model')
+
+/**
+ * SiteService
+ * Handles authentication logic only.
+ * No HTTP logic here.
+ */
+class TmplService {
+
+  /**
+   * Validate username & password
+   */
+  async authenticate(username, password) {
+
+    const user = await User.findOne({
+      where: { username }
+    })
+
+    if (!user) {
+      throw new Error('Invalid username or password')
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
+      throw new Error('Invalid username or password')
+    }
+
+    return user
+  }
+}
+
+module.exports = TmplService
