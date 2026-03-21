@@ -31,6 +31,15 @@ accessConfig['menu-access'] = {
   'dashboard_update'      : ['admin-group','support-group'],
   'dashboard_delete'      : ['admin-group','support-group'],
   'dashboard_report'      : ['admin-group','support-group'],
+  
+    // Template Right controls
+  'template_access'      : ['admin-group','support-group','business-group','user-group'],
+  'template_manage'      : ['admin-group','support-group','business-group','user-group'],
+  'template_create'      : ['admin-group','support-group'],
+  'template_read'        : ['admin-group','support-group','business-group','user-group'],
+  'template_update'      : ['admin-group','support-group'],
+  'template_delete'      : ['admin-group','support-group'],
+  'template_report'      : ['admin-group','support-group'],
 
   // Top Menu controls
   'topmenu_manage'       : ['admin-group','support-group','business-group','user-group'],

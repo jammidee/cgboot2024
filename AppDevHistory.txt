@@ -11,6 +11,8 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+03/21/2026      - completed the module template example that can be used using development for additional features
+
 03/18/2026      - added the template module
                 -
 

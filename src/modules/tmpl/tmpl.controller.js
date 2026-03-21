@@ -14,30 +14,38 @@
  * ------------------------------------------------------------------------
  */
 
-class SiteController {
+const { can }         = require('../../helpers/access.helper');
+
+class TmplController {
 
   /**
    * Render Site Page
-   * Uses Pug template from /views/site/index.pug
+   * Dusplay the Template Index Page
    */
-  showSitePage = async (req, res) => {
+  showIndex = async (req, res) => {
 
-    res.render('systems/site/index', {
-      error: null
-    })
-  }
-  
+    if (!can('template_access', req.user)) {
+        return res.status(403).send('Access Denied')
+    }
+
+    res.render('./modules/tmpl/index', { title: 'Template Index', can, now: new Date(), error: null });
+
+  };
+
   /**
-   * Display the Fullflyer Page
+   * Display the Template Single Page
    */
-  showFullFlyerPage = async (req, res) => {
+  showSinglePage = async (req, res) => {
 
-    res.render('systems/site/fullflyer', {
-      error: null
-    })
-  }
-  
+    if (!can('template_access', req.user)) {
+        return res.status(403).send('Access Denied')
+    }
+
+    res.render('./modules/tmpl/singlepage', { title: 'Template Single Page', can, now: new Date(), error: null });
+
+  };
+
 
 }
 
-module.exports = SiteController
+module.exports = TmplController

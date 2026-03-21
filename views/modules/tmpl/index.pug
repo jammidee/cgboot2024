@@ -1,0 +1,163 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title #{app.appname} | #{title}
+		include ../../layout/cgHeader.pug
+
+		// Inline CSS for dashboard icons
+		style.
+		
+			.content-wrapper {
+				background-color: #ffffff;
+			}
+			
+			.dashboard-icons {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 100px;
+				margin-top: 40px;
+				justify-content: center;
+			}
+
+			.dashboard-btn {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100px;
+				text-decoration: none;
+				color: #333;
+				transition: transform 0.2s, box-shadow 0.2s;
+			}
+
+			.dashboard-btn img {
+				width: 120px;
+				height: 120px;
+				border-radius: 20%;
+				margin-bottom: 8px;
+				transition: transform 0.2s, box-shadow 0.2s;
+				border: 1px solid #e1e1e1; /* subtle grey border */
+				padding: 10px;          /* space inside the border */
+				background-color: #f9f9f9; /* optional, to make border stand out */
+			}
+
+			.dashboard-btn:hover img {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+			}
+
+			.dashboard-btn p {
+				margin: 0;
+				font-size: 14px;
+				font-weight: 500;
+				text-align: center;
+				color: #303030; /* standard dark text color */
+			}
+
+
+	body(class="hold-transition sidebar-mini")
+		.wrapper
+			include ../../layout/cgNavigation.pug
+			include ../../layout/cgSideBar.pug
+			include ../../layout/cgRightBar.pug
+
+			//Content Wrapper. Contains page content
+			div.content-wrapper
+				//Content Header (Page header)
+				div.content-header
+					div.container-fluid
+						div.row.mb-2
+							div.col-sm-6
+								h4.m-0 Dashboard
+							div.col-sm-6
+								ol.breadcrumb.float-sm-right
+									li.breadcrumb-item
+										a( href="#" ) Home
+									li.breadcrumb-item.active Dashboard
+
+				div.content
+					div.container-fluid
+
+						if (is_desktop)
+							p This is a desktop!
+
+						if (is_phone)
+							p This is a phone!
+
+						if (is_tablet)
+							p This is a table!
+
+
+					p
+						span  &nbsp; &nbsp; &nbsp;WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED! #{app.appname}
+							i &nbsp;
+
+						div.dashboard-icons
+
+							if can('dashboard_manage', user)
+								a.dashboard-btn(data-url="/dashboard")
+									img(src="/resources/assets/dashboard.png", alt="Dashboard")
+									p Dashboard
+
+							a.dashboard-btn(data-urll="/calendarc")
+								img(src="/resources/assets/calendarc-img.png", alt="Calendar")
+								p Calendar
+
+							a.dashboard-btn(data-urll="/attendance")
+								img(src="/resources/assets/attendance.png", alt="Attendance")
+								p Attendance
+
+							a.dashboard-btn(data-urll="/flows")
+								img(src="/resources/assets/flows.png", alt="Flows")
+								p Flows
+
+							a.dashboard-btn(data-urll="/employees")
+								img(src="/resources/assets/employees.png", alt="Employees")
+								p Employees
+
+							a.dashboard-btn(data-urll="/hr-documents")
+								img(src="/resources/assets/hr-documents.png", alt="HR Docs")
+								p HR Documents
+
+							a.dashboard-btn(data-urll="/performance")
+								img(src="/resources/assets/performance.png", alt="Performance")
+								p Performance
+
+							a.dashboard-btn(data-urll="/recruitment")
+								img(src="/resources/assets/recruitment.png", alt="Recruitment")
+								p Recruitment
+
+							a.dashboard-btn(data-urll="/compensation")
+								img(src="/resources/assets/compensation.png", alt="Compensation")
+								p Compensation
+
+							a.dashboard-btn(data-urll="/org_structure_icon")
+								img(src="/resources/assets/org_structure_icon.svg", alt="Org Structure")
+								p Org Structure
+
+							a.dashboard-btn(data-urll="/pending-action")
+								img(src="/resources/assets/pending-action.png", alt="Pending Actions")
+								p Pending Actions
+
+							a.dashboard-btn(data-urll="/pending-action")
+								img(src="/resources/assets/TalentManagementDashboard_Icon.svg", alt="Talent Management")
+								p Talent Management
+
+
+			include ../../layout/cgFooter.pug
+			include ../../layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+
+			document.addEventListener('click', function(e) {
+			const link = e.target.closest('[data-url]');
+				if (link) {
+					window.location.href = link.dataset.url;
+				} else {
+					//alert('Not yet implemented!');
+				}
+			});
+
+		});

@@ -333,7 +333,7 @@ app.use('/dashboard', 		require('./src/routes/capp/dashboard/dashboard.routes'))
 //=====================================
 // Modules Declaration
 //=====================================
-app.use('/template', 		require('./src/modules/tmpl/tmpl.routes'));
+app.use('/module/template', 		require('./src/modules/tmpl/tmpl.routes'));
 
 
 const fs = require('fs')

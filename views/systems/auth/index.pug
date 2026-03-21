@@ -6,6 +6,12 @@ html
 		title #{app.appname} | Login
 		include ../../layout/cgHeader.pug
 
+		style.
+			.login-container {
+				max-width: 420px;
+				width: 100%;
+			}
+
 	body(class="hold-transition layout-top-nav")
 		.wrapper
 
@@ -16,7 +22,8 @@ html
 
 						// Add vertical spacing
 						//- div.row.justify-content-center.mt-5
-						div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+						//- div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+						div.row.justify-content-center.align-items-center.px-3(style="min-height: calc(100vh - 120px);")
 							div.col-md-4.col-sm-6.col-12
 
 								div.card.card-primary

@@ -24,6 +24,12 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 							i.nav-icon.fas.fa-th
 							p Dashboard
 
+				if can('template_manage', user)
+					li.nav-item
+						a.nav-link(href="#", onclick="window.location='/module/template'; return false;")
+							i.nav-icon.fas.fa-th
+							p Template
+
 				// Add icons to the links using the .nav-icon class
 				// with font-awesome or any other icon font library
 				li.nav-item.menu-close
