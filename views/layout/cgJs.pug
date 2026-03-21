@@ -39,4 +39,15 @@ script.
             });
         });
 
+        //Redirect button - allows hiding of URL for all attributes
+        document.querySelectorAll('.redirect-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const redirectUrl = this.getAttribute('data-href');
+                window.location.href = redirectUrl;
+
+            });
+        });
+
+
     });

@@ -14,6 +14,8 @@
  * ------------------------------------------------------------------------
  */
 
+const { isLogged } = require('../../helpers/auth.helper');
+
 class SiteController {
 
   /**
@@ -22,11 +24,17 @@ class SiteController {
    */
   showSitePage = async (req, res) => {
 
+    if (isLogged(req)) {
+
+      return res.redirect('/dashboard?t==' + Date.now() );
+
+    }
+
     res.render('systems/site/index', {
       error: null
     })
   }
-  
+
   /**
    * Display the Fullflyer Page
    */
@@ -36,7 +44,7 @@ class SiteController {
       error: null
     })
   }
-  
+
 
 }
 

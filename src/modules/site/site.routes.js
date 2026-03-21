@@ -18,8 +18,8 @@ const router = express.Router()
 const SiteController = require('./site.controller')
 const SiteService    = require('./site.service')
 
-const controller = new SiteController(new SiteService())
-
+const controller            = new SiteController(new SiteService())
+// const AuthMiddleware        = require('../../middlewares/auth.middleware');
 /**
  * GET /site
  * Displays site page

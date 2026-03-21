@@ -6,7 +6,7 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
 			a.nav-link(data-widget="pushmenu", href="#", role="button")
 				i.fas.fa-bars
 		li.nav-item.d-none.d-sm-inline-block
-			a.nav-link(href="index3.html") Home
+			a.nav-link(href="/") Home
 		li.nav-item.d-none.d-sm-inline-block
 			a.nav-link Contact
 		li.nav-item.dropdown
@@ -98,10 +98,8 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
 		li.nav-item
 			a.nav-link(data-widget="fullscreen", href="#", role="button")
 				i.fas.fa-expand-arrows-alt
-		li.nav-item
-			a.nav-link(data-widget="control-sidebar", data-slide="true", href="#", role="button")
-				i.fas.fa-th-large
 
+		//User profile
 		li.nav-item.dropdown.user-menu
 			a.nav-link.dropdown-toggle.d-flex.align-items-center(href="#", id="navbarDropdown2",
 				role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false" )
@@ -127,3 +125,8 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
 				a.nav-link.logout-btn(href="#" data-href="/auth/logout")
 					i.fas.fa-sign-out-alt.mr-2
 					| Logout
+
+		// Rightbar Context menu
+		li.nav-item
+			a.nav-link(data-widget="control-sidebar", data-slide="true", href="#", role="button")
+				i.fas.fa-th-large

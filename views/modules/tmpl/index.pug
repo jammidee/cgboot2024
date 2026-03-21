@@ -59,8 +59,10 @@ html
 	body(class="hold-transition sidebar-mini")
 		.wrapper
 			include ../../layout/cgNavigation.pug
-			include ../../layout/cgSideBar.pug
-			include ../../layout/cgRightBar.pug
+
+			// The sidebar and rightbar should be in context with the module
+			include ./layout/laSideBar.pug
+			include ./layout/laRightBar.pug
 
 			//Content Wrapper. Contains page content
 			div.content-wrapper
@@ -69,7 +71,7 @@ html
 					div.container-fluid
 						div.row.mb-2
 							div.col-sm-6
-								h4.m-0 Dashboard
+								h4.m-0 #{title}
 							div.col-sm-6
 								ol.breadcrumb.float-sm-right
 									li.breadcrumb-item
@@ -119,31 +121,6 @@ html
 							a.dashboard-btn(data-urll="/hr-documents")
 								img(src="/resources/assets/hr-documents.png", alt="HR Docs")
 								p HR Documents
-
-							a.dashboard-btn(data-urll="/performance")
-								img(src="/resources/assets/performance.png", alt="Performance")
-								p Performance
-
-							a.dashboard-btn(data-urll="/recruitment")
-								img(src="/resources/assets/recruitment.png", alt="Recruitment")
-								p Recruitment
-
-							a.dashboard-btn(data-urll="/compensation")
-								img(src="/resources/assets/compensation.png", alt="Compensation")
-								p Compensation
-
-							a.dashboard-btn(data-urll="/org_structure_icon")
-								img(src="/resources/assets/org_structure_icon.svg", alt="Org Structure")
-								p Org Structure
-
-							a.dashboard-btn(data-urll="/pending-action")
-								img(src="/resources/assets/pending-action.png", alt="Pending Actions")
-								p Pending Actions
-
-							a.dashboard-btn(data-urll="/pending-action")
-								img(src="/resources/assets/TalentManagementDashboard_Icon.svg", alt="Talent Management")
-								p Talent Management
-
 
 			include ../../layout/cgFooter.pug
 			include ../../layout/cgJs.pug
