@@ -37,6 +37,7 @@ class AuthService {
       throw new Error('Invalid username or password')
     }
 
+    // Bcrypt magic, await bcrypt.compare(plain-text, salt-from a hashed table)
     const match = await bcrypt.compare(password, user.password)
 
     if (!match) {

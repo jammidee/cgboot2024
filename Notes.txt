@@ -348,6 +348,10 @@ npm install http-proxy-middleware @types/http-proxy-middleware --save
 **Cheerio 10/08/2023
 npm install cheerio @types/cheerio --save
 
+**Sequelized 03/28/2026
+npm install sequelize --save
+npm install --save-dev sequelize-cli
+
 AUDIT
 **Run Audit for vulnerabilty
 npm audit
@@ -388,3 +392,12 @@ git push -u origin feature01
 * Create a pull request
 1. Login to github then click the 'Pull Request' menu.
 2. Click the Create A Pull Request. Then Confirm Merge.
+
+
+
+TABLE MIGRATION
+===============
+
+npx sequelize-cli db:migrate:undo:all
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all

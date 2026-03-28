@@ -14,7 +14,7 @@
  * ------------------------------------------------------------------------
  */
 
-const { logAction } = require('../utils/logAction'); // assume helper exists
+const logAction = require('../utils/logAction'); // assume helper exists
 
 class AuthMiddleware {
 
@@ -40,6 +40,7 @@ class AuthMiddleware {
 
       // Log the unauthorized attempt
       logAction(
+        req,
         'unauthorized_access',
         `Unauthorized access attempt to ${callerInfo} at URI: ${req.originalUrl}`,
         'WARNING',

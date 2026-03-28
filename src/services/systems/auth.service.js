@@ -27,10 +27,10 @@ class AuthService {
   /**
    * Validate username & password
    */
-  async authenticate(username, password) {
+  async authenticate(email, password) {
 
     const user = await User.findOne({
-      where: { username }
+      where: { email }
     })
 
     if (!user) {

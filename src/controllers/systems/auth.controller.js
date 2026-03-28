@@ -17,7 +17,7 @@ const { isLogged }    = require('../../helpers/auth.helper');
 class AuthController {
 
   constructor(AuthService) {
-    this.authService = AuthService;
+    this.authService = AuthService; // Passed parameter
   }
 
   /**
@@ -131,7 +131,7 @@ class AuthController {
       // -------------------------------------------------
 
 
-      const user = await this.loginService.authenticate(username, password)
+      const user = await this.authService.authenticate(username, password)
 
       // Store minimal session info
       req.session.user = {
@@ -140,6 +140,24 @@ class AuthController {
         firstname: user.firstname,
         lastname: user.lastname,
         store_id: user.store_id
+      }
+      
+      // ✅ Set Lalulla-style session data
+      req.session.user_id     = user.id;
+      req.session.user_name   = user.username;
+      req.session.user_email  = user.email;
+      req.session.user_role   = user.roleid ?? 'Superadmin';
+      req.session.user_entity = user.entityid;
+      req.session.user_appid  = config.appid;
+      req.session.logged_in   = true;
+
+      // Optional: update your main app session flag
+      if (req.session.app) {
+        req.session.app.logged = 'YES';
+      }
+
+      if (redirect_url) {
+          return res.redirect(redirect_url);
       }
 
       // Redirect after successful login

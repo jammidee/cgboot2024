@@ -11,6 +11,15 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+03/28/2026      - Installed Sequelize CLI [Node: 22.21.1, CLI: 6.6.5, ORM: 6.37.7]
+                - npx sequelize-cli migration:generate --name create-users-table
+                - npx sequelize-cli seed:generate --name seed-users
+                - Added database.js in the config for sequelized initialization
+                - npx sequelize-cli migration:generate --name create-systemlogs-table
+                - Create system_logs table
+                - completed the login using the database.
+                - 
+
 03/21/2026      - completed the module template example that can be used using development for additional features
                 - Added hiding redirection.
                 - Rename 'cg'xxx to 'la'xxx
