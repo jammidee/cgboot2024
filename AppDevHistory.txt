@@ -11,6 +11,15 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+04/04/20206     - npx sequelize-cli migration:generate --name create-configdb
+                - Added migrate scripts in package.json
+                - Added 20260403230015-create-configdb.js
+                - added /system/service/config.service.js
+                - Added /model/systems/cofigdb.model.js
+                - npx sequelize-cli seed:generate --name seed-configdb
+                - Added /database/seeders/xxxxx-seed-config.db
+                -
+
 03/28/2026      - Installed Sequelize CLI [Node: 22.21.1, CLI: 6.6.5, ORM: 6.37.7]
                 - npx sequelize-cli migration:generate --name create-users-table
                 - npx sequelize-cli seed:generate --name seed-users

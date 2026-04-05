@@ -206,7 +206,7 @@ app.use(function(req, res, next) {
 
 	// Framework and App version are the same
 	// during framework development.
-	req.session.cgFrameCodeName			= process.env.APP_FRAMECODENAME 	|| 'Alstroemeria'; 			// http://www.typesofflowers.co.uk/flower-list
+	req.session.cgFrameCodeName			= process.env.APP_FRAMECODENAME 	|| 'Begonia'; 							// http://www.typesofflowers.co.uk/flower-list
 	req.session.cgFrameVersion			= process.env.APP_FRAMEVERSION 		|| '0.0.0'; 							// versioning http://semver.org/
 	req.session.cgFrameworkVersion		= process.env.APP_FRAMEVERSION 		|| '0.0.0'; 
 

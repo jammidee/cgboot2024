@@ -1,0 +1,93 @@
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2026 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * Lalulla System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : April 05, 2026 07:25 PM
+ * ------------------------------------------------------------------------
+ */
+
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2026 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : April 04, 2026 08:21 AM
+ * ------------------------------------------------------------------------
+ */
+
+'use strict';
+
+const ConfigService = require('../../services/systems/config.service');
+
+(async () => {
+  try {
+    console.log('-----------------------------------');
+    console.log(' CONFIG SERVICE TEST SCRIPT');
+    console.log('-----------------------------------\n');
+
+    const configService = ConfigService; // Singleton instance
+
+    // ----------------- 1. READ seeded values -----------------
+    const appName = await configService.get('APP_NAME', 'Default App');
+    const allowLogin = await configService.get('ALLOW_LOGIN', false);
+    console.log('[READ] APP_NAME:', appName); 
+    console.log('[READ] ALLOW_LOGIN:', allowLogin); 
+
+    // ----------------- 2. SET new config value -----------------
+    await configService.set('MAX_LOGIN_ATTEMPTS', 5, {
+      entityid: 'LALULLA',
+      description: 'Maximum allowed login attempts'
+    });
+    const maxLogin = await configService.get('MAX_LOGIN_ATTEMPTS', 3);
+    console.log('[SET] MAX_LOGIN_ATTEMPTS:', maxLogin); 
+
+    // ----------------- 3. UPDATE existing config value -----------------
+    await configService.set('APP_NAME', 'Lalulla Framework', {
+      entityid: 'LALULLA',
+      description: 'Updated application name'
+    });
+    const updatedAppName = await configService.get('APP_NAME', 'Default App');
+    console.log('[UPDATE] APP_NAME:', updatedAppName); 
+
+    // ----------------- 4. READ non-existent value with default -----------------
+    const unknownValue = await configService.get('NON_EXISTENT_KEY', 'DefaultValue');
+    console.log('[DEFAULT] NON_EXISTENT_KEY:', unknownValue); 
+
+    // ----------------- 5. Cache test -----------------
+    console.log('\n[INFO] Testing in-memory cache...');
+    const start = Date.now();
+    await configService.get('APP_NAME');
+    await configService.get('APP_NAME');
+    const end = Date.now();
+    console.log('[CACHE] Accessed APP_NAME twice in', end - start, 'ms');
+
+    console.log('\n-----------------------------------');
+    console.log(' CONFIG SERVICE TEST SCRIPT COMPLETED');
+    console.log('-----------------------------------\n');
+
+    process.exit(0);
+
+  } catch (err) {
+    console.error('CONFIG SERVICE TEST ERROR:', err);
+    process.exit(1);
+  }
+})();
