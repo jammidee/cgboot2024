@@ -1,0 +1,17 @@
+Created: 04/07/2025
+
+Feature List Based on DataTypes
+
+04/07/2026
+- Login Mechanism by database
+- Logging mechanism
+- Database based variables (configdb)
+- AdmdinLTE based GUI
+- RBAC to page loading, Page components
+- Development
+  - uses sequelized
+  - provides test mechanisms
+  - Auto-increment versioning
+
+04/08/2026
+- API with security middleware using JWT

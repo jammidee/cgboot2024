@@ -1,0 +1,704 @@
+I want to create an API for validating of API via jwt.
+
+This is the code that I want to migrate:
+
+/**
+ * Copyright (C) 2012-2022 Lalulla OPC. All rights reserved.
+ * Copyright (c) 2017 - Joel M. Damaso - mailto:jammi_dee@yahoo.com Manila/Philippines
+ * This file is part of Lalulla System.
+ * 
+ * Lalulla System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * 
+ * Framework Designed by: Jammi Dee (jammi_dee@yahoo.com)
+ * 02/05/2024 03:29pm
+ *  
+*/
+
+var express 		= require('express');
+var router 			= express.Router();
+
+
+const bodyParser 	= require('body-parser');
+const jwt 			= require('jsonwebtoken');
+const mysql 		= require('mysql2');
+const crypto 		= require("crypto");
+//const bcrypt 		= require('bcrypt');
+
+const filetype = require('file-type');
+const fs = require('fs');
+const path = require('path');
+
+require('dotenv').config();
+router.use(bodyParser.json());
+
+const validateToken = require('./validatetoken.js');
+
+// Load environment variables from .env file with default values
+const {
+	DB_HOST 		= 'localhost',
+	DB_USER 		= 'root',
+	DB_PASSWORD 	= 'password',
+	DB_DATABASE 	= 'dbwavedar',
+	JWT_SECRET 		= 'secret'
+  } = process.env;
+
+// Create a MySQL connection pool
+const pool = mysql.createPool({
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+// console.log("Connecting to Database:", DB_DATABASE, "on Host:", DB_HOST);
+
+//Added by Jammi Dee 09/05/2017
+// var cgreg = require('../../../../../node_modules/lalulla/cglibregistry.js');
+
+// //Added by Jammi Dee 09/11/2017
+// var cg = require('../../../../../node_modules/lalulla/lalulla.js');
+
+// //Added by Jammi Dee 09/11/2017
+// var cgdb = require('../../../../../node_modules/lalulla/cglibmysql.js');
+
+// //Added by Jammi Dee 09/11/2017
+// var cgutil = require('../../../../../node_modules/lalulla/cgutility.js');
+
+/* Required library for the Cloud Gate Framework */
+var cg = require('../../../../node_modules/cloudgate/cloudgate.js');
+
+/* Required library for the Cloud Gate Framework */
+var ch = require('../../../../node_modules/cloudgate/cglibhelper.js');
+
+/* Required library for the Cloud Gate Framework */
+var cgmy = require('../../../../node_modules/cloudgate/cglibmysql.js');
+
+//Added by Jammi Dee 09/05/2017
+var cgreg = require('../../../../node_modules/cloudgate/cglibregistry.js');
+
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+
+	res.send('Healthcheck! Endpoint is running!');
+    
+});
+router.post('/login', validateToken, async (req, res, next) => {
+
+	const authHeader = req.headers.authorization;
+	const body =req.body;
+	
+	const targetURL = body.targetURL;
+
+	//if( req.session.logged === 'YES'){
+		console.log('SESSION LOGGED');
+		res.redirect(targetURL)
+	//}else{
+		console.log('SESSION OUT')
+	//}
+	
+  
+});
+//===============================
+// Added by Jammi Dee 01/15/2024
+//===============================
+router.post('/getaccesstoken', async (req, res, next) => {
+
+	const authHeader = req.headers.authorization;
+	const body =req.body;
+
+  
+	if (!authHeader) {
+	  return res.status(401).json({ error: 'Unauthorized: Missing Authorization header' });
+	}
+  
+	const authData = authHeader.split(' ');
+	if (authData.length !== 2 || authData[0].toLowerCase() !== 'basic') {
+	  return res.status(401).json({ error: 'Unauthorized: Invalid Authorization header format' });
+	}
+  
+	const credentials = Buffer.from(authData[1], 'base64').toString('utf-8');
+	let [username, password] = credentials.split(':');
+  
+	// console.log(`User: ${username} Password: ${password}`);
+	const authenticationResult = await authenticateUser(req, res, username.trim(), password.trim());
+
+	if (authenticationResult.authenticated) {
+		const { token, userData } = authenticationResult;
+		// Send the token and user data in the response or handle as needed
+		res.json({ token, userData });
+	} else {
+	// Authentication failed
+	res.status(401).json({ error: 'Invalid username or password' });
+	}
+  
+});
+
+// Route to validate JWT token
+router.get('/validatetoken', validateToken, (req, res) => {
+	// If the token is valid, the validateToken middleware would have added user information to req.user
+	res.json({ success: true, user: req.user });
+});
+
+
+//Get the current date and time JMD 02/04/2024
+router.get('/datetime', validateToken, (req, res) => {
+    // Get the current date and time
+    const currentDateTime = new Date();
+
+    // Send the current date and time
+    res.json({ datetime: currentDateTime });
+});
+
+
+  const authenticateUser = async (req, res, username, password) => {
+	const cleanUsername 	= username.replace(/[^\x20-\x7E]/g, '').trim();	
+	const [rows] 			= await pool.promise().query('SELECT * FROM tbluser WHERE username = ?', [cleanUsername]);
+
+	if (rows.length === 1) {
+	  const storedEncryptedPassword = rows[0].passwdencn;
+  
+	  // Encrypt the incoming password for comparison
+	  const encryptedPassword = encryptPassword(password);
+	  const passwordMatch = encryptedPassword === storedEncryptedPassword;
+  
+	  if (passwordMatch) {
+		// If authentication is successful, include all user data in the token
+		const userData = {
+		  userId: 		rows[0].userid,
+		  username: 	rows[0].username,
+		  entityid: 	rows[0].entityid,
+		  roleid: 		rows[0].roleid,
+		  locked: 		rows[0].locked,
+		  allowlogon:	rows[0].allowlogon,
+		  // Add other user properties as needed
+		};
+  
+		const token = generateToken(userData);
+		return { authenticated: true, token, userData };
+	  }
+	}
+  
+	return { authenticated: false };
+  };
+  
+  // Function to encrypt the password
+  const encryptPassword = (password) => {
+	const key = 'ADMAJOREMDEIGLORIAMLUXDOMINOAMDG';  // replace with your key
+	const iv = 'SIC-ITUR-ADASTRA'; // replace with your IV
+	const cipher = crypto.createCipheriv('aes256', key, iv); // aes-256-cbc
+	let encryptedPassword = cipher.update(password, 'utf8', 'base64');
+	encryptedPassword += cipher.final('base64');
+	return encryptedPassword;
+  };
+
+  const generateToken = (userData) => {
+	const token = jwt.sign(userData, JWT_SECRET, { expiresIn: '1h' });
+	return token;
+  };
+
+
+module.exports = router;
+
+you can use your own functions to meet the requirements.
+Add comments to your code.
+
+Here is boilerplate tree where the code will be migrated:
+
+C:\DEVS72\CGBOOT2024\SRC
+├───config
+├───controllers
+│   ├───api
+│   │   └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───database
+│   ├───migrations
+│   └───seeders
+├───helpers
+├───middlewares
+├───models
+│   └───systems
+├───modules
+│   ├───site
+│   ├───tmpl
+│   ├───user
+│   └───welcome
+├───routes
+│   ├───api
+│   │   ├───mc
+│   │   └───v1
+│   │       ├───jwt
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───services
+│   ├───api
+│   │   └───v1
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───test
+│   └───systems
+└───utils
+
+Here is how the classes are created in the new template:
+
+auth.route.js
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : CloudGate PHP Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 07, 2026 11:50 PM
+ * ------------------------------------------------------------------------
+ */
+
+const express           = require('express');
+const router            = express.Router();
+
+const AuthController    = require('../../controllers/systems/auth.controller');
+const AuthService       = require('../../services/systems/auth.service');
+
+const controller = new AuthController(new AuthService())
+
+/**
+ * GET /login
+ * Displays login page
+ */
+router.get('/login', controller.showLoginPage)
+
+/**
+ * POST /login
+ * Processes login
+ */
+router.post('/login', controller.login)
+
+/**
+ * POST /login/logout
+ */
+router.get('/logout', controller.logout)
+
+module.exports = router
+
+
+
+auth.service.js
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : CloudGate PHP Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 07, 2026 11:50 PM
+ * ------------------------------------------------------------------------
+ */
+
+const bcrypt  = require('bcrypt')
+const User    = require('../../models/user.model')
+
+/**
+ * LoginService
+ * Handles authentication logic only.
+ * No HTTP logic here.
+ */
+class AuthService {
+
+  /**
+   * Validate username & password
+   */
+  async authenticate(email, password) {
+
+    const user = await User.findOne({
+      where: { email }
+    })
+
+    if (!user) {
+      throw new Error('Invalid username or password')
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
+      throw new Error('Invalid username or password')
+    }
+
+    return user
+  }
+}
+
+module.exports = AuthService
+
+
+user.model.js 
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * Lalulla System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 07, 2026 11:30 PM
+ * ------------------------------------------------------------------------
+ */
+
+
+const { DataTypes } = require('sequelize');
+const sequelize     = require('../config/db');
+
+const User          = sequelize.define('User', {
+
+  id: {
+    type: DataTypes.BIGINT,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+
+  username: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+    unique: true,
+  },
+
+  password: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+
+  email: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+    unique: true,
+  },
+
+  firstname: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+  },
+
+  lastname: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+  },
+
+  phone: {
+    type: DataTypes.STRING(50),
+    allowNull: true,
+  },
+
+  gender: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    comment: '1=Male, 2=Female, 3=Other'
+  },
+
+  store_id: {
+    type: DataTypes.BIGINT,
+    allowNull: true,
+  },
+
+  status: {
+    type: DataTypes.STRING(20),
+    allowNull: false,
+    defaultValue: 'ACTIVE',
+  },
+
+  entityid: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    defaultValue: 'GCONE',
+  },
+
+  last_login_at: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+
+  created_at: {
+    type: DataTypes.DATE,
+  },
+
+  updated_at: {
+    type: DataTypes.DATE,
+  },
+
+  deleted_at: {
+    type: DataTypes.DATE,
+  }
+
+}, {
+  tableName: 'users',
+
+  // Enable Sequelize timestamp handling
+  timestamps: true,
+
+  // Map to snake_case columns
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+
+  // Enable soft delete
+  paranoid: true,
+  deletedAt: 'deleted_at',
+});
+
+module.exports = User;
+
+
+auth.controller.js
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : CloudGate PHP Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 07, 2026 11:50 PM
+ * ------------------------------------------------------------------------
+ */
+
+const crypto          = require('crypto');
+const config          = require('../../config/app.config');
+const logAction       = require('../../utils/logAction');
+const { isLogged }    = require('../../helpers/auth.helper');
+
+
+class AuthController {
+
+  constructor(AuthService) {
+    this.authService = AuthService; // Passed parameter
+  }
+
+  /**
+   * Render Login Page
+   * Uses Pug template from /views/login/index.pug
+   */
+  showLoginPage = async (req, res) => {
+
+    // Just redirect to secured page because we are
+    // still authenticated.
+    if (isLogged(req)) {
+
+      return res.redirect('/dashboard');
+
+    }
+
+    // Get redirect URL from query parameter
+    // (e.g., /auth/login?redirect=/dashboard)
+    const redirectUrl = req.query.redirect || '';
+
+    res.render('systems/auth/index', {
+        error: null,
+        redirect_url: redirectUrl  // pass to the view
+    });
+
+  }
+
+  /**
+   * Handle Login POST
+   * - Calls service
+   * - Creates session
+   */
+  login = async (req, res) => {
+
+    const { username, password, redirect_url } = req.body
+
+    try {
+
+      // -------------------------------------------------
+      // 1️⃣ Check SUPERADMINS from config first
+      // -------------------------------------------------
+
+      const hashedInput = crypto.createHash('md5').update(password).digest('hex');
+
+      // 03/14/2026 Get the matching data in the config.
+      const superadmin = config.superadmins.find(admin =>admin.email === username && admin.password === hashedInput);
+
+      if (superadmin) {
+
+        req.session.user = {
+          id: 'SUPERADMIN', username: superadmin.email, role: 'SUPERADMIN'
+        }
+
+        // ✅ Set Lalulla-style session data
+        req.session.user_id     = 0;
+        req.session.user_name   = 'Superadmin';
+        req.session.user_email  = superadmin.email;
+        req.session.user_role   = 'Superadmin';
+        req.session.user_entity = config.appentity;
+        req.session.user_appid  = config.appid;
+        req.session.logged_in   = true;
+
+        // Optional: update your main app session flag
+        if (req.session.app) {
+          req.session.app.logged = 'YES';
+        }
+
+        // In the app.js, user information is normalized
+        // and loaded to be access by pug like below. The function 'can'
+        // is also published.
+
+        //--------------------------------------------------------
+        // // Globalize req.user
+        // const { can } = require('./src/helpers/access.helper');
+        // app.use((req, res, next) => {
+
+        //   if (req.session?.logged_in) {
+
+        //     req.user = {
+        //       id:     req.session.user_id,
+        //       name:   req.session.user_name,
+        //       email:  req.session.user_email,
+        //       role:   req.session.user_role,
+        //       entity: req.session.user_entity,
+        //       appid:  req.session.user_appid
+        //     }
+
+        //     // expose to pug automatically
+        //     res.locals.user = req.user;
+        //   // Expose can in the pages
+        //   res.locals.can = can;
+
+        //   }
+
+        //   next()
+
+        // })
+        //--------------------------------------------------
+
+        // Redirect back if redirect_url exists
+        if (redirect_url) {
+            return res.redirect(redirect_url);
+        }
+
+        return res.redirect('/dashboard');
+
+      }
+
+      // -------------------------------------------------
+      // 2️⃣ Otherwise check database
+      // -------------------------------------------------
+
+
+      const user = await this.authService.authenticate(username, password)
+
+      // Store minimal session info
+      req.session.user = {
+        id: user.id,
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        store_id: user.store_id
+      }
+      
+      // ✅ Set Lalulla-style session data
+      req.session.user_id     = user.id;
+      req.session.user_name   = user.username;
+      req.session.user_email  = user.email;
+      req.session.user_role   = user.roleid ?? 'Superadmin';
+      req.session.user_entity = user.entityid;
+      req.session.user_appid  = config.appid;
+      req.session.logged_in   = true;
+
+      // Optional: update your main app session flag
+      if (req.session.app) {
+        req.session.app.logged = 'YES';
+      }
+
+      if (redirect_url) {
+          return res.redirect(redirect_url);
+      }
+
+      // Redirect after successful login
+      res.redirect('/dashboard')
+
+    } catch (err) {
+
+      console.log(`There is an error --------> ${err}.`);
+      res.redirect('/auth/login')
+
+      // Re-render login page with error message
+      // res.render('systems/auth/login', {
+      //   error: err.message
+      // })
+
+    }
+  }
+
+  /**
+   * Logout
+   */
+  // logout = async (req, res) => {
+  //   req.session.destroy(() => {
+  //     res.redirect('/auth/login')
+  //   })
+  // }
+
+logout = async (req, res) => {
+
+  try {
+    await logAction( req,'logout', 'User logged out', 'INFO', false );
+  } catch (err) {
+    console.error(err);
+  }
+
+  req.session.destroy((err) => {
+
+    if (err) {
+      console.error('Session destroy error:', err);
+    }
+
+    res.clearCookie('connect.sid');
+    res.redirect('/?t=' + Date.now());
+
+  });
+
+};
+
+
+
+}
+
+module.exports = AuthController
+
+The app.js entry should be:
+app.use('/api/v1/systems/auth', 	require('./src/routes/api/v1/systems/auth/auth.routes'));
+
+For service path: /src/services/api/v1/systems/auth - do the same folder path patterm with other classes.
+
+Maintain the comments. Update the timestamp * CREATED DATE : March 07, 2026 11:50 PM to today

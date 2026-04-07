@@ -313,22 +313,26 @@ app.use((req, res, next) => {
 //==========
 // Homepage
 //==========
-app.use('/', 				require('./src/modules/site/site.routes'));
+app.use('/', 						require('./src/modules/site/site.routes'));
 
 //System Modules
-app.use('/auth', 			require('./src/routes/systems/auth.routes'));
-app.use('/access-denied', 	require('./src/routes/systems/access_denied.routes'));
+//Frontend APIs
+app.use('/auth', 					require('./src/routes/systems/auth.routes'));
+app.use('/access-denied', 			require('./src/routes/systems/access_denied.routes'));
 
-app.use('/site', 			require('./src/modules/site/site.routes'));
+//Backend APIs
+app.use('/api/v1/systems/auth',  	require('./src/routes/api/v1/systems/auth.routes'));
 
-app.use('/users', 			require('./src/modules/user/user.routes'));
+app.use('/site', 					require('./src/modules/site/site.routes'));
+
+app.use('/users', 					require('./src/modules/user/user.routes'));
 // Mount login module
-app.use('/welcome', 		require('./src/modules/welcome/welcome.routes'));
+app.use('/welcome', 				require('./src/modules/welcome/welcome.routes'));
 
 //=====================================
 // Client Application (capp) end points
 //=====================================
-app.use('/dashboard', 		require('./src/routes/capp/dashboard/dashboard.routes'));
+app.use('/dashboard', 				require('./src/routes/capp/dashboard/dashboard.routes'));
 
 //=====================================
 // Modules Declaration

@@ -1,0 +1,439 @@
+Created by Jammi Dee
+04/05/2026
+
+Im developing an API that will allow me to:
+1. setup an ollama enpoint, query for available LLMs, etc.
+2. setup what type of LLM to download, using ollama
+3. ability to call an LLM via API by sending a prompt
+4. Ablility to keep a persona per api all so that I can continue the LLM memory across inqueries. Then persona is used again
+   if the same persona is passed as parameter. The persona lives in a mysql database. A persona is clear when a reset API is called
+5. Create an API to meet these requirements. Use routes/api/mc for this.
+
+The goal is to network different LLMs laters and draw summary on their final result.
+
+Used these templates in my nodejs boilerplate:
+
+This is my application Tree:
+C:\DEVS72\CGBOOT2024\SRC
+├───config
+├───controllers
+│   ├───api
+│   │   └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───database
+│   ├───migrations
+│   └───seeders
+├───helpers
+├───middlewares
+├───models
+│   └───systems
+├───modules
+│   ├───site
+│   ├───tmpl
+│   ├───user
+│   └───welcome
+├───routes
+│   ├───api
+│   │   ├───mc
+│   │   └───v1
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───services
+│   ├───api
+│   │   └───v1
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───test
+│   └───systems
+└───utils
+
+sample for routes:
+
+/**
+ * ------------------------------------------------------------------------
+ * CREATED DATE : March 07, 2026 11:50 PM
+ * ------------------------------------------------------------------------
+ */
+
+const express           = require('express');
+const router            = express.Router();
+
+const AuthController    = require('../../controllers/systems/auth.controller');
+const AuthService       = require('../../services/systems/auth.service');
+
+const controller = new AuthController(new AuthService())
+
+/**
+ * GET /login
+ * Displays login page
+ */
+router.get('/login', controller.showLoginPage)
+
+/**
+ * POST /login
+ * Processes login
+ */
+router.post('/login', controller.login)
+
+/**
+ * POST /login/logout
+ */
+router.get('/logout', controller.logout)
+
+module.exports = router
+
+Sample for services:
+
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : CloudGate PHP Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 07, 2026 11:50 PM
+ * ------------------------------------------------------------------------
+ */
+
+const bcrypt  = require('bcrypt')
+const User    = require('../../models/user.model')
+
+/**
+ * LoginService
+ * Handles authentication logic only.
+ * No HTTP logic here.
+ */
+class AuthService {
+
+  /**
+   * Validate username & password
+   */
+  async authenticate(email, password) {
+
+    const user = await User.findOne({
+      where: { email }
+    })
+
+    if (!user) {
+      throw new Error('Invalid username or password')
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
+      throw new Error('Invalid username or password')
+    }
+
+    return user
+  }
+}
+
+module.exports = AuthService
+
+Sample for model:
+
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * Lalulla System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 07, 2026 11:30 PM
+ * ------------------------------------------------------------------------
+ */
+
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2026 Lalulla OPC. All rights reserved.
+ *
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * CREATED DATE : March 28, 2026
+ * ------------------------------------------------------------------------
+ */
+
+const { DataTypes } = require('sequelize');
+const sequelize     = require('../config/db');
+
+const User          = sequelize.define('User', {
+
+  id: {
+    type: DataTypes.BIGINT,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+
+  username: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+    unique: true,
+  },
+
+  password: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+
+  email: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+    unique: true,
+  },
+
+  firstname: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+  },
+
+  lastname: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+  },
+
+  phone: {
+    type: DataTypes.STRING(50),
+    allowNull: true,
+  },
+
+  gender: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    comment: '1=Male, 2=Female, 3=Other'
+  },
+
+  store_id: {
+    type: DataTypes.BIGINT,
+    allowNull: true,
+  },
+
+  status: {
+    type: DataTypes.STRING(20),
+    allowNull: false,
+    defaultValue: 'ACTIVE',
+  },
+
+  entityid: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    defaultValue: 'GCONE',
+  },
+
+  last_login_at: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+
+  created_at: {
+    type: DataTypes.DATE,
+  },
+
+  updated_at: {
+    type: DataTypes.DATE,
+  },
+
+  deleted_at: {
+    type: DataTypes.DATE,
+  }
+
+}, {
+  tableName: 'users',
+
+  // Enable Sequelize timestamp handling
+  timestamps: true,
+
+  // Map to snake_case columns
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+
+  // Enable soft delete
+  paranoid: true,
+  deletedAt: 'deleted_at',
+});
+
+module.exports = User;
+
+Create the needed tables.
+
+Use this for migrate template:
+
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2026 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * Lalulla System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 28, 2026 05:31 PM
+ * ------------------------------------------------------------------------
+ */
+
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('users', {
+
+      id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+      },
+
+      username: {
+        type: Sequelize.STRING(150),
+        allowNull: false,
+        unique: true
+      },
+
+      password: {
+        type: Sequelize.STRING(255),
+        allowNull: false
+      },
+
+      email: {
+        type: Sequelize.STRING(150),
+        allowNull: false,
+        unique: true
+      },
+
+      firstname: {
+        type: Sequelize.STRING(150),
+        allowNull: false
+      },
+
+      lastname: {
+        type: Sequelize.STRING(150),
+        allowNull: false
+      },
+
+      phone: {
+        type: Sequelize.STRING(50),
+        allowNull: true
+      },
+
+      gender: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        comment: '1=Male, 2=Female, 3=Other'
+      },
+
+      store_id: {
+        type: Sequelize.BIGINT,
+        allowNull: true
+      },
+
+      status: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        defaultValue: 'ACTIVE'
+      },
+
+      roleid: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+        defaultValue: 'USER'
+      },
+
+      entityid: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+        defaultValue: 'GCONE'
+      },
+
+      last_login_at: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
+
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
+      },
+
+      deleted_at: {
+        type: Sequelize.DATE,
+        allowNull: true
+      }
+
+    });
+
+    // Indexes
+    await queryInterface.addIndex('users', ['username']);
+    await queryInterface.addIndex('users', ['email']);
+    await queryInterface.addIndex('users', ['store_id']);
+    await queryInterface.addIndex('users', ['status']);
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('users');
+  }
+};
+
+User this header template in every code:
+
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2025 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso) <jammi_dee@yahoo.com>
+ * This file is part of the Lalulla System.
+ *
+ * Lalulla System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 07, 2026 11:30 PM
+ * ------------------------------------------------------------------------
+ */
+ 
+
+Maintain comments.
+Add timestamp on comments.
+Add comments to your code.

@@ -5,11 +5,20 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential. This file is part of Lalulla Framework.
 Written by Joel M. Damaso <jammidee@gmail.com>, September 12, 2017 - 2024
 ============================================================================
- 
+
 Software Architect: 		Jammi Dee
 Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
+
+04/08/2026      - Added npm install --save-dev mocha supertest
+                - Creates test for the API auth
+                -
+
+04/06/2026      - Added JWT API in the system
+                - Added prompt folder for reference
+                - Added npm install jsonwebtoken --save
+                - Created route, controller, service, model classes for API Auth
 
 04/04/20206     - npx sequelize-cli migration:generate --name create-configdb
                 - Added migrate scripts in package.json
