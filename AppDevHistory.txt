@@ -13,6 +13,11 @@ Tested / QA by:				Jammi Dee
 
 04/09/2026      - completed configdb via API.
                 - Added an API template hello with test scripts
+                - Added a Unified Response Wrapper (API & UI) /utils/resphelper.js and /middlewares/resphandler.middleware.js
+                - create a module loader for modules
+                - Added a create-api utility to create an API scaffolding
+                - Added a create-module automation script
+                - next create-capp
 
 04/08/2026      - Added npm install --save-dev mocha supertest
                 - Creates test for the API auth

@@ -341,6 +341,9 @@ app.use('/dashboard', 				require('./src/routes/capp/dashboard/dashboard.routes'
 //=====================================
 app.use('/module/template', 		require('./src/modules/tmpl/tmpl.routes'));
 
+// Response helper for API
+const respHelper = require('./src/middlewares/resphandler.middleware');
+app.use(respHelper);
 
 const fs = require('fs')
 
@@ -381,5 +384,12 @@ app.use((err, req, res, next) => {
     error: process.env.NODE_ENV === 'development' ? err : null
   });
 });
+
+//========================================================
+// Register all modules
+// This must be executed after all other middlewares
+//========================================================
+const registerModules = require('./routes/loader.routes');
+registerModules(app);
 
 module.exports = app;

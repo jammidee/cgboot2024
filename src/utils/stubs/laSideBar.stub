@@ -1,0 +1,31 @@
+// Main Sidebar Container
+aside.main-sidebar.sidebar-light-yellow.elevation-2
+    // Brand Logo
+    a.brand-link(href="/dashboard")
+        img.brand-image.img-circle.elevation-1(src="/resources/images/logos/logo160.png", alt="AdminLTE Logo", style="opacity: .8")
+        span.brand-text.font-weight-light Lalulla
+
+    // Sidebar
+    .sidebar
+        // Sidebar Menu
+        nav.mt-2
+            ul.nav.nav-pills.nav-sidebar.flex-column(data-widget="treeview", role="menu")
+
+                if can('{{fileName}}_manage', user)
+                    li.nav-item
+                        a.nav-link(href="#", onclick="window.location='/module/{{fileName}}'; return false;")
+                            i.nav-icon.fas.fa-th
+                            p {{className}} Home
+
+                if can('dashboard_manage', user)
+                    li.nav-item
+                        a.nav-link(href="#")
+                            i.nav-icon.fas.fa-th
+                            p
+                                | Mod Menu Item
+                                span.right.badge.badge-danger New
+
+                li.nav-item
+                    a.nav-link.redirect-btn(href="#" data-href="/")
+                        i.nav-icon.fas.fa-arrow-left
+                        p Back to Main

@@ -1,0 +1,87 @@
+Im developing a framework or boilerplate if you should say in nodeJS. The framework is expressjs, pugjs and mySQL for the
+database. Im using also sequelize for the database.
+
+This is the tree of the application:
+C:\DEVS72\CGBOOT2024\SRC
+├───config
+├───controllers
+│   ├───api
+│   │   ├───user
+│   │   └───v1
+│   │       ├───hello
+│   │       └───systems
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───database
+│   ├───migrations
+│   └───seeders
+├───helpers
+├───middlewares
+├───models
+│   └───systems
+├───modules
+│   ├───site
+│   ├───tmpl
+│   ├───user
+│   └───welcome
+├───prompts
+│   └───api
+│       └───v1
+│           └───systems
+├───routes
+│   ├───api
+│   │   ├───mc
+│   │   └───v1
+│   │       ├───hello
+│   │       ├───systems
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───services
+│   ├───api
+│   │   └───v1
+│   │       ├───hello
+│   │       ├───systems
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───test
+│   ├───api
+│   │   └───v1
+│   │       └───hello
+│   └───systems
+└───utils
+
+I want the framework to hold both UI and API section so that I can create a microservice out of it but
+also I can create a GUI based out of it.
+
+So far these are the features that I have:
+
+Created: 04/07/2025
+
+Feature List Based on DataTypes
+
+04/07/2026
+- Login Mechanism by database
+- Logging mechanism
+- Database based variables (configdb)
+- AdmdinLTE based GUI
+- RBAC to page loading, Page components
+- Development
+  - uses sequelized
+  - provides test mechanisms
+  - Auto-increment versioning
+- Module Based design
+
+04/08/2026
+- API with security middleware using JWT
+
+04/09/2026
+- API for setting the configdb
+- Template API to Developers
+
+Suggest what should I do next to complete a least a working framework so that dev can start developing
+right away and not from scratch.

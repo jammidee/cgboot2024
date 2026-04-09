@@ -1,0 +1,101 @@
+aside.control-sidebar.control-sidebar-light
+  // Sidebar Tabs
+  ul.nav.nav-tabs.nav-justified.control-sidebar-tabs
+    li
+      a.p-3(href='#control-sidebar-layout-tab' data-toggle='tab')
+        i.fa.fa-home.fa-lg
+    li
+      a.p-3(href='#control-sidebar-settings-tab' data-toggle='tab')
+        i.fa.fa-gears.fa-lg
+
+  // TAB CONTENT
+  div.tab-content
+
+    //==============================
+    // Layout Options Tab
+    //==============================
+    div.tab-pane#control-sidebar-layout-tab.active
+      div.control-sidebar-dashboard
+        style.
+          .control-sidebar-dashboard {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 20px;
+              justify-content: center;
+              margin-top: 10px;
+          }
+          .control-sidebar-btn {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              width: 50px;
+              text-decoration: none;
+              color: #111;
+              transition: transform 0.2s, box-shadow 0.2s;
+          }
+          .control-sidebar-btn img {
+              width: 50px;
+              height: 50px;
+              border-radius: 10%;
+              border: 1px solid #ccc;
+              margin-bottom: 4px;
+              transition: transform 0.1s, box-shadow 0.1s;
+          }
+          .control-sidebar-btn:hover img {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          }
+          .control-sidebar-btn p {
+              margin: 0;
+              font-size: 10px;
+              text-align: center;
+              color: #111;
+          }
+          .control-sidebar-tabs i.fa {
+             padding: 12px;
+          }
+
+        // Dashboard Navigation
+        a.control-sidebar-btn(href="/dashboard")
+          img(src="/resources/assets/dashboard.png", alt="Dashboard")
+          p Dashboard
+
+        a.control-sidebar-btn(href="/calendarc-img")
+          img(src="/resources/assets/calendarc-img.png", alt="Calendar")
+          p Calendar
+
+        a.control-sidebar-btn(href="/attendance")
+          img(src="/resources/assets/attendance.png", alt="Attendance")
+          p Attendance
+
+        a.control-sidebar-btn(href="/flows")
+          img(src="/resources/assets/flows.png", alt="Flows")
+          p Flows
+
+        a.control-sidebar-btn(href="/employees")
+          img(src="/resources/assets/employees.png", alt="Employees")
+          p Employees
+
+        a.control-sidebar-btn(href="/hr-documents")
+          img(src="/resources/assets/hr-documents.png", alt="HR Docs")
+          p HR Docs
+
+    //==============================
+    // Recent Activity Tab
+    //==============================
+    div.tab-pane#control-sidebar-home-tab
+      h3.control-sidebar-heading {{className}} Activity
+
+    //==============================
+    // General Settings Tab
+    //==============================
+    div.tab-pane#control-sidebar-settings-tab
+      form#settings
+        h3.control-sidebar-heading General Settings
+        div.form-group
+          label.control-sidebar-subheading Report Panel Usage
+            input.pull-right(type='checkbox' onclick='clkmailredirect()' checked)
+          p View report on the panel usage in the system
+
+// Infinite black background placeholder for AdminLTE
+div.control-sidebar-bg
