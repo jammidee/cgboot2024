@@ -317,6 +317,7 @@ app.use('/', 						require('./src/modules/site/site.routes'));
 
 //System Modules
 //Frontend APIs
+app.use('/api/v1/hello', 			require('./src/routes/api/v1/hello/hello.routes'));
 app.use('/auth', 					require('./src/routes/systems/auth.routes'));
 app.use('/access-denied', 			require('./src/routes/systems/access_denied.routes'));
 

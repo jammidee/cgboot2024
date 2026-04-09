@@ -55,8 +55,8 @@ describe('Config API Integration (JWT Protected)', function () {
                 entityid: 'LALULLA'
             });
 
-            // Add this to see why it's failing:
-            if (res.status === 500) console.log(res.body);
+            // // Add this to see why it's failing:
+            // if (res.status === 500) console.log(res.body);
     
         assert.strictEqual(res.status, 200);
         assert.strictEqual(res.body.success, true);

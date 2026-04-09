@@ -12,9 +12,12 @@ Feature List Based on DataTypes
   - uses sequelized
   - provides test mechanisms
   - Auto-increment versioning
+- Module Based design
 
 04/08/2026
 - API with security middleware using JWT
 
 04/09/2026
 - API for setting the configdb
+- Template API to Developers
+

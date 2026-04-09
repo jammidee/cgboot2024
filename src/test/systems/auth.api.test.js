@@ -60,21 +60,19 @@ describe('Auth API (Systems Module)', function () {
     it('should generate JWT token for valid credentials', async function () {
 
         const validCredentials = Buffer
-            .from('admin:password') // <-- change to valid test user
+            .from('testuser:P@55w0rd!User')
             .toString('base64');
 
         const res = await request(app)
             .post('/api/v1/systems/auth/token')
             .set('Authorization', `Basic ${validCredentials}`);
 
-        if (res.status === 200) {
-            assert.strictEqual(res.body.success, true);
-            assert.ok(res.body.token);
-            jwtToken = res.body.token;
-        } else {
-            // If credentials not seeded yet, mark as skipped logically
-            assert.ok(true);
-        }
+        // This will force a failure if the status is 401
+        assert.strictEqual(res.status, 200, `Expected 200 OK but got ${res.status}: ${res.body.message}`);
+        assert.strictEqual(res.body.success, true);
+        assert.ok(res.body.token);
+
+        jwtToken = res.body.token;
     });
 
     /**
