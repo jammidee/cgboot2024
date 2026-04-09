@@ -322,6 +322,7 @@ app.use('/access-denied', 			require('./src/routes/systems/access_denied.routes'
 
 //Backend APIs
 app.use('/api/v1/systems/auth',  	require('./src/routes/api/v1/systems/auth.routes'));
+app.use('/api/v1/systems/config', 	require('./src/routes/api/v1/systems/config.routes'));
 
 app.use('/site', 					require('./src/modules/site/site.routes'));
 
