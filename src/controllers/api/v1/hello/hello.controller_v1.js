@@ -7,10 +7,10 @@
  *
  * ------------------------------------------------------------------------
  * PRODUCT NAME : Lalulla Nodejs Framework
- * AUTHOR         : Jammi Dee (Joel M. Damaso)
- * LOCATION       : Manila, Philippines
- * EMAIL          : jammi_dee@yahoo.com
- * CREATED DATE  : April 12, 2026 12:49 AM
+ * AUTHOR        : Jammi Dee (Joel M. Damaso)
+ * LOCATION      : Manila, Philippines
+ * EMAIL         : jammi_dee@yahoo.com
+ * CREATED DATE  : April 09, 2026 07:15 PM
  * ------------------------------------------------------------------------
  */
 
@@ -25,21 +25,21 @@ class HelloController {
   create = async (req, res) => {
     try {
       const result = await this.helloService.createResource(req.body);
-      return res.apiSuccess(result, 'Resource created successfully', 201);
+      return res.status(201).json({ success: true, data: result });
     } catch (err) {
-      return res.apiError('Failed to create resource', 400, err.message);
+      return res.status(400).json({ success: false, message: err.message });
     }
   };
 
   /**
-   * Retrieve all resources
+   * Retrieve all resources (Simulated)
    */
   getAll = async (req, res) => {
     try {
       const results = await this.helloService.fetchAll();
-      return res.apiSuccess(results, 'Resources retrieved successfully');
+      return res.json({ success: true, count: results.length, data: results });
     } catch (err) {
-      return res.apiError('Failed to fetch resources', 500, err.message);
+      return res.status(500).json({ success: false, message: err.message });
     }
   };
 
@@ -49,9 +49,9 @@ class HelloController {
   getById = async (req, res) => {
     try {
       const result = await this.helloService.fetchById(req.params.id);
-      return res.apiSuccess(result, 'Resource retrieved successfully');
+      return res.json({ success: true, data: result });
     } catch (err) {
-      return res.apiError('Resource not found', 404, err.message);
+      return res.status(404).json({ success: false, message: err.message });
     }
   };
 
@@ -61,9 +61,9 @@ class HelloController {
   update = async (req, res) => {
     try {
       const result = await this.helloService.updateResource(req.params.id, req.body);
-      return res.apiSuccess(result, 'Resource updated successfully');
+      return res.json({ success: true, data: result });
     } catch (err) {
-      return res.apiError('Failed to update resource', 400, err.message);
+      return res.status(400).json({ success: false, message: err.message });
     }
   };
 
@@ -73,9 +73,9 @@ class HelloController {
   delete = async (req, res) => {
     try {
       await this.helloService.removeResource(req.params.id);
-      return res.apiSuccess(null, 'Resource deleted successfully');
+      return res.json({ success: true, message: 'Resource deleted successfully' });
     } catch (err) {
-      return res.apiError('Failed to delete resource', 400, err.message);
+      return res.status(400).json({ success: false, message: err.message });
     }
   };
 }

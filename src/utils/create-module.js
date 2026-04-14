@@ -31,13 +31,13 @@ const className = inputName.charAt(0).toUpperCase() + inputName.slice(1);
 
 // Dynamic Date Generator
 const now = new Date();
-const formattedDate = now.toLocaleString('en-US', { 
-    month: 'long', 
-    day: '2-digit', 
-    year: 'numeric', 
-    hour: '2-digit', 
+const formattedDate = now.toLocaleString('en-US', {
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
     minute: '2-digit',
-    hour12: true 
+    hour12: true
 }).replace(',', '');
 
 const header = `/**
@@ -71,9 +71,9 @@ const ${className}Service = require('./${fileName}.service');
 exports.renderPage = async (req, res) => {
     try {
         const data = await ${className}Service.getData();
-        res.render('${fileName}/index', { title: '${className}', data });
+        return res.apiSuccess(data, "${className} retrieved successfully");
     } catch (error) {
-        res.status(500).send(error.message);
+        return res.apiError("Failed to fetch systems", 500, error.message);
     }
 };`,
 

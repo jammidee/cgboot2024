@@ -1,6 +1,6 @@
 {
   "name": "cgboot2024",
-  "version": "0.0.327",
+  "version": "0.0.336",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -12,7 +12,7 @@
     "test": "mocha --recursive --exit src/test",
     "create:api": "node src/utils/create-api.js",
     "create:module": "node src/utils/create-module.js",
-    "create:app": "node src/utils/create-capp.js"
+    "create:moduleview": "node src/utils/create-module-view.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",

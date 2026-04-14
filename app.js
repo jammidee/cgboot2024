@@ -341,9 +341,17 @@ app.use('/dashboard', 				require('./src/routes/capp/dashboard/dashboard.routes'
 //=====================================
 app.use('/module/template', 		require('./src/modules/tmpl/tmpl.routes'));
 
+// app.use('/module/demo3', 			require('./src/modules/demo3/demo3.routes'));
+// app.use('/module/demo5', 			require('./src/modules/demo5/demo5.routes'));
+app.use('/module/demo6', require('./src/modules/demo6/demo6.routes'));
+
+
+//=====================================
 // Response helper for API
 const respHelper = require('./src/middlewares/resphandler.middleware');
 app.use(respHelper);
+
+
 
 const fs = require('fs')
 
