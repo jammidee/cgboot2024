@@ -11,9 +11,15 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+04/18/2026      - Added selection of the menu based on URL in template
+                - Added CSS to make the menu more accurate
+                -
+
 04/15/2026      - Added the singlepage in the template
                 - Completed the scaffolding generator for module with view
-                -
+                - Added cron service folder
+                - Added intial code for the services
+                - What is next??
 
 04/09/2026      - completed configdb via API.
                 - Added an API template hello with test scripts

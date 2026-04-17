@@ -55,6 +55,34 @@ html
 				color: #303030; /* standard dark text color */
 			}
 
+			/* 1. Sidebar Background & Shadow Removal */
+			aside.main-sidebar {
+				background-color: #f8f9fa !important; /* Super light grey (Bootstrap light) */
+				box-shadow: none !important;           /* Removes the elevation shadow */
+				border-right: 1px solid #dee2e6;      /* Optional: subtle border instead of shadow */
+			}
+
+			/* 2. Active Link Style (The Yellow Line) */
+			.nav-sidebar .nav-link.active {
+				background-color: #edebeb !important; /* White background for the active item */
+				color: #212529 !important;
+				border-left: 4px solid #ffc107 !important;
+				border-radius: 0 !important;
+				padding-left: calc(1rem - 4px) !important;
+				box-shadow: none !important;          /* Ensure no inner shadows */
+			}
+
+			/* 3. Active Icon Color */
+			.nav-sidebar .nav-link.active i {
+				color: #ffc107 !important;
+			}
+
+			/* 4. Hover State */
+			.nav-sidebar .nav-link:hover {
+				background-color: #e9ecef !important; /* Slightly darker grey on hover */
+				color: #000 !important;
+			}
+
 
 	body(class="hold-transition sidebar-mini")
 		.wrapper
@@ -69,7 +97,7 @@ html
 					div.container-fluid
 						div.row.mb-2
 							div.col-sm-6
-								h4.m-0 Dashboard
+								h6.m-0 Dashboard
 							div.col-sm-6
 								ol.breadcrumb.float-sm-right
 									li.breadcrumb-item
@@ -90,7 +118,7 @@ html
 
 
 					p
-						span  &nbsp; &nbsp; &nbsp;WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED! #{app.appname}
+						span(style='font-size: 0.8rem;')  &nbsp; &nbsp; &nbsp;WHATEVER YOU WANT TO DO TODAY, &nbsp; BE INSPIRED! #{app.appname}
 							i &nbsp;
 
 						div.dashboard-icons

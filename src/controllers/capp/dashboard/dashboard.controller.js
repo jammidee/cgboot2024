@@ -36,7 +36,7 @@ class DashboardController {
     // app.js
     // The pug is found in the application folder 'view'.
     //------------------------------------------------------------------------------
-    res.render('capp/dashboard/index', { title: 'Dashboard', can, now: new Date() });
+    res.render('capp/dashboard/index', { title: 'Dashboard', can, now: new Date(), error: null, activePage: 'dashboard' });
 
   }
 

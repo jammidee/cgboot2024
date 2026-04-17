@@ -28,7 +28,7 @@ class TmplController {
         return res.status(403).send('Access Denied')
     }
 
-    res.render('./modules/tmpl/index', { title: 'Template Index', can, now: new Date(), error: null });
+    res.render('./modules/tmpl/index', { title: 'Template Index', can, now: new Date(), error: null, activePage: 'template' });
 
   };
 

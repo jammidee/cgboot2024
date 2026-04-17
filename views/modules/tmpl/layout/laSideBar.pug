@@ -13,9 +13,9 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 
 				if can('template_manage', user)
 					li.nav-item
-						a.nav-link(href="#", onclick="window.location='/module/template'; return false;")
+						a.nav-link(href="#", class=(activePage === 'template' ? 'active' : '') onclick="window.location='/module/tmpl'; return false;")
 							i.nav-icon.fas.fa-th
-							p Module Home
+							p Home
 
 				//- Add icons to the links using the .nav-icon class
 				//- with font-awesome or any other icon font library
@@ -41,7 +41,7 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 						a.nav-link(href="#")
 							i.nav-icon.fas.fa-th
 							p
-								| Mod Menu Item
+								| Menu Item
 								span.right.badge.badge-danger New
 
 				li.nav-item

@@ -24,4 +24,7 @@ Feature List Based on DataTypes
 - Added automated generation of API scaffolding
 - Added automated generation of module scaffolding
 
+04/18/2026
+- Improve the menu UI
+
 

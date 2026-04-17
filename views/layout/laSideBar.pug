@@ -20,20 +20,20 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 
 				if can('dashboard_manage', user)
 					li.nav-item
-						a.nav-link(href="#", onclick="window.location='/dashboard'; return false;")
+						a.nav-link(href="#", class=(activePage === 'dashboard' ? 'active' : ''), onclick="window.location='/dashboard'; return false;")
 							i.nav-icon.fas.fa-th
 							p Dashboard
 
 				if can('template_manage', user)
 					li.nav-item
-						a.nav-link(href="#", onclick="window.location='/module/template'; return false;")
+						a.nav-link(href="#", class=(activePage === 'template' ? 'active' : ''), onclick="window.location='/module/template'; return false;")
 							i.nav-icon.fas.fa-th
 							p Template
 
 				// Add icons to the links using the .nav-icon class
 				// with font-awesome or any other icon font library
 				li.nav-item.menu-close
-					a.nav-link.active(href="#")
+					a.nav-link(href="#")
 						i.nav-icon.fas.fa-tachometer-alt
 						p
 							| Starter Pages
