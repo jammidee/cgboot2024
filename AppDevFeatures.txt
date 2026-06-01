@@ -24,7 +24,11 @@ Feature List Based on DataTypes
 - Added automated generation of API scaffolding
 - Added automated generation of module scaffolding
 
+- Automated detection of modules to be loaded.
+- 
+
 04/18/2026
 - Improve the menu UI
 
-
+05/02/2026
+- distributed processing using mysql as the queue

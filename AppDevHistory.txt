@@ -11,6 +11,14 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+06/02/2026      - Aadded Embedded Redis Server - not used
+                - npx sequelize-cli migration:generate --name create-bgndjobs
+                - Added a distributed service processing - const cronLoader = require('./src/helpers/cron_loader.helper');
+                - 
+
+05/28/2026      - Added cron_loder.helper.js
+                -
+
 04/18/2026      - Added selection of the menu based on URL in template
                 - Added CSS to make the menu more accurate
                 -

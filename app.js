@@ -396,4 +396,98 @@ app.use((err, req, res, next) => {
 const registerModules = require('./routes/loader.routes');
 registerModules(app);
 
+
+
+// //========================================================
+// // Register all service (cron jobs)
+// // This must be executed after all other middlewares
+// //========================================================
+// const RedisServer = require('redis-server');
+// const REDIS_PORT = 6379;
+// //------------------------------------------------------------------
+// // 1. Configure Local Embedded Queue Engine
+// //------------------------------------------------------------------
+// const embeddedRedis = new RedisServer({
+//     port: REDIS_PORT,
+// 	// Points to your redis configs if any
+//     // conf: path.join(__dirname, './config/redis.conf'),
+// 	conf: '--save 60 1 --dir ./data'
+// });
+
+// const cronLoader = require('./src/helpers/cron_loader.helper');
+
+// //------------------------------------------------------------------
+// // 3. System Initialization Sequence
+// //------------------------------------------------------------------
+// const bootstrapSystem = async () => {
+//     try {
+//         await embeddedRedis.open();
+//         console.info(`[System] Embedded Redis Engine active on port ${REDIS_PORT}`);
+
+//         // Boot background queues and workers
+//         cronLoader();
+
+//     } catch (err) {
+//         // Fallback if an external system-wide Redis instance is already handling port 6379
+//         if (err.message && err.message.includes('EADDRINUSE')) {
+//             console.warn('[System Warning] Port 6379 bound. Hooking into host Redis environment...');
+//             cronLoader();
+//         } else {
+//             console.error('[Fatal System Error] Background execution environment failed:', err.message);
+//             process.exit(1);
+//         }
+//     }
+// };
+
+// // Fire up the background workers
+// bootstrapSystem();
+
+
+// ---------------------------------------------------------------------
+// 2. Distributed System Initialization Sequence
+// ---------------------------------------------------------------------
+const cronLoader 		= require('./src/helpers/cron_loader.helper');
+const bootstrapSystem 	= async () => {
+    try {
+		
+        console.info('[System] Verifying database cluster connection state...');
+
+        // Use the sequelize instance to verify connection health safely
+        await sequelize.authenticate();
+        console.info('[System] Database cluster handshakes verified.');
+
+        // Boot your native workers and schedules
+        console.info('[System] Loading pure background service execution registry...');
+        cronLoader();
+
+    } catch (err) {
+        console.error('[Fatal System Error] Distributed environment failed to boot:', err.message);
+        process.exit(1);
+    }
+};
+
+// Fire up the engine - comment if service is not used.
+bootstrapSystem();
+
+// ---------------------------------------------------------------------
+// 3. Application Teardown / Graceful Shutdown Handling
+// ---------------------------------------------------------------------
+const handleTeardown = async (signal) => {
+    console.log(`\n[System] Received ${signal}. Draining database connection pools gracefully...`);
+    
+    try {
+        // Changed from dbPool.end() to dbPool.close() for Sequelize compatibility
+        await dbPool.close();
+        console.log('[System] Sequelize connection pool terminated cleanly. Process exiting.');
+        process.exit(0);
+    } catch (err) {
+        console.error('[System Error] Error during database connection pool teardown:', err.message);
+        process.exit(1);
+    }
+};
+
+// Catch process interruption signals (e.g., Ctrl+C, PM2 reload, Docker stop)
+process.on('SIGINT', () => handleTeardown('SIGINT'));
+process.on('SIGTERM', () => handleTeardown('SIGTERM'));
+
 module.exports = app;

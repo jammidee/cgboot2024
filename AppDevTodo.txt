@@ -1,0 +1,8 @@
+Create by Jammi Dee 05/28/2026
+
+05/28/2026      - immutable logging. Allows the system to monitor the changes in a module. Must generic that can be
+                  used by other modules.
+                - create an SQL script for the current database table state. Then moving forward should be updated
+                  regularly. Current is dynamically created by sequelized.
+
+06/02/2026      - create a recently app access subsystem

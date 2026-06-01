@@ -355,6 +355,13 @@ npm install --save-dev sequelize-cli
 **Mocha 04/04/2026
 npm install --save-dev mocha
 
+**BullMQ 05/30/2026
+npm install --save bullmq
+
+**Redis Server 06/02/2026
+**npm install redis-server --save
+npm install pariqua --save
+
 AUDIT
 **Run Audit for vulnerabilty
 npm audit
