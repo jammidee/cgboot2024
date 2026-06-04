@@ -15,7 +15,8 @@
  */
 
 // const { isLogged } = require('../../../helpers/auth.helper');
-const { can }         = require('../../../helpers/access.helper');
+const { can }                 = require('../../../helpers/access.helper');
+const userRecentActivity      = require('../../../utils/userRecentActivity');
 
 class DashboardController {
 
@@ -30,6 +31,16 @@ class DashboardController {
     if (!can('dashboard_access', req.user)) {
         return res.status(403).send('Access Denied')
     }
+
+    // -------------------------------------------------------------------------
+    // Log the user's interaction activity for this module.
+    // Replace 'req.user?.id' with whichever key holds the unique User ID 
+    // inside your specific framework context (e.g., req.session?.user_id).
+    // -------------------------------------------------------------------------
+    const userId = req.user?.id || req.session?.user_id || 'UNKNOWN_USER';
+
+    // Fire-and-forget call (or append await if you want strict synchronous order)
+    await userRecentActivity(userId, 'dashboard', 'Dashboard');
 
     //------------------------------------------------------------------------------
     // 'can' is passed as a function to check user access. 'can' is declared in the

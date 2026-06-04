@@ -1,0 +1,344 @@
+You are task to create a helper called userRecentActivity.js. The function will upsert a record of the current
+module being accessed by the user.
+
+Refer to the table below:
+
+CREATE TABLE user_recent_activity (
+    user_id VARCHAR(50),
+    module_id VARCHAR(50),
+    module_name VARCHAR(100),
+    last_accessed TIMESTAMP,
+    access_count INT DEFAULT 1,
+    PRIMARY KEY (user_id, module_id)
+);
+
+Create a migrate File first using the template below:
+
+/**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2026 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso)
+ * This file is part of the Lalulla System.
+ *
+ * Lalulla System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : June 02, 2026 01:45 AM
+ * ------------------------------------------------------------------------
+ * npx sequelize-cli db:migrate --seed 20260601174516-create-bgndjobs.js
+ * npx sequelize-cli db:migrate
+ */
+
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+
+  async up(queryInterface, Sequelize) {
+
+    // ---------------------------------------------------------------------
+    // Optimized Background Jobs Ledger Migration (June 02, 2026)
+    // Supports high-concurrency 'FOR UPDATE SKIP LOCKED' worker locks
+    // ---------------------------------------------------------------------
+
+    await queryInterface.createTable('bgndjobs', {
+
+      id: {
+        type: Sequelize.BIGINT.UNSIGNED,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+      },
+
+      queue_name: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
+
+      payload: {
+        type: Sequelize.JSON,
+        allowNull: false
+      },
+
+      status: {
+        type: Sequelize.ENUM('pending', 'processing', 'completed', 'failed'),
+        allowNull: true,
+        defaultValue: 'pending'
+      },
+
+      attempts: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+      },
+
+      error_message: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
+
+      // -------------------------
+      // System Metadata
+      // -------------------------
+
+      vversion: {
+        type: Sequelize.STRING(20),
+        allowNull: true
+      },
+
+      pid: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+      },
+
+      sstatus: {
+        type: Sequelize.STRING(36),
+        allowNull: true,
+        defaultValue: 'ACTIVE'
+      },
+
+      deleted: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+      },
+
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
+      },
+
+      created_by: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      },
+
+      updated_by: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      },
+
+      deleted_at: {
+        type: Sequelize.DATE,
+        allowNull: true
+      }
+
+    });
+
+    // ---------------------------------------------------------------------
+    // Multi-tenant and high-throughput worker state optimization indexes
+    // ---------------------------------------------------------------------
+    await queryInterface.addIndex('bgndjobs', ['queue_name', 'status'], {
+      name: 'idx_queue_status'
+    });
+
+    // Optional composite indexing expansion templates matching enterprise architecture
+    // await queryInterface.addIndex('bgndjobs', ['status', 'created_at']);
+    // await queryInterface.addIndex('bgndjobs', ['deleted']);
+
+  },
+
+  async down(queryInterface, Sequelize) {
+
+    // ---------------------------------------------------------------------
+    // Rollback - Drop table and ENUM cleanup
+    // ---------------------------------------------------------------------
+
+    await queryInterface.dropTable('bgndjobs');
+
+    // Important cleanup for MySQL ENUM variants
+    await queryInterface.sequelize.query(
+      'DROP TYPE IF EXISTS "enum_bgndjobs_status";'
+    );
+
+  }
+
+};
+
+Maintain the indentation style
+Main the comment format in the header
+Update the timestamp CREATED DATE : June 02, 2026 01:45 AM
+
+This is the application working tree:
+
+C:\DEVS72\CGBOOT2024\SRC
+├───config
+├───controllers
+│   ├───api
+│   │   ├───user
+│   │   └───v1
+│   │       ├───hello
+│   │       └───systems
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───cronservices
+│   └───tmpl
+├───database
+│   ├───migrations
+│   └───seeders
+├───helpers
+├───middlewares
+├───models
+│   ├───api
+│   └───systems
+├───modules
+│   ├───site
+│   ├───tmpl
+│   ├───user
+│   └───welcome
+├───prompts
+│   ├───api
+│   │   └───v1
+│   │       └───systems
+│   └───utils
+├───routes
+│   ├───api
+│   │   ├───mc
+│   │   └───v1
+│   │       ├───hello
+│   │       ├───systems
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───services
+│   ├───api
+│   │   └───v1
+│   │       ├───hello
+│   │       ├───systems
+│   │       └───user
+│   ├───capp
+│   │   └───dashboard
+│   └───systems
+├───test
+│   ├───api
+│   │   └───v1
+│   │       └───hello
+│   └───systems
+└───utils
+    └───stubs
+    
+    Place userRecentActivity.js in the utils folder.
+    
+    Function of the userRecentActivity: Upsert a record that will monitor the access of modules.
+    Refer to the template below for the helper template:
+    
+    
+    
+    /**
+ * ------------------------------------------------------------------------
+ * Copyright (C) 2026 Lalulla OPC. All rights reserved.
+ *
+ * Copyright (c) 2017 - Jammi Dee (Joel M. Damaso)
+ * This file is part of the Lalulla System.
+ * ------------------------------------------------------------------------
+ * PRODUCT NAME : Lalulla Nodejs Framework
+ * AUTHOR       : Jammi Dee (Joel M. Damaso)
+ * LOCATION     : Manila, Philippines
+ * EMAIL        : jammi_dee@yahoo.com
+ * CREATED DATE : March 15, 2026 12:52 AM
+ * ------------------------------------------------------------------------
+ */
+
+// utils/logAction.js
+
+const db = require('../config/db'); // your mysql connection
+
+const logAction = async (
+  req,
+  actionType,
+  actionDetails,
+  severity = 'INFO',
+  isSuspicious = false
+) => {
+  try {
+
+    // Use optional chaining to safely access session and headers
+    const userId   = req?.session?.user_id ?? 0;
+    const entityId = req?.session?.user_entity ?? '_NA_';
+
+    // Safeguard headers and IP
+    const userAgent = req?.headers ? req.headers['user-agent'] : 'Unknown Agent';
+    const ipAddress = req?.ip ?? '0.0.0.0';
+
+    const logData = {
+      entityid: entityId,
+      user_id: userId,
+      action_type: actionType,
+      action_details: actionDetails,
+      ip_address: ipAddress,
+      user_agent: userAgent,
+      severity: severity,
+      is_suspicious: isSuspicious ? 1 : 0,
+      sstatus: 'ACTIVE',
+      pid: 0,
+      userid: userId,
+      deleted: 0
+    };
+
+    await db.query(
+      'INSERT INTO system_logs (entityid, user_id, action_type, action_details, ip_address, user_agent, severity, is_suspicious, sstatus, pid, userid, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      {
+        replacements: [
+          logData.entityid, logData.user_id, logData.action_type,
+          logData.action_details, logData.ip_address, logData.user_agent,
+          logData.severity, logData.is_suspicious, logData.sstatus,
+          logData.pid, logData.userid, logData.deleted
+        ]
+      }
+    );
+
+  } catch (err) {
+
+    // We log the error but don't 'throw' it,
+    // so the user's redirect still happens.
+    console.error('CRITICAL: logAction failed:', err.message);
+
+  }
+};
+
+module.exports = logAction;
+
+
+Other info that you can use:
+
+Notes:
+	•	last_accessed → for sorting
+	•	access_count → for ranking (optional)
+	•	Composite key avoids duplicates
+function trackRecent(userId, moduleId, moduleName):
+    record = find(userId, moduleId)
+ 
+    if record exists:
+        update:
+            last_accessed = now()
+            access_count += 1
+    else:
+        insert new record
+ 
+    trimRecentList(userId)
+DELETE FROM user_recent_activity
+WHERE user_id = ?
+AND module_id NOT IN (
+    SELECT module_id FROM user_recent_activity
+    WHERE user_id = ?
+    ORDER BY last_accessed DESC
+    LIMIT 10
+);
