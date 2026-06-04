@@ -13,6 +13,8 @@ Tested / QA by:				Jammi Dee
 
 06/05/2026      - Added user recent activity helper to monitor access of user
                 - Added the migrate for the recent user activity.
+                - updated the dotenv, http-error, debug and morgan
+                -
 
 06/02/2026      - Aadded Embedded Redis Server - not used
                 - npx sequelize-cli migration:generate --name create-bgndjobs

@@ -368,6 +368,11 @@ npm audit
 **If there is a fix run:
 npm audit fix 
 
+** Update the dotenv 06/05/2026
+npm install dotenv@17.4.2
+npm install morgan@1.11.0
+npm install http-errors@2.0.1
+npm install debug@4.4.3
 
 GIT - G1thUUb@!!M3
 ---
@@ -416,6 +421,8 @@ Updating Nodejs
 ===============
 npm outdated
 npm update
+npm audit
+npm audit fix
 
 TODO:
 
