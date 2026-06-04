@@ -412,6 +412,10 @@ npx sequelize-cli db:migrate:undo:all
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 
+Updating Nodejs
+===============
+npm outdated
+npm update
 
 TODO:
 
