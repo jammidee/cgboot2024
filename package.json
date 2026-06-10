@@ -1,6 +1,6 @@
 {
   "name": "cgboot2024",
-  "version": "0.0.370",
+  "version": "0.0.373",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",

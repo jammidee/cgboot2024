@@ -11,6 +11,10 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+06/10/2026      - fixed the mobile page issue of the landing page, menu to hamburger
+                - Added background to the login page
+                - added a showcase section in the landing pages
+
 06/05/2026      - Added user recent activity helper to monitor access of user
                 - Added the migrate for the recent user activity.
                 - updated the dotenv, http-error, debug and morgan

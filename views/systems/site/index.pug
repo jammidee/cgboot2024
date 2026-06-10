@@ -9,6 +9,10 @@ html
 	body(class="hold-transition layout-top-nav")
 		.wrapper
 
+			//- include ../../layout/cgNavigation-no-session.pug
+			//- include ../../layout/laSideBar.pug
+			//- include ../../layout/laRightBar.pug
+
 			div.content-wrapper
 				div.content
 					div.container-fluid#container-wrapper
@@ -16,7 +20,7 @@ html
 						// Embedded CSS
 						style.
 							html { scroll-behavior: smooth; }
-							.service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 12px; }
+							.service-card { t	ransition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 12px; }
 							.service-card:hover { transform: scale(1.05); box-shadow: 0 12px 24px rgba(0,0,0,0.2); z-index: 10; }
 							.about-section { background: #fff; color: #444; font-family: 'Open Sans','Roboto',Arial,sans-serif; }
 							.about-section .tagline { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; color: #999; margin-bottom: 10px; }
@@ -37,7 +41,11 @@ html
 								a.navbar-brand.d-flex.align-items-center(href="#")
 									img(src="/resources/images/logos/logo160.png" style="height:30px;margin-right:10px;")
 									span Lalulla System
-								div.collapse.navbar-collapse.justify-content-end
+
+								button.navbar-toggler(type="button", data-toggle="collapse", data-target="#mainNavbar", aria-controls="mainNavbar", aria-expanded="false", aria-label="Toggle navigation")
+									span.navbar-toggler-icon
+
+								div#mainNavbar.collapse.navbar-collapse.justify-content-end
 									ul.navbar-nav
 										li.nav-item
 											a.nav-link(href="#who") Who We Are
@@ -47,6 +55,8 @@ html
 											a.nav-link(href="#core-values") Core Values
 										li.nav-item
 											a.nav-link(href="#services") Services
+										li.nav-item
+											a.nav-link(href="#showcase") Show Case
 										li.nav-item
 											a.nav-link(href="/auth/login") Client Login
 
@@ -167,6 +177,52 @@ html
 						div#services.row.justify-content-center.mb-5
 							div.col-lg-10.text-center
 								h2.main-heading Our Services
+								div.row.mt-4
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Custom Software Development
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We design and develop scalable enterprise applications tailored 
+													| to your business processes and operational requirements.
+												ul
+													li Multi-tenant SaaS platforms
+													li Enterprise web & mobile applications
+													li Secure authentication & authorization systems
+													li Long-term maintainable architectures
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 System Integration
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We integrate complex systems into unified digital ecosystems 
+													| ensuring seamless data flow and operational efficiency.
+												ul
+													li RESTful & secure API ecosystems
+													li Microservices architecture
+													li Workflow & BPM automation
+													li Legacy system modernization
+
+									div.col-md-4.mb-3
+										div.card.shadow-sm.h-100.service-card
+											div.card-header.text-white.bg-primary
+												h5.mb-0 Data Engineering
+											div.card-body.p-4(style="text-align:left;")
+												p
+													| We build robust data pipelines and analytics platforms 
+													| capable of handling high-volume enterprise workloads.
+												ul
+													li Real-time streaming (Kafka-based architectures)
+													li Reporting & BI dashboards
+													li Data warehousing solutions
+													li Event-driven distributed systems
+						// Show Case
+						div#showcase.row.justify-content-center.mb-5
+							div.col-lg-10.text-center
+								h2.main-heading Showcase
 								div.row.mt-4
 									div.col-md-4.mb-3
 										div.card.shadow-sm.h-100.service-card

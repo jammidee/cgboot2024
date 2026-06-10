@@ -57,6 +57,19 @@ aside.main-sidebar.sidebar-light-yellow.elevation-2
 								| Simple Link
 								span.right.badge.badge-danger New
 
+				li.nav-header Administration
+
+				if can('template_manage', user)
+					li.nav-item
+						a.nav-link(href="#", class=(activePage === 'template' ? 'active' : ''), onclick="window.location='/module/template'; return false;")
+							i.nav-icon.fas.fa-th
+							p Lookup
+
+				li.nav-item
+					hr.sidebar-divider
+
+				li.nav-header System
+
 				li.nav-item
 					a.nav-link.logout-btn(href="#" data-href="/auth/logout")
 						i.nav-icon.fas.fa-sign-out-alt

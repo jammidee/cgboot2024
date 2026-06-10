@@ -6,7 +6,7 @@
 ---
 
 ## 🛡️ Routes moved to src/routes/<sufolders>
-All the route code are moved to a more segregated apporach to maintain an clean model.
+All the route code are moved to a more segregated approach to maintain an clean model.
 
 ---
 
