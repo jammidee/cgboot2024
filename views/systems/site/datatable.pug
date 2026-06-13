@@ -1,0 +1,132 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title #{app.appname} | Responsive Data Table
+        include ../../layout/cgHeader.pug
+
+        //- DataTables Bootstrap Integration CSS
+        link(rel="stylesheet", href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css")
+        link(rel="stylesheet", href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css")
+
+        style.
+            .content-wrapper {
+                background: url('/resources/assets/img/logo/bgnd/cloud.jpg') no-repeat center center fixed !important;
+                background-size: cover !important;
+                padding: 20px 0;
+            }
+            .table-card {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+            /* Custom tweak to make sure search inputs and filters stack nicely on extra small screens */
+            @media (max-width: 576px) {
+                .dataTables_wrapper .dataTables_length,
+                .dataTables_wrapper .dataTables_filter {
+                    text-align: center !important;
+                    margin-bottom: 10px;
+                }
+                .dataTables_wrapper .dataTables_paginate {
+                    text-align: center !important;
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+
+    body( class="hold-transition layout-top-nav" )
+        .wrapper
+
+            // Content Wrapper
+            div.content-wrapper
+                div.content
+                    div.container-fluid
+                        
+                        div.row.justify-content-center
+                            div.col-12.col-xl-10
+                                
+                                //- Wrapper Card for the Data Table
+                                div.card.table-card.p-3.p-sm-4
+                                    div.card-header.bg-transparent.border-0.pl-0
+                                        h3.card-title.font-weight-bold.text-dark User Directory
+                                        p.text-muted.small Manage and view framework registered records
+                                    
+                                    div.card-body.p-0.pt-2
+                                        //- Responsive wrapper to handle overflows elegantly 
+                                        div.table-responsive
+                                            table#sampleDataTable.table.table-striped.table-bordered.dt-responsive.nowrap(style="width:100%")
+                                                thead
+                                                    tr
+                                                        th ID
+                                                        th Name
+                                                        th Position
+                                                        th Office
+                                                        th Age
+                                                        th Status
+                                                tbody
+                                                    tr
+                                                        <td>1</td>
+                                                        <td>Danilo Santos</td>
+                                                        <td>Lead Developer</td>
+                                                        <td>Manila</td>
+                                                        <td>32</td>
+                                                        <td><span class="badge badge-success">Active</span></td>
+                                                    tr
+                                                        <td>2</td>
+                                                        <td>Maria Clara</td>
+                                                        <td>UI/UX Designer</td>
+                                                        <td>Quezon City</td>
+                                                        <td>27</td>
+                                                        <td><span class="badge badge-success">Active</span></td>
+                                                    tr
+                                                        <td>3</td>
+                                                        <td>Juan Dela Cruz</td>
+                                                        <td>System Analyst</td>
+                                                        <td>Makati</td>
+                                                        <td>41</td>
+                                                        <td><span class="badge badge-warning">On Leave</span></td>
+                                                    tr
+                                                        <td>4</td>
+                                                        <td>Jane Doe</td>
+                                                        <td>QA Engineer</td>
+                                                        <td>Cebu</td>
+                                                        <td>24</td>
+                                                        <td><span class="badge badge-danger">Inactive</span></td>
+
+            include ../../layout/cgFooter-no-session.pug
+            include ../../layout/cgJs.pug
+
+    //- DataTables core and responsive plugin dependencies 
+    script(src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js")
+    script(src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js")
+    script(src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js")
+    script(src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js")
+
+    script.
+        $(document).ready(function(){
+            // Initialize DataTables with explicit responsive properties
+            var table = $('#sampleDataTable').DataTable({
+                responsive: {
+                    details: {
+                        // Crucial: This setting displays hidden columns inside an expandable child row layout when screens get narrow
+                        display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                        type: 'none',
+                        target: ''
+                    }
+                },
+                "lengthChange": true,
+                "autoWidth": false,
+                "pageLength": 10,
+                "order": [[0, "asc"]],
+                "language": {
+                    "search": "Filter records:",
+                    "zeroRecords": "No matching user logs found"
+                }
+            });
+
+            // Re-evaluates responsive structural breaks whenever window sizes are toggled or modified
+            $(window).on('resize', function () {
+                table.responsive.recalc();
+            });
+        });

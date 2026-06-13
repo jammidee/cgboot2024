@@ -1,0 +1,101 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title #{app.appname} | Login
+		include ../../layout/cgHeader.pug
+
+		style.
+			.login-container {
+				max-width: 420px;
+				width: 100%;
+			}
+
+			.content-wrapper {
+				background: url('/resources/assets/img/logo/bgnd/cloud.jpg') no-repeat center center fixed !important;
+				background-size: cover !important;
+			}
+
+	body( class="hold-transition layout-top-nav" )
+		.wrapper
+
+			// Content Wrapper
+			div.content-wrapper
+				div.content
+					div.container-fluid
+
+						// Add vertical spacing
+						//- div.row.justify-content-center.mt-5
+						//- div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+						//- div.row.justify-content-center.align-items-center.px-3(style="min-height: calc(100vh - 120px);")
+						div.row.justify-content-center.align-items-start.px-3.pt-4(style="min-height: calc(100vh - 120px);")
+							div.col-md-12.col-sm-6.col-12
+
+								br
+								br
+
+								div.card.card-primary
+									div.card-header.text-center
+										h3.card-title Help
+
+									div.card-body
+										p.login-box-msg.text-center.mb-4
+											| Contact System Admin
+										div.px-4.pt-3
+											p
+												| The 
+												b Client Login Module
+												|  is designed to provide secure access exclusively for registered clients. 
+												| Through this portal, clients can access their personalized dashboard, review account details, and interact 
+												| with available services.
+
+											p
+												| Login credentials (username and password) are unique to each client and verified through a secure 
+												| authentication process. The system validates the provided credentials against stored records, ensuring 
+												| only authorized users are granted access.
+
+											p
+												| Once logged in, clients gain access to modules such as 
+												b billing
+												| , 
+												b requests
+												| , 
+												b notifications
+												| , and 
+												b account management
+												| . Session handling ensures that all activities are tracked for security and 
+												| audit purposes.
+
+											p
+												| To enhance security, failed login attempts are logged and can trigger alerts or temporary account lockouts. 
+												| Clients are encouraged to maintain strong passwords and update them regularly through the account settings.
+
+											p
+												| The login page is intended solely for 
+												b client access
+												| . Administrative and staff modules are accessible 
+												| through a separate portal to maintain system integrity and role-based permissions.
+
+											p
+												| Use the 
+												b Login
+												|  form to enter your credentials. Upon successful authentication, you will be redirected 
+												| to your dashboard where you can explore the services available to you.
+
+									div.card-footer.text-center
+										div.row
+											div.col-4
+												a(href="/") Home
+											div.col-4
+												//- a(href="/auth/forgot") Forgot password?
+											div.col-4
+												//- a(href="/auth/help") Help
+
+			include ../../layout/cgFooter-no-session.pug
+			include ../../layout/cgJs.pug
+
+	script.
+		$(document).ready(function(){
+			console.log("Page ready");
+		});

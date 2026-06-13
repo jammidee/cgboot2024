@@ -25,6 +25,11 @@ const controller            = new SiteController(new SiteService())
  * Displays site page
  */
 router.get('/',                 controller.showSitePage);
-router.get('/fullflyer',        controller.showFullFlyerPage)
+router.get('/fullflyer',        controller.showFullFlyerPage);
+
+router.get('/features',         controller.features);
+router.get('/calendar',         controller.calendar);
+router.get('/map',              controller.map);
+router.get('/datatable',        controller.datatable);
 
 module.exports = router

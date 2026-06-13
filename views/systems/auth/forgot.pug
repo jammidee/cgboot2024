@@ -33,54 +33,18 @@ html
 
 								div.card.card-primary
 									div.card-header.text-center
-										h3.card-title #{app.appname}
+										h3.card-title Forgot Password
 
 									div.card-body
 										p.login-box-msg.text-center.mb-4
-											| Sign in to start your session
-
-										form(action="/auth/login" method="post")
-
-											input(type="hidden" name="redirect_url" value=redirect_url)
-
-											div.input-group.mb-3
-												input.form-control(
-													type="text"
-													name="username"
-													placeholder="Username"
-													required
-												)
-												div.input-group-append
-													div.input-group-text
-														span.fas.fa-user
-
-											div.input-group.mb-3
-												input.form-control(
-													type="password"
-													name="password"
-													placeholder="Password"
-													required
-												)
-												div.input-group-append
-													div.input-group-text
-														span.fas.fa-lock
-
-											div.row
-												div.col-8
-													div.icheck-primary
-														input#remember(type="checkbox")
-														label(for="remember") Remember Me
-
-												div.col-4
-													button.btn.btn-primary.btn-block(type="submit")
-														| Login
+											| Contact System Admin
 
 									div.card-footer.text-center
 										div.row
 											div.col-4
 												a(href="/") Home
 											div.col-4
-												a(href="/auth/forgot") Forgot password?
+												// Nothing at the moment
 											div.col-4
 												a(href="/auth/help") Help
 
@@ -89,5 +53,5 @@ html
 
 	script.
 		$(document).ready(function(){
-			console.log("Login ready");
+			console.log("Page ready");
 		});

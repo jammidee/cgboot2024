@@ -11,6 +11,19 @@ Framework Design: 			Jammi Dee
 Developed / Programmed by : Joel Margate Damaso aka Jammi Dee
 Tested / QA by:				Jammi Dee
 
+06/13/2026      - added the feature page in the site.
+                - added calendar page
+                - added map page
+                - added the datatable page
+                - 
+
+06/12/2026      - fixed the redirection on logout back to login page instead of site page.
+                - added forgot password page
+                - added link back to Main, help, forgot password in the login page
+                - added pages help, forgot password pages
+                - adjust the login help page making the card on top of the page.
+                -
+
 06/10/2026      - fixed the mobile page issue of the landing page, menu to hamburger
                 - Added background to the login page
                 - added a showcase section in the landing pages

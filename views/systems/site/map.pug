@@ -1,0 +1,84 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title #{app.appname} | Manila Map
+        include ../../layout/cgHeader.pug
+
+        //- Leaflet CSS for Map Styling
+        link(rel="stylesheet", href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css", integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=", crossorigin="")
+
+        style.
+            /* Reset margins and lock container to full viewport */
+            html, body, .wrapper, .content-wrapper {
+                margin: 0;
+                padding: 0;
+                height: 100vh !important;
+                width: 100vw !important;
+                overflow: hidden;
+            }
+
+            #map {
+                height: 100%;
+                width: 100%;
+                z-index: 1;
+            }
+
+    body( class="hold-transition layout-top-nav" )
+        .wrapper
+            // Content Wrapper maximized entirely
+            div.content-wrapper
+                div#map
+
+            include ../../layout/cgFooter-no-session.pug
+            include ../../layout/cgJs.pug
+
+    //- Leaflet JavaScript
+    script(src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=", crossorigin="")
+
+    script.
+        $(document).ready(function(){
+            console.log("Interactive Map ready");
+
+            // 1. Define the Map Coordinates for Manila, Philippines
+            var manilaCoords = [14.5995, 120.9842];
+            var initialZoom = 13;
+
+            // 2. Define the Base Map Tile Layers
+            var streetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            });
+
+            var satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 19,
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+
+            // 3. Initialize the Map with the Street Map as default
+            var map = L.map('map', {
+                center: manilaCoords,
+                zoom: initialZoom,
+                layers: [streetMap] // Default active layer
+            });
+
+            // 4. Create Layer Groups for the Toggle Controller
+            var baseMaps = {
+                "Street Map": streetMap,
+                "Satellite Imagery": satelliteMap
+            };
+
+            // 5. Add the Layer Control Toggle to the Top Right of the screen
+            L.control.layers(baseMaps, null, { position: 'topright' }).addTo(map);
+
+            // Optional: Drop a quick marker over Manila to visually confirm coordinates
+            L.marker(manilaCoords).addTo(map)
+                .bindPopup('<b>Manila, Philippines</b>')
+                .openPopup();
+
+            // Refresh map dimensions to guarantee full-screen layout rendering
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 200);
+        });

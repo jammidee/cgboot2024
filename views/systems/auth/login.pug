@@ -1,0 +1,125 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title #{app.appname} | Login
+        include ../../layout/cgHeader.pug
+
+        style.
+            .login-container {
+                max-width: 420px;
+                width: 100%;
+            }
+
+            .content-wrapper {
+                background: url('/resources/assets/img/logo/bgnd/cloud.jpg') no-repeat center center fixed !important;
+                background-size: cover !important;
+            }
+
+            /* Styles for the floating circle brand logo context */
+            .card.card-primary {
+                position: relative;
+                margin-top: 75px; /* Pushes card down so floating logo doesn't bleed out of view */
+            }
+            .brand_logo_container {
+                position: absolute;
+                height: 150px;
+                width: 150px;
+                top: -75px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 50%;
+                background: #ffffff;
+                padding: 10px;
+                text-align: center;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+                z-index: 10;
+            }
+            .brand_logo {
+                height: 130px;
+                width: 130px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+            }
+
+    body( class="hold-transition layout-top-nav" )
+        .wrapper
+
+            // Content Wrapper
+            div.content-wrapper
+                div.content
+                    div.container-fluid
+
+                        // Add vertical spacing
+                        //- div.row.justify-content-center.mt-5
+                        //- div.row.justify-content-center.align-items-center(style="min-height: calc(100vh - 120px);")
+                        div.row.justify-content-center.align-items-center.px-3(style="min-height: calc(100vh - 120px);")
+                            div.col-md-4.col-sm-6.col-12
+
+                                div.card.card-outline.card-secondary
+
+                                    //- The Floating Circle Component Logo placement
+                                    div.brand_logo_container
+                                        img.brand_logo(src='/resources/images/logos/logo160.png' alt='Logo')
+
+                                    //- Extra top padding added to header text to compensate for the overlapping circle
+                                    div.card-header.text-center.pt-5
+                                        h3.card-title.mt-4 #{app.appname}
+
+                                    div.card-body
+                                        p.login-box-msg.text-center.mb-4
+                                            | Sign in to start your session
+
+                                        form(action="/auth/login" method="post")
+
+                                            input(type="hidden" name="redirect_url" value=redirect_url)
+
+                                            div.input-group.mb-3
+                                                input.form-control(
+                                                    type="text"
+                                                    name="username"
+                                                    placeholder="Username"
+                                                    required
+                                                )
+                                                div.input-group-append
+                                                    div.input-group-text
+                                                        span.fas.fa-user
+
+                                            div.input-group.mb-3
+                                                input.form-control(
+                                                    type="password"
+                                                    name="password"
+                                                    placeholder="Password"
+                                                    required
+                                                )
+                                                div.input-group-append
+                                                    div.input-group-text
+                                                        span.fas.fa-lock
+
+                                            div.row
+                                                div.col-8
+                                                    div.icheck-primary
+                                                        input#remember(type="checkbox")
+                                                        label(for="remember") Remember Me
+
+                                                div.col-4
+                                                    button.btn.btn-primary.btn-block(type="submit")
+                                                        | Login
+
+                                    div.card-footer.text-center
+                                        div.row
+                                            div.col-4
+                                                a(href="/") Home
+                                            div.col-4
+                                                a(href="/auth/forgot") Forgot password?
+                                            div.col-4
+                                                a(href="/auth/help") Help
+
+            include ../../layout/cgFooter-no-session.pug
+            include ../../layout/cgJs.pug
+
+    script.
+        $(document).ready(function(){
+            console.log("Login ready");
+        });

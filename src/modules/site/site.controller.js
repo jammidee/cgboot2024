@@ -32,7 +32,8 @@ class SiteController {
 
     res.render('systems/site/index', {
       error: null
-    })
+    });
+
   }
 
   /**
@@ -43,7 +44,47 @@ class SiteController {
     res.render('systems/site/fullflyer', {
       error: null
     })
-  }
+  };
+
+  /**
+   * Display the features Page
+   */
+  features = async (req, res) => {
+
+    res.render('systems/site/features', {
+      error: null
+    })
+  };
+
+  /**
+   * Display the calendar Page
+   */
+  calendar = async (req, res) => {
+
+    res.render('systems/site/calendar', {
+      error: null
+    })
+  };
+
+  /**
+   * Display the map Page
+   */
+  map = async (req, res) => {
+
+    res.render('systems/site/map', {
+      error: null
+    })
+  };
+
+  /**
+   * Display the datatable Page
+   */
+  datatable = async (req, res) => {
+
+    res.render('systems/site/datatable', {
+      error: null
+    })
+  };
 
 
 }

@@ -1,0 +1,73 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title #{app.appname} | Login
+        include ../../layout/cgHeader.pug
+
+        style.
+            .login-container {
+                max-width: 420px;
+                width: 100%;
+            }
+
+            .content-wrapper {
+                background: url('/resources/assets/img/logo/bgnd/cloud.jpg') no-repeat center center fixed !important;
+                background-size: cover !important;
+            }
+
+    body( class="hold-transition layout-top-nav" )
+        .wrapper
+
+            // Content Wrapper
+            div.content-wrapper
+                div.content
+                    div.container-fluid
+
+                        // Add vertical spacing
+                        div.row.justify-content-center.align-items-start.px-3.pt-4(style="min-height: calc(100vh - 120px);")
+                            div.col-md-12.col-sm-6.col-12
+
+                                br
+                                br
+
+                                div.card.card-primary
+                                    div.card-header.text-center
+                                        h3.card-title Features
+
+                                    div.card-body
+                                        p.login-box-msg.text-center.mb-4
+                                            | List of templates available supported by the framework
+
+                                        div.row
+                                            div.col-12.col-sm-6.col-md-4
+                                                a(href="/site/calendar") Calendar Integration
+                                                p Show how to integrate the Lalulla Framework with calendar.
+                                                br
+                                            div.col-12.col-sm-6.col-md-4
+                                                a(href="/site/map") Map Integration
+                                                p Show how to integrate the Lalulla Framework with map.
+                                                br
+                                            div.col-12.col-sm-6.col-md-4
+                                                a(href="/site/datatable") Data Table Integration
+                                                p Show how to integrate the Lalulla Framework with datatable.
+                                                br
+
+                                    div.card-footer.text-center
+                                        div.row
+                                            div.col-4
+                                                a(href="/") Home
+                                            div.col-4
+                                                //- a(href="/auth/forgot") Forgot password?
+                                            div.col-4
+                                                //- a(href="/auth/help") Help
+
+
+            include ../../layout/cgFooter-no-session.pug
+            include ../../layout/cgJs.pug
+
+    script.
+        $(document).ready(function(){
+            console.log("Page ready");
+        });

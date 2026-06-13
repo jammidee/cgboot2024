@@ -12,13 +12,13 @@ const config = {}
 // Application Info
 // ---------------------------------------------------------------------
 
-config.appid        = 'CGONE'
-config.appname      = 'Lalulla System'
-config.appdesc      = 'Lalulla Application Template'
-config.appprefix    = 'FEA'
-config.appversion   = '1.07.1972'
-config.appcopyright = 'Lalulla OPC'
-config.appentity    = 'LALULLA'
+config.appid            = 'CGONE'
+config.appname          = 'Lalulla System'
+config.appdesc          = 'Lalulla Application Template'
+config.appprefix        = 'FEA'
+config.appversion       = '1.07.1972'
+config.appcopyright     = 'Lalulla OPC'
+config.appentity        = 'LALULLA'
 
 config.cg_version       = '1.19.72'
 config.allowlogin       = true

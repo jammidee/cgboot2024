@@ -44,7 +44,7 @@ class AuthController {
     // (e.g., /auth/login?redirect=/dashboard)
     const redirectUrl = req.query.redirect || '';
 
-    res.render('systems/auth/index', {
+    res.render('systems/auth/login', {
         error: null,
         redirect_url: redirectUrl  // pass to the view
     });
@@ -147,7 +147,7 @@ class AuthController {
         lastname: user.lastname,
         store_id: user.store_id
       }
-      
+
       // ✅ Set Lalulla-style session data
       req.session.user_id     = user.id;
       req.session.user_name   = user.username;
@@ -206,8 +206,38 @@ logout = async (req, res) => {
     }
 
     res.clearCookie('connect.sid');
-    res.redirect('/?t=' + Date.now());
+    res.redirect('/auth/login?t=' + Date.now());
 
+  });
+
+};
+
+//Added by Jammi Dee 06/12/2026
+forgot = async (req, res) => {
+
+  try {
+    await logAction( req,'forgot', 'User forgot password invoked', 'INFO', false );
+  } catch (err) {
+    console.error(err);
+  }
+
+  res.render('systems/auth/forgot', {
+    error: null
+  });
+
+};
+
+//Added by Jammi Dee 06/12/2026
+help = async (req, res) => {
+
+  try {
+    await logAction( req,'help', 'User invoked help page.', 'INFO', false );
+  } catch (err) {
+    console.error(err);
+  }
+
+  res.render('systems/auth/help', {
+    error: null
   });
 
 };

@@ -29,6 +29,18 @@ const controller = new AuthController(new AuthService())
 router.get('/login', controller.showLoginPage)
 
 /**
+ * GET /forgot 06/12/2026
+ * Displays login page
+ */
+router.get('/forgot', controller.forgot)
+
+/**
+ * GET /forgot 06/12/2026
+ * Displays login page
+ */
+router.get('/help', controller.help)
+
+/**
  * POST /login
  * Processes login
  */

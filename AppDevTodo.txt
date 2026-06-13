@@ -6,3 +6,14 @@ Create by Jammi Dee 05/28/2026
                   regularly. Current is dynamically created by sequelized.
 
 06/02/2026      - create a recently app access subsystem
+
+06/11/2026      - Create an entity management subsystem for the framework
+                - Allow management of entity by a hard coded super admin
+                -
+                - Create login page for the a user.
+                -
+                - In every call to a page with record number to it. encrypted the record number, call itself again with encrypted
+                  code before loading the page. This creates a illusion of random page that cannot be booked marked.
+
+                - Move autoloaded modules to automodules folder
+                -
